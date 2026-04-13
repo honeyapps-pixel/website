@@ -25,6 +25,7 @@
             <span></span><span></span><span></span>
         </button>
         <ul>
+            <li><a href="#apps">Apps</a></li>
             <li><a href="#leistungen">Leistungen</a></li>
             <li><a href="#prozess">Prozess</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
@@ -42,6 +43,103 @@
         <a href="#leistungen" class="btn-secondary">Mehr erfahren</a>
     </div>
 </section>
+
+<!-- Unsere Apps -->
+<section id="apps" class="apps-section">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2>Unsere Apps</h2>
+            <p>Eigenentwickelte Produkte, die wir täglich selbst nutzen.</p>
+        </div>
+        <div class="apps-grid">
+            <a href="/route2bee" class="app-card fade-in">
+                <img src="/route2bee/icon.png" alt="Route2Bee App-Icon" class="app-card-icon">
+                <div class="app-card-content">
+                    <h3>Route2Bee</h3>
+                    <p class="app-card-tagline">Dein digitales Fahrtenbuch für iPhone</p>
+                    <p class="app-card-desc">Automatische Fahrtenerkennung per GPS, GoBD-konform, mit DATEV-, Lexoffice- und PDF-Export. Für Selbstständige, Außendienst und Firmenwagenfahrer.</p>
+                    <span class="app-card-cta">Mehr erfahren →</span>
+                </div>
+            </a>
+            <a href="/recibee/" class="app-card fade-in">
+                <img src="/recibee/app-icon.png" alt="ReciBee App-Icon" class="app-card-icon">
+                <div class="app-card-content">
+                    <h3>ReciBee</h3>
+                    <p class="app-card-tagline">Rezepte teilen und sammeln</p>
+                    <p class="app-card-desc">Deine persönliche Rezeptsammlung mit Familie und Freunden teilen. Kochideen entdecken, Lieblingsrezepte speichern und organisieren.</p>
+                    <span class="app-card-cta">Mehr erfahren →</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .apps-section {
+        padding: 100px 20px;
+        background: var(--bg-secondary);
+    }
+    .apps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .app-card {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        background: white;
+        padding: 32px;
+        border-radius: 20px;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .app-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(59, 115, 185, 0.15);
+    }
+    .app-card-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 18px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(59, 115, 185, 0.2);
+    }
+    .app-card-content {
+        flex: 1;
+    }
+    .app-card h3 {
+        font-size: 22px;
+        margin-bottom: 4px;
+        color: var(--text-primary);
+    }
+    .app-card-tagline {
+        font-size: 14px;
+        color: #3B73B9;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+    .app-card-desc {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+    .app-card-cta {
+        color: #3B73B9;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    @media (max-width: 520px) {
+        .app-card {
+            flex-direction: column;
+        }
+    }
+</style>
 
 <!-- Leistungen -->
 <section id="leistungen" class="section-dark">
@@ -170,9 +268,8 @@
             <div class="footer-col">
                 <h4>Apps</h4>
                 <ul>
+                    <li><a href="/route2bee">Route2Bee</a></li>
                     <li><a href="recibee/">ReciBee</a></li>
-                    <li><a href="recibee/support/">Support</a></li>
-                    <li><a href="recibee/privacy/">Datenschutz</a></li>
                 </ul>
             </div>
         </div>
