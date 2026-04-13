@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route2Bee Support – HoneyApps</title>
+    <meta name="description" content="Hilfe zu Route2Bee: FAQ, Kontakt, Standortberechtigungen, GoBD, Abo-Verwaltung und vieles mehr.">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .support-hero {
+            text-align: center;
+            padding: 120px 20px 60px;
+            background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+        }
+        .support-hero h1 {
+            font-size: clamp(36px, 5vw, 54px);
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        .support-hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .support-contact {
+            max-width: 720px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .support-contact a {
+            display: block;
+            padding: 20px 24px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: border-color 0.15s ease;
+        }
+        .support-contact a:hover {
+            border-color: #0D9488;
+        }
+        .support-contact .label {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+        .support-contact .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0D9488;
+        }
+        .faq-section {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        .faq-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+        }
+        .faq-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .faq-item p, .faq-item li {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        .faq-item ul {
+            margin: 10px 0 0 20px;
+        }
+        .faq-item a {
+            color: #0D9488;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 40px;
+            color: #0D9488;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="/route2bee">Route2Bee</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="mailto:info@honeyapps.de">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="support-hero">
+    <h1>Route2Bee Support</h1>
+    <p>Fragen zur App? Probleme mit deinem Abo? Schreib uns – wir helfen dir normalerweise innerhalb von 24 Stunden.</p>
+    <div class="support-contact">
+        <a href="mailto:info@honeyapps.de">
+            <div class="label">E-Mail</div>
+            <div class="value">info@honeyapps.de</div>
+        </a>
+        <a href="tel:+491749783003">
+            <div class="label">Telefon</div>
+            <div class="value">+49 174 9783003</div>
+        </a>
+    </div>
+</section>
+
+<section id="faq" class="faq-section">
+    <h2>Häufige Fragen</h2>
+
+    <div class="faq-item">
+        <h3>Die App erkennt meine Fahrten nicht automatisch</h3>
+        <p>Route2Bee braucht für die Hintergrund-Erkennung mehrere Berechtigungen:</p>
+        <ul>
+            <li>Standort: <strong>„Immer"</strong> (nicht „Beim Verwenden")</li>
+            <li>Genaue Position: aktiviert</li>
+            <li>Hintergrundaktualisierung: aktiviert (iOS-Einstellungen → Route2Bee → Hintergrundaktualisierung)</li>
+            <li>Stromspar-/Energiemodus: deaktiviert</li>
+            <li>Auto-Tracking-Schalter in der App: aktiv (Einstellungen → Auto-Tracking)</li>
+        </ul>
+        <p>Force-Close der App (Wischen im App-Switcher) stoppt die Fahrterkennung. Lass die App einfach im Hintergrund.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Mein Abo wurde gekauft, aber Premium ist nicht aktiv</h3>
+        <p>In den meisten Fällen hilft:</p>
+        <ul>
+            <li>Mehr-Tab → Abonnement → <strong>„Käufe wiederherstellen"</strong> tippen</li>
+            <li>App komplett beenden (App-Switcher → hochwischen) und neu öffnen</li>
+            <li>Mit der gleichen Apple-ID eingeloggt sein, mit der du gekauft hast</li>
+        </ul>
+        <p>Wenn das nicht hilft, melde dich per E-Mail mit deiner Kaufbestätigung.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie kann ich mein Abo kündigen?</h3>
+        <p>Abos werden ausschließlich über Apple verwaltet:</p>
+        <ul>
+            <li>In der App: Mehr-Tab → Abonnement → <strong>„Abo verwalten"</strong></li>
+            <li>Oder direkt auf dem iPhone: Einstellungen → (dein Name) → Abonnements → Route2Bee</li>
+        </ul>
+        <p>Die Kündigung greift zum Ende des bezahlten Zeitraums – dein Abo bleibt bis dahin aktiv.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Ist das Fahrtenbuch GoBD-konform?</h3>
+        <p>Route2Bee bietet alle technischen Funktionen für ein GoBD-konformes elektronisches Fahrtenbuch: Audit-Log, Finalisierung (unveränderbare Einträge), 10-Jahres-Aufbewahrung und Prüfsummen auf PDF-Exporten.</p>
+        <p>Die steuerliche Anerkennung durch dein Finanzamt hängt aber auch von deiner Nutzung ab – insbesondere von der <strong>zeitgerechten und vollständigen Erfassung aller Fahrten</strong> und der korrekten Zuordnung des Fahrtzwecks. Wir empfehlen, die Nutzung mit deinem Steuerberater abzustimmen.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wo liegen meine Daten?</h3>
+        <p>Deine Fahrten werden primär <strong>lokal</strong> auf deinem iPhone in einer SQLite-Datenbank gespeichert. Die Cloud-Synchronisierung (optional) läuft über Supabase-Server in <strong>Frankfurt, Deutschland</strong>. Einzelne GPS-Koordinaten verlassen dein Gerät nie – nur aggregierte Fahrtdaten (Start-, Endadresse, Strecke, Dauer).</p>
+        <p>Details: <a href="https://route2bee-verify.vercel.app/privacy.html">Datenschutzerklärung</a></p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie exportiere ich meine Daten?</h3>
+        <p>Zwei Wege:</p>
+        <ul>
+            <li><strong>Fahrtenbericht</strong> (Reports-Tab): PDF, CSV, DATEV (SKR03/SKR04), Lexoffice</li>
+            <li><strong>Kompletter JSON-Export</strong> (Mehr → Meine Daten → „Daten exportieren"): alle Fahrten inkl. Metadaten für DSGVO-Datenportabilität (Art. 20)</li>
+        </ul>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie lösche ich mein Konto?</h3>
+        <p>In der App: Mehr-Tab → Meine Daten (DSGVO) → <strong>„Konto & Daten löschen"</strong>. Die Löschung ist unwiderruflich.</p>
+        <p><strong>Wichtig:</strong> Finalisierte (geprüfte) Fahrten unterliegen der 10-jährigen Aufbewahrungspflicht nach § 147 AO. Personenbezogene Daten (Adressen, GPS-Koordinaten, Notizen) werden bei Kontolöschung anonymisiert; nur das steuerlich relevante Fahrten-Skelett (Datum, Strecke, Zweck, KM-Stand) bleibt für die Aufbewahrungsfrist erhalten.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Ich habe einen Fehler / Bug gefunden</h3>
+        <p>Schick uns eine kurze Beschreibung an <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> mit:</p>
+        <ul>
+            <li>Was du gemacht hast (Schritte)</li>
+            <li>Was passiert ist</li>
+            <li>Was du erwartet hast</li>
+            <li>iPhone-Modell und iOS-Version</li>
+            <li>App-Version (Mehr-Tab → ganz unten)</li>
+        </ul>
+        <p>Wir antworten normalerweise innerhalb eines Werktags.</p>
+    </div>
+
+    <a href="/route2bee" class="back-link">← Zurück zu Route2Bee</a>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Route2Bee</h4>
+                <ul>
+                    <li><a href="/route2bee">Übersicht</a></li>
+                    <li><a href="/route2bee/support">Support &amp; FAQ</a></li>
+                    <li><a href="https://apps.apple.com/app/route2bee">App Store</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/#impressum">Impressum</a></li>
+                    <li><a href="https://route2bee-verify.vercel.app/privacy.html">Datenschutz</a></li>
+                    <li><a href="/agb.html">AGB</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@honeyapps.de">info@honeyapps.de</a></li>
+                    <li><a href="tel:+491749783003">+49 174 9783003</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="https://route2bee-verify.vercel.app/privacy.html">Datenschutz</a>
+                <a href="/agb.html">AGB</a>
+                <a href="/#impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
