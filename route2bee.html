@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route2Bee – Dein digitales Fahrtenbuch | HoneyApps</title>
+    <meta name="description" content="Route2Bee erkennt deine Fahrten automatisch per GPS, dokumentiert sie GoBD-konform und exportiert PDF-, DATEV- und Lexoffice-Berichte. Für Selbstständige und Außendienstler.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .r2b-hero {
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+        }
+        .r2b-hero .badge {
+            display: inline-block;
+            background: #E0F2F1;
+            color: #0D9488;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .r2b-hero h1 {
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .r2b-hero .r2b-accent {
+            background: linear-gradient(90deg, #0D9488 0%, #14B8A6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .r2b-hero p.lead {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 32px;
+        }
+        .r2b-hero .cta-group .btn-primary {
+            background: #0D9488;
+        }
+        .r2b-hero .cta-group .btn-primary:hover {
+            background: #0F766E;
+        }
+        .r2b-features {
+            padding: 100px 20px;
+            max-width: var(--max-width-wide);
+            margin: 0 auto;
+        }
+        .r2b-features h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+        .r2b-features .sub {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 60px;
+            font-size: 18px;
+        }
+        .r2b-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .r2b-feature-card {
+            background: var(--bg-secondary);
+            padding: 32px;
+            border-radius: var(--radius);
+        }
+        .r2b-feature-card .icon {
+            width: 48px;
+            height: 48px;
+            background: #0D9488;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 16px;
+        }
+        .r2b-feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .r2b-feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .r2b-pricing {
+            padding: 100px 20px;
+            background: var(--bg-secondary);
+        }
+        .r2b-pricing-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .r2b-pricing h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+        .r2b-pricing .sub {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            font-size: 18px;
+        }
+        .r2b-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .r2b-plan {
+            background: white;
+            padding: 32px;
+            border-radius: var(--radius);
+            border: 2px solid var(--border);
+        }
+        .r2b-plan.featured {
+            border-color: #0D9488;
+            position: relative;
+        }
+        .r2b-plan.featured::before {
+            content: "Beliebteste Wahl";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0D9488;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .r2b-plan h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+        .r2b-plan .price {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .r2b-plan .price-period {
+            color: var(--text-tertiary);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .r2b-plan ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .r2b-plan li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        .r2b-plan li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0D9488;
+            font-weight: 700;
+        }
+        .r2b-compliance {
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .r2b-compliance h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .r2b-compliance p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .r2b-compliance .badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 32px;
+        }
+        .r2b-compliance .badge-pill {
+            background: var(--bg-secondary);
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .r2b-cta-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: #0D9488;
+            color: white;
+        }
+        .r2b-cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .r2b-cta-section p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+        .r2b-cta-section .btn-primary {
+            background: white;
+            color: #0D9488;
+        }
+        .r2b-cta-section .btn-primary:hover {
+            background: #f5f5f7;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation (shared style with honeyapps.de) -->
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Preise</a></li>
+            <li><a href="/#kontakt">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="r2b-hero">
+    <span class="badge">🐝 Für Selbstständige & Außendienst</span>
+    <h1>Fahrtenbuch,<br><span class="r2b-accent">das sich selbst schreibt.</span></h1>
+    <p class="lead">Route2Bee erkennt deine Fahrten automatisch per GPS, dokumentiert GoBD-konform und exportiert direkt ins DATEV, Lexoffice oder als PDF.</p>
+    <div class="cta-group">
+        <a href="https://apps.apple.com/app/route2bee" class="btn-primary">Im App Store laden</a>
+        <a href="#features" class="btn-secondary">Features entdecken</a>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="r2b-features">
+    <h2>Alles was du brauchst</h2>
+    <p class="sub">Von der ersten Fahrt bis zum Finanzamt-tauglichen Export. Ohne Papierkram, ohne Excel.</p>
+    <div class="r2b-feature-grid">
+        <div class="r2b-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 4.42 8 12 8 12s8-7.58 8-12a8 8 0 0 0-8-8z"/></svg>
+            </div>
+            <h3>Automatische Erkennung</h3>
+            <p>Route2Bee erkennt per GPS, wann du losfährst und wo du ankommst. Kein manuelles Starten, kein Vergessen.</p>
+        </div>
+        <div class="r2b-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.12 0 4.07.73 5.61 1.96"/></svg>
+            </div>
+            <h3>GoBD-konform</h3>
+            <p>Unveränderbare Dokumentation mit Audit-Log, Finalisierung und 10-Jahres-Aufbewahrung. Für dein Finanzamt.</p>
+        </div>
+        <div class="r2b-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <h3>Exporte die zählen</h3>
+            <p>PDF fürs Finanzamt. CSV für Excel. DATEV SKR03/SKR04 für deinen Steuerberater. Lexoffice für deine Buchhaltung.</p>
+        </div>
+        <div class="r2b-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <h3>Mehrere Firmen & Kostensätze</h3>
+            <p>Lege beliebig viele Firmen mit eigener Kilometerpauschale an. Perfekte Abrechnung pro Kunde.</p>
+        </div>
+        <div class="r2b-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <h3>Cloud-Sync via EU-Server</h3>
+            <p>Deine Daten bleiben in Frankfurt. GPS-Koordinaten verlassen niemals dein Gerät – nur aggregierte Fahrtdaten.</p>
+        </div>
+        <div class="r2b-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <h3>Wiederkehrende Routen</h3>
+            <p>Arbeitsweg oder Stammkunde? Einmal anlegen, automatisch an Werktagen eintragen lassen.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="r2b-pricing">
+    <div class="r2b-pricing-inner">
+        <h2>Einfach, fair, transparent</h2>
+        <p class="sub">Kostenlos starten. Erst upgraden wenn du wirklich loslegst.</p>
+        <div class="r2b-plans">
+            <div class="r2b-plan">
+                <h3>Kostenlos</h3>
+                <div class="price">0 €</div>
+                <div class="price-period">für immer</div>
+                <ul>
+                    <li>20 Fahrten insgesamt</li>
+                    <li>Automatische Erkennung</li>
+                    <li>Manuelle Eingabe</li>
+                    <li>Firmen & Kostensätze</li>
+                </ul>
+            </div>
+            <div class="r2b-plan featured">
+                <h3>Premium Jährlich</h3>
+                <div class="price">79,99 €</div>
+                <div class="price-period">pro Jahr · spare 30 %</div>
+                <ul>
+                    <li>Unbegrenzte Fahrten</li>
+                    <li>Hintergrund-Tracking</li>
+                    <li>PDF & DATEV-Export</li>
+                    <li>Cloud-Sync</li>
+                    <li>Routen-Kartenbilder</li>
+                    <li>Alle zukünftigen Features</li>
+                </ul>
+            </div>
+            <div class="r2b-plan">
+                <h3>Premium Monatlich</h3>
+                <div class="price">7,99 €</div>
+                <div class="price-period">pro Monat</div>
+                <ul>
+                    <li>Unbegrenzte Fahrten</li>
+                    <li>Hintergrund-Tracking</li>
+                    <li>PDF & DATEV-Export</li>
+                    <li>Cloud-Sync</li>
+                    <li>Monatlich kündbar</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Compliance -->
+<section class="r2b-compliance">
+    <h2>Gebaut für Vertrauen</h2>
+    <p>Route2Bee ist als vollwertiges elektronisches Fahrtenbuch konzipiert – mit allen technischen Voraussetzungen für die steuerliche Anerkennung.</p>
+    <div class="badges">
+        <span class="badge-pill">GoBD-Unterstützung</span>
+        <span class="badge-pill">§ 147 AO</span>
+        <span class="badge-pill">DSGVO-konform</span>
+        <span class="badge-pill">EU-Hosting (Frankfurt)</span>
+        <span class="badge-pill">TLS-verschlüsselt</span>
+        <span class="badge-pill">Audit-Log</span>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="r2b-cta-section">
+    <h2>Bereit für dein smartes Fahrtenbuch?</h2>
+    <p>20 Fahrten gratis. Ohne Kreditkarte. Ohne Anmeldung beim Steuerberater.</p>
+    <a href="https://apps.apple.com/app/route2bee" class="btn-primary">Im App Store laden</a>
+</section>
+
+<!-- Support / Kontakt -->
+<section id="kontakt" class="impressum-section">
+    <div class="impressum-inner">
+        <h2>Support & Kontakt</h2>
+        <div class="impressum-grid">
+            <div class="impressum-card">
+                <h3>Fragen zur App?</h3>
+                <p>Schreib uns direkt – wir antworten normalerweise innerhalb von 24 Stunden.</p>
+                <p><a href="mailto:info@honeyapps.de" style="color:#0D9488;font-weight:600;">info@honeyapps.de</a></p>
+            </div>
+            <div class="impressum-card">
+                <h3>Rechtliches</h3>
+                <p>
+                    <a href="https://route2bee-verify.vercel.app/privacy.html" style="color:#0D9488;">Datenschutzerklärung</a><br>
+                    <a href="agb.html" style="color:#0D9488;">AGB</a><br>
+                    <a href="/#impressum" style="color:#0D9488;">Impressum</a>
+                </p>
+            </div>
+            <div class="impressum-card">
+                <h3>Telefon</h3>
+                <p>+49 174 9783003</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer (same as honeyapps.de) -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Route2Bee</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Preise</a></li>
+                    <li><a href="https://apps.apple.com/app/route2bee">App Store</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/#impressum">Impressum</a></li>
+                    <li><a href="https://route2bee-verify.vercel.app/privacy.html">Datenschutz</a></li>
+                    <li><a href="agb.html">AGB</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Apps</h4>
+                <ul>
+                    <li><a href="route2bee.html">Route2Bee</a></li>
+                    <li><a href="datenschutz.html#recibee">ReciBee</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="https://route2bee-verify.vercel.app/privacy.html">Datenschutz</a>
+                <a href="agb.html">AGB</a>
+                <a href="/#impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
