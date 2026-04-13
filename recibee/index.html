@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReciBee – Dein smarter Küchen-Assistent</title>
+    <meta name="description" content="ReciBee sammelt Rezepte aus Links, Fotos oder dem Internet, plant deine Woche und erstellt automatisch die Einkaufsliste. Mit KI-Import – kostenlos für alle.">
+    <meta name="theme-color" content="#74A87B">
+    <meta property="og:title" content="ReciBee – Dein smarter Küchen-Assistent">
+    <meta property="og:description" content="Rezepte sammeln, planen und kochen. Mit KI in Sekunden. Für die ganze Familie.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://honeyapps.de/recibee/">
+    <meta property="og:image" content="https://honeyapps.de/recibee/app-icon-512.png">
+    <meta property="og:locale" content="de_DE">
+    <link rel="icon" type="image/png" href="app-icon-512.png">
+    <link rel="apple-touch-icon" href="app-icon-512.png">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --accent: #74A87B;
+            --accent-hover: #5E9165;
+            --accent-dark: #2E5E35;
+            --accent-soft: #E8F1E9;
+        }
+        nav .logo span { color: var(--accent); }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, #2E5E35, #74A87B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .service-card .icon {
+            background: linear-gradient(135deg, #2E5E35, #74A87B);
+        }
+
+        /* Hero App Icon */
+        .recibee-hero {
+            padding: 9rem 2rem 5rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--accent-soft) 0%, #ffffff 100%);
+        }
+        .hero-icon {
+            width: 128px;
+            height: 128px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(46, 94, 53, 0.25);
+            margin: 0 auto 2rem;
+            display: block;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: #ffffff;
+            color: var(--accent-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 980px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--accent-soft);
+            box-shadow: 0 2px 8px rgba(46, 94, 53, 0.06);
+        }
+        .recibee-hero h1 {
+            font-size: clamp(2.25rem, 5.5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.08;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+        }
+        .recibee-hero h1 .gradient {
+            background: linear-gradient(135deg, #2E5E35, #74A87B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .recibee-hero p.lead {
+            font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.5;
+        }
+        .store-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.625rem;
+            background: #1d1d1f;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .store-badge:hover { transform: scale(1.04); background: #000; }
+        .store-badge svg { width: 24px; height: 24px; }
+        .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
+        .store-badge-text strong { font-size: 1rem; font-weight: 600; }
+
+        /* Feature Grid (6 columns responsive) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* How it works (ordered steps with connector) */
+        #so-funktionierts .process-step::before {
+            background: var(--accent);
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .price-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem 2rem;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .price-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .price-card.featured {
+            border: 2px solid var(--accent);
+            box-shadow: 0 8px 32px rgba(116, 168, 123, 0.18);
+        }
+        .price-card .plan-badge {
+            position: absolute;
+            top: -12px;
+            right: 24px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 980px;
+            letter-spacing: 0.03em;
+        }
+        .price-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 0.75rem 0 0.25rem;
+            color: var(--text-primary);
+        }
+        .price-card .price small {
+            font-size: 0.9375rem;
+            color: var(--text-tertiary);
+            font-weight: 400;
+            letter-spacing: 0;
+        }
+        .price-card .plan-desc {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+        .price-card ul.features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.75rem;
+        }
+        .price-card ul.features li {
+            padding: 0.5rem 0 0.5rem 1.75rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+        .price-card ul.features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Trust/Badges */
+        .trust-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.25rem 2.5rem;
+            color: var(--text-tertiary);
+            font-size: 0.9375rem;
+        }
+        .trust-row span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .trust-row svg {
+            color: var(--accent);
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* CTA override for green theme */
+        .cta-section.green {
+            background: linear-gradient(135deg, #2E5E35, #74A87B);
+        }
+        .cta-section.green .btn-primary {
+            background: #fff;
+            color: var(--accent-dark);
+        }
+        .cta-section.green .btn-primary:hover {
+            background: var(--accent-soft);
+        }
+
+        @media (max-width: 480px) {
+            .hero-icon { width: 104px; height: 104px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#so-funktionierts">So geht's</a></li>
+            <li><a href="#preise">Preise</a></li>
+            <li><a href="support/">Support</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="recibee-hero">
+    <img src="app-icon-512.png" alt="ReciBee App Icon" class="hero-icon">
+    <div class="hero-badge">🍯 Dein smarter Küchen-Assistent</div>
+    <h1>Rezepte sammeln, planen,<br><span class="gradient">in Sekunden kochen.</span></h1>
+    <p class="lead">ReciBee speichert Rezepte aus Links, Fotos oder dem Internet per KI, plant deine Woche und erstellt automatisch die Einkaufsliste – für dich und die ganze Familie.</p>
+    <div class="store-badges">
+        <a href="https://apps.apple.com/app/recibee" class="store-badge" aria-label="Im App Store laden">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div class="store-badge-text"><small>Laden im</small><strong>App Store</strong></div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=de.honeyapps.recibee" class="store-badge" aria-label="Bei Google Play laden">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
+            <div class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></div>
+        </a>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="section-dark">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2>Alles, was du zum Kochen brauchst</h2>
+            <p>Von der Rezept-Idee bis zum fertigen Gericht – ReciBee begleitet dich durch den ganzen Prozess.</p>
+        </div>
+        <div class="features-grid">
+            <div class="service-card fade-in">
+                <div class="icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 22 12 18.77 7.82 22 9 14.14 4 9.27l5.91-1.01L12 2z"/></svg>
+                </div>
+                <h3>KI-Import <span style="font-size:0.75em;color:var(--accent);font-weight:600;white-space:nowrap;">· für alle kostenlos</span></h3>
+                <p>Rezept-Link, Screenshot oder Foto einwerfen – ReciBee liest Zutaten und Schritte automatisch aus und legt ein sauberes Rezept an.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3>Was soll ich kochen?</h3>
+                <p>Keine Idee? Gib Kriterien wie „schnell", „vegetarisch" oder „Reste verwerten" an – die KI schlägt das perfekte Gericht aus deiner Sammlung vor.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Familien-Sharing</h3>
+                <p>Rezeptbuch, Einkaufsliste und Speiseplan werden live mit deiner Familie synchronisiert. Jeder trägt bei, alle sehen dasselbe.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 11H3v10h6V11zM21 3h-6v18h6V3zM15 7H9v14h6V7z"/></svg>
+                </div>
+                <h3>Automatische Einkaufsliste</h3>
+                <p>Mit einem Tipp werden Zutaten aus deinem Speiseplan in die Einkaufsliste übertragen – Mengen werden smart zusammengerechnet.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <h3>Wochen-Speiseplan</h3>
+                <p>Ziehe Rezepte per Drag-&-Drop auf die Woche. KI-Tipps zur Abwechslung inklusive – nie wieder dreimal hintereinander Nudeln.</p>
+            </div>
+            <div class="service-card fade-in">
+                <div class="icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>EU-Server &amp; DSGVO</h3>
+                <p>Alle Daten liegen auf europäischen Servern. TLS-Verschlüsselung, Account-Löschung mit einem Tipp, keine Werbetracker.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it works -->
+<section id="so-funktionierts">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2>So einfach geht's</h2>
+            <p>In drei Schritten vom leeren Kühlschrank zum fertigen Menü.</p>
+        </div>
+        <div class="process-steps">
+            <div class="process-step fade-in">
+                <h3>Rezepte sammeln</h3>
+                <p>Link teilen, Foto machen oder per Hand anlegen. Die KI strukturiert automatisch Zutaten, Schritte und Bilder.</p>
+            </div>
+            <div class="process-step fade-in">
+                <h3>Woche planen</h3>
+                <p>Rezepte auf Wochentage ziehen. Teile den Plan mit deiner Familie und bekomme KI-Vorschläge für Abwechslung.</p>
+            </div>
+            <div class="process-step fade-in">
+                <h3>Einkaufen &amp; kochen</h3>
+                <p>Einkaufsliste wird automatisch erzeugt. Beim Kochen zeigt ReciBee die Schritte groß und ohne Display-Abschaltung.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section id="preise" class="section-dark">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2>Einfache Preise</h2>
+            <p>Der KI-Rezept-Import ist für alle Nutzer <strong>immer kostenlos</strong>. Pro entsperrt die volle Power.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card fade-in">
+                <h3>Free</h3>
+                <p class="plan-desc">Perfekt zum Einstieg</p>
+                <div class="price">0 €<small> / immer</small></div>
+                <ul class="features">
+                    <li>Unbegrenzt viele Rezepte</li>
+                    <li>KI-Rezept-Import (Link, Foto, Text)</li>
+                    <li>Einkaufsliste &amp; Basis-Speiseplan</li>
+                    <li>1 Familie mit bis zu 2 Mitgliedern</li>
+                </ul>
+                <a href="#download" class="btn-secondary" style="padding-left:0">Kostenlos starten →</a>
+            </div>
+
+            <div class="price-card featured fade-in">
+                <div class="plan-badge">Beliebteste Wahl</div>
+                <h3>ReciBee Pro – Jährlich</h3>
+                <p class="plan-desc">~30% sparen gegenüber monatlich</p>
+                <div class="price">24,99 €<small> / Jahr</small></div>
+                <ul class="features">
+                    <li>Alles aus Free, plus:</li>
+                    <li>„Was soll ich kochen?"-KI unbegrenzt</li>
+                    <li>Unbegrenzte Familienmitglieder</li>
+                    <li>Speiseplan-KI &amp; Koch-Assistent</li>
+                    <li>Priorisierter Support</li>
+                </ul>
+                <a href="#download" class="btn-primary" style="background:var(--accent)">Pro holen</a>
+            </div>
+
+            <div class="price-card fade-in">
+                <h3>ReciBee Pro – Monatlich</h3>
+                <p class="plan-desc">Flexibel, jederzeit kündbar</p>
+                <div class="price">2,99 €<small> / Monat</small></div>
+                <ul class="features">
+                    <li>Alles aus Free, plus:</li>
+                    <li>„Was soll ich kochen?"-KI unbegrenzt</li>
+                    <li>Unbegrenzte Familienmitglieder</li>
+                    <li>Speiseplan-KI &amp; Koch-Assistent</li>
+                </ul>
+                <a href="#download" class="btn-secondary" style="padding-left:0">Monatlich starten →</a>
+            </div>
+        </div>
+        <p style="text-align:center;margin-top:2rem;color:var(--text-tertiary);font-size:0.875rem;">Abrechnung über Apple App Store bzw. Google Play. Jederzeit in den Abo-Einstellungen kündbar.</p>
+    </div>
+</section>
+
+<!-- Trust -->
+<section id="vertrauen">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2>Sicher &amp; europäisch gehostet</h2>
+            <p>Deine Rezepte und Familiendaten bleiben dort, wo sie hingehören.</p>
+        </div>
+        <div class="trust-row">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>DSGVO-konform</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>TLS-verschlüsselt</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>EU-Server</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Account-Löschung per Tipp</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2 2 2 0 0 1 2-2h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>Keine Werbetracker</span>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section id="download" class="cta-section green">
+    <h2>Jetzt kostenlos loslegen</h2>
+    <p>Lade ReciBee und starte sofort mit dem KI-Rezept-Import – ohne Limit, ohne Kreditkarte.</p>
+    <div class="store-badges" style="margin-top:1.5rem;">
+        <a href="https://apps.apple.com/app/recibee" class="store-badge" aria-label="Im App Store laden">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div class="store-badge-text"><small>Laden im</small><strong>App Store</strong></div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=de.honeyapps.recibee" class="store-badge" aria-label="Bei Google Play laden">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
+            <div class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></div>
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>ReciBee</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#preise">Preise</a></li>
+                    <li><a href="support/">Support</a></li>
+                    <li><a href="privacy/">Datenschutz</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Unternehmen</h4>
+                <ul>
+                    <li><a href="/#leistungen">Leistungen</a></li>
+                    <li><a href="/#prozess">Prozess</a></li>
+                    <li><a href="/#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/#impressum">Impressum</a></li>
+                    <li><a href="/datenschutz.html">Datenschutz</a></li>
+                    <li><a href="/agb.html">AGB</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="/datenschutz.html">Datenschutz</a>
+                <a href="/agb.html">AGB</a>
+                <a href="/#impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" aria-label="Nach oben scrollen" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+const backToTop = document.querySelector('.back-to-top');
+window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 400);
+}, { passive: true });
+</script>
+
+</body>
+</html>
