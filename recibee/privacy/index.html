@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReciBee Datenschutz – HoneyApps</title>
-    <meta name="description" content="Datenschutzerklärung für die ReciBee-App: Wir verarbeiten Daten DSGVO-konform auf EU-Servern, nutzen keine Werbetracker und ermöglichen die Account-Löschung jederzeit.">
+    <meta name="description" content="Datenschutzerklärung für die ReciBee-App: Wir verarbeiten Daten DSGVO-konform, holen für Werbung und Analyse in der EU eine ausdrückliche Einwilligung ein und ermöglichen die Account-Löschung jederzeit.">
     <meta name="theme-color" content="#74A87B">
     <link rel="icon" type="image/png" href="../app-icon-512.png">
     <link rel="apple-touch-icon" href="../app-icon-512.png">
@@ -117,7 +117,7 @@
 <section class="privacy-hero">
     <img src="../app-icon-512.png" alt="ReciBee">
     <h1>Datenschutz für ReciBee</h1>
-    <p class="updated">Stand: 13. April 2026</p>
+    <p class="updated">Stand: 17. April 2026</p>
 </section>
 
 <div class="legal-page">
@@ -136,8 +136,8 @@
             <div><strong>EU-Hosting</strong><span>Speicherung primär auf europäischen Servern, mit SCCs für US-Dienste.</span></div>
         </div>
         <div class="quick-fact">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-            <div><strong>Keine Werbetracker</strong><span>Keine Drittanbieter-Werbung, keine Weitergabe an Werbenetzwerke.</span></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            <div><strong>Werbung nur mit Einwilligung</strong><span>Für EWR/UK/CH holen wir über Google UMP (IAB TCF v2.2) eine ausdrückliche Einwilligung vor der ersten Anzeige ein.</span></div>
         </div>
     </div>
 
@@ -146,9 +146,11 @@
         <ul>
             <li><a href="#verantwortlicher">1. Verantwortlicher</a></li>
             <li><a href="#erhebung">2. Erhebung und Speicherung personenbezogener Daten</a></li>
+            <li><a href="#permissions">2a. Geräteberechtigungen</a></li>
             <li><a href="#firebase">3. Nutzung von Firebase (Google)</a></li>
             <li><a href="#analytics">3a. Firebase Analytics &amp; Crashlytics</a></li>
             <li><a href="#brevo">3b. E-Mail-Versand (Brevo)</a></li>
+            <li><a href="#admob">3c. Werbung (Google AdMob)</a></li>
             <li><a href="#ki">4. Künstliche Intelligenz (KI-Funktionen)</a></li>
             <li><a href="#import">5. Rezept-Import aus Drittquellen</a></li>
             <li><a href="#usa">6. Datenübertragung in die USA</a></li>
@@ -156,6 +158,8 @@
             <li><a href="#rechte">8. Deine Rechte</a></li>
             <li><a href="#entscheidungen">9. Automatisierte Entscheidungsfindung</a></li>
             <li><a href="#kontakt">10. Kontakt &amp; Beschwerderecht</a></li>
+            <li><a href="#iap">11. In-App-Käufe und Abonnements</a></li>
+            <li><a href="#jugendschutz">12. Jugendschutz und Mindestalter</a></li>
         </ul>
     </div>
 
@@ -178,7 +182,8 @@
         <li>Familien- und Gruppenzugehörigkeiten</li>
         <li>Wochenpläne und Einkaufslisten</li>
         <li>Etiketten und Kategorien</li>
-        <li>Kommentare und „Gefällt mir"-Angaben zu öffentlichen Rezepten</li>
+        <li>Kommentare, Bewertungen und „Gefällt mir"-Angaben zu öffentlichen Rezepten</li>
+        <li>Nutzungseinstellungen (Sprache, Theme, Zeitpunkt der Registrierung und letzten Anmeldung)</li>
     </ul>
     <p>Bei der Nutzung bestimmter Funktionen werden darüber hinaus vorübergehend folgende Daten verarbeitet (nicht dauerhaft gespeichert):</p>
     <ul>
@@ -189,25 +194,38 @@
     <p>Die Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) sowie Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).</p>
     <p>Die Nutzung der App ist ab 16 Jahren gestattet. Personen unter 16 Jahren benötigen die Einwilligung eines Erziehungsberechtigten (Art. 8 DSGVO).</p>
 
+    <h2 id="permissions">2a. Geräteberechtigungen</h2>
+    <p>Die App fordert folgende Geräteberechtigungen an, die jeweils nur bei aktiver Nutzung der entsprechenden Funktion verwendet werden:</p>
+    <ul>
+        <li><strong>Kamera</strong> – zum Aufnehmen von Rezeptfotos und zur Bild-zu-Rezept-Erkennung</li>
+        <li><strong>Mikrofon</strong> – für die Spracheingabe von Rezepten</li>
+        <li><strong>Fotogalerie</strong> – zum Auswählen von Bildern für Rezepte</li>
+        <li><strong>Spracherkennung</strong> – zur automatischen Transkription gesprochener Rezepte</li>
+        <li><strong>Tracking-Transparenz (nur iOS)</strong> – für personalisierte Werbung über Google AdMob und anonymisierte Nutzungsstatistiken (wird nur mit deiner ausdrücklichen Zustimmung aktiviert)</li>
+    </ul>
+
     <h2 id="firebase">3. Nutzung von Firebase (Google)</h2>
     <p>Diese App nutzt Dienste von Google Firebase:</p>
     <ul>
-        <li>Firebase Authentication – für die Nutzeranmeldung (inkl. Google Sign-In)</li>
+        <li>Firebase Authentication – für die Nutzeranmeldung (inkl. Google Sign-In und „Mit Apple anmelden")</li>
         <li>Cloud Firestore – für die Speicherung von Rezepten, Plänen und Nutzerdaten</li>
         <li>Firebase Cloud Storage – für die Speicherung von Bildern</li>
         <li>Firebase Cloud Functions – für serverseitige Verarbeitung (Rezept-Import, KI-Funktionen, Social-Media-Import)</li>
+        <li>Firebase App Check – zur Absicherung gegen missbräuchliche Zugriffe (Geräte-Attestierung über Apple DeviceCheck bzw. Google Play Integrity)</li>
     </ul>
     <p>Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland) ist Auftragsverarbeiter im Sinne von Art. 28 DSGVO. Ein Auftragsverarbeitungsvertrag (AVV) liegt vor.</p>
     <p>Weitere Informationen: <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">https://firebase.google.com/support/privacy</a></p>
 
     <h2 id="analytics">3a. Firebase Analytics &amp; Crashlytics</h2>
     <p>Die App nutzt folgende Firebase-Dienste:</p>
-    <p><strong>a) Firebase Crashlytics (berechtigtes Interesse, opt-out möglich)</strong><br>
-    Erfasst technische Absturzberichte, um die Stabilität der App zu gewährleisten. Dabei werden Gerätetyp, Betriebssystemversion und der technische Fehlerverlauf übermittelt. Es werden keine persönlichen Inhalte übermittelt.</p>
-    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Crashlytics ist standardmäßig aktiviert, um die Stabilität der App sicherzustellen. Du kannst Absturzberichte jederzeit in den App-Einstellungen unter „Datenschutz" deaktivieren.</p>
+    <p><strong>a) Firebase Crashlytics (nur mit Einwilligung)</strong><br>
+    Erfasst technische Absturzberichte, um die Stabilität der App zu gewährleisten. Dabei werden Gerätetyp, Betriebssystemversion und der technische Fehlerverlauf übermittelt. Es werden keine persönlichen Inhalte (Rezepte, Namen) übermittelt.</p>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO sowie § 25 Abs. 1 TDDDG (Einwilligung). Crashlytics ist standardmäßig deaktiviert und wird erst nach deiner ausdrücklichen Zustimmung über den Einwilligungsdialog der App aktiviert. Du kannst deine Einwilligung jederzeit in den App-Einstellungen unter „Datenschutz" widerrufen.</p>
     <p><strong>b) Firebase Analytics (nur mit Einwilligung)</strong><br>
     Erfasst anonymisierte Nutzungsstatistiken (z. B. welche Funktionen wie häufig genutzt werden, Bildschirmaufrufe). Es werden keine persönlichen Inhalte (Rezepte, Namen) übermittelt.</p>
-    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Du kannst deine Einwilligung jederzeit in den App-Einstellungen unter „Datenschutz" widerrufen.</p>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO sowie § 25 Abs. 1 TDDDG (Einwilligung). Analytics ist standardmäßig deaktiviert. Du kannst deine Einwilligung jederzeit in den App-Einstellungen unter „Datenschutz" widerrufen.</p>
+    <p>Auf iOS-Geräten wird vor der Aktivierung von Analytics und Werbe-Tracking zusätzlich die Zustimmung über den systemseitigen App-Tracking-Transparenz-Dialog (ATT) eingeholt.</p>
+    <p>Deine Datenschutz-Einstellungen (Einwilligung zu Analytics und Crashlytics) werden in deinem Nutzerprofil gespeichert, um sie geräteübergreifend beizubehalten.</p>
     <p>Die Datenverarbeitung erfolgt durch Google Ireland Limited (siehe Abschnitt 3).</p>
 
     <h2 id="brevo">3b. E-Mail-Versand (Brevo)</h2>
@@ -217,6 +235,28 @@
     <p>Die Datenverarbeitung erfolgt innerhalb der EU. Ein Auftragsverarbeitungsvertrag (AVV) liegt vor.</p>
     <p>Weitere Informationen: <a href="https://www.brevo.com/de/legal/privacypolicy/" target="_blank" rel="noopener">https://www.brevo.com/de/legal/privacypolicy/</a></p>
 
+    <h2 id="admob">3c. Werbung (Google AdMob)</h2>
+    <p>Die App zeigt Werbeanzeigen über Google AdMob (Google Ireland Limited). AdMob verwendet folgende Daten zur Ausspielung personalisierter Werbung:</p>
+    <ul>
+        <li>Geräte-Werbe-ID (IDFA auf iOS, Google Advertising ID auf Android)</li>
+        <li>IP-Adresse (ungefährer Standort)</li>
+        <li>Gerätetyp und Betriebssystemversion</li>
+        <li>App-Nutzungsdaten (welche Anzeigen gesehen/angeklickt wurden)</li>
+        <li>Abgeleitete demographische Daten (geschätztes Alter, Interessen)</li>
+    </ul>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO sowie § 25 Abs. 1 TDDDG (Einwilligung). Personalisierte Werbung wird nur mit deiner ausdrücklichen Zustimmung aktiviert.</p>
+    <p><strong>Einwilligungs-Management (Google UMP / CMP):</strong><br>
+    Für Nutzer im EWR, in der Schweiz und in Großbritannien holen wir deine Einwilligung vor der ersten Anzeige von Werbung über die Google User Messaging Platform (UMP) ein (IAB TCF v2.2). Über diesen Dialog kannst du der Datenverarbeitung durch Google und weitere Werbepartner zustimmen oder widersprechen. Du kannst deine Einstellungen jederzeit in den App-Einstellungen unter „Datenschutz" → „Werbe-Einstellungen verwalten" ändern.</p>
+    <p>Auf iOS wird zusätzlich der App-Tracking-Transparenz-Dialog (ATT) angezeigt.</p>
+    <p>Du kannst personalisierte Werbung außerdem auf Geräteebene deaktivieren:</p>
+    <ul>
+        <li>iOS: Einstellungen → Datenschutz &amp; Sicherheit → Tracking</li>
+        <li>Android: Einstellungen → Google → Anzeigen → Anzeigenpersonalisierung deaktivieren</li>
+    </ul>
+    <p>Ohne Zustimmung werden nur kontextbezogene, nicht-personalisierte Anzeigen angezeigt.</p>
+    <p>Weitere Informationen: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">https://policies.google.com/technologies/ads</a><br>
+    Datenschutz bei Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></p>
+
     <h2 id="ki">4. Künstliche Intelligenz (KI-Funktionen)</h2>
     <p>Die App nutzt KI-gestützte Funktionen auf Basis von Google Gemini (ein generatives KI-Modell von Google LLC). Die Verarbeitung erfolgt über unsere eigenen Firebase Cloud Functions, die als Vermittler zur Gemini API dienen. Daten werden dabei ausschließlich auf deine aktive Anfrage hin übermittelt.</p>
     <p><strong>a) Bild-zu-Rezept-Erkennung</strong><br>
@@ -225,6 +265,14 @@
     Bei der Spracheingabe wird die Sprache zunächst lokal auf deinem Gerät transkribiert (on-device Speech-to-Text). Der transkribierte Text wird anschließend an Google Gemini übermittelt, um daraus strukturierte Zutaten und Zubereitungsschritte zu erstellen. Die Sprachaufnahme selbst verlässt das Gerät nicht.</p>
     <p><strong>c) Automatische Nährwertberechnung</strong><br>
     Die von dir eingegebene Zutatenliste eines Rezepts wird an Google Gemini übermittelt, um Nährwerte (Kalorien, Eiweiß, Kohlenhydrate, Fett) zu schätzen. Diese Werte sind automatisch generierte Schätzungen und ohne Gewähr.</p>
+    <p><strong>d) Rezeptgenerierung aus Zutaten</strong><br>
+    Wenn du eine Liste vorhandener Zutaten angibst, wird diese an Google Gemini übermittelt, um ein passendes Rezept zu erstellen.</p>
+    <p><strong>e) KI-gestützte Rezeptanpassung</strong><br>
+    Wenn du ein bestehendes Rezept per KI anpassen lässt (z. B. „mach es vegan"), werden die Rezeptdaten und dein Änderungswunsch an Google Gemini übermittelt.</p>
+    <p><strong>f) Lebensmittelerkennung aus Fotos</strong><br>
+    Wenn du ein Foto zur Zutatenerkennung verwendest, wird das Bild an Google Gemini übermittelt, um einzelne Lebensmittel zu identifizieren.</p>
+    <p><strong>g) Texteingabe-Interpretation und Rezept-Import-Bereinigung</strong><br>
+    Bei Texteingaben zur Rezepterfassung sowie bei importierten Rezepten wird der eingegebene bzw. extrahierte Text an Google Gemini übermittelt, um relevante Rezeptinformationen zu extrahieren und zu strukturieren.</p>
     <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung, da die KI-Funktion auf aktive Anfrage ausgeführt wird).</p>
     <p>Google LLC ist insoweit als Auftragsverarbeiter tätig. Gemäß den Nutzungsbedingungen der Gemini API werden über die API übermittelte Daten nicht für das Training von KI-Modellen verwendet.</p>
     <p>Weitere Informationen zur Gemini API: <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">https://ai.google.dev/gemini-api/terms</a><br>
@@ -236,6 +284,7 @@
         <li><strong>Webseiten-Import (URL):</strong> Die angegebene URL wird von unserer Cloud Function serverseitig aufgerufen. Seiteninhalt und strukturierte Rezeptdaten (JSON-LD, Microdata) werden extrahiert.</li>
         <li><strong>Social-Media-Import (Instagram, TikTok, Pinterest):</strong> Öffentlich zugängliche Beiträge werden über öffentliche Schnittstellen oder öffentlich einsehbare Inhalte abgerufen. Gespeichert werden nur die extrahierten Rezeptdaten.</li>
         <li><strong>Chefkoch:</strong> Die App nutzt die öffentliche Rezept-API von chefkoch.de zum Abruf von Rezeptdaten.</li>
+        <li><strong>iOS Share Extension:</strong> Wenn du über das iOS-Teilen-Menü Inhalte (z. B. URLs oder Texte) an ReciBee weitergibst, werden diese direkt an unsere Cloud Function übertragen und dort wie ein regulärer Import verarbeitet (inkl. KI-gestützter Strukturierung über Google Gemini, siehe Abschnitt 4). Gespeichert werden ausschließlich die extrahierten Rezeptdaten.</li>
     </ul>
     <p>Du bist dafür verantwortlich, dass du zur Nutzung der importierten Inhalte berechtigt bist und keine Urheberrechte Dritter verletzt.</p>
 
@@ -249,8 +298,28 @@
     <p>Weitere Informationen zum Data Privacy Framework: <a href="https://www.dataprivacyframework.gov" target="_blank" rel="noopener">https://www.dataprivacyframework.gov</a></p>
 
     <h2 id="speicherdauer">7. Speicherdauer</h2>
-    <p>Deine Daten werden gespeichert, solange dein Account aktiv ist. Bei Löschung deines Accounts werden alle zugehörigen personenbezogenen Daten umgehend gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
-    <p>Für KI-Funktionen übermittelte Daten (Bilder, transkribierte Texte, Zutatenlisten) werden von der Gemini API nach der Verarbeitung nicht dauerhaft gespeichert und nicht für das Training von KI-Modellen verwendet.</p>
+    <p>Deine Daten werden gemäß folgender Fristen gespeichert:</p>
+    <p><strong>Dauerhaft gespeichert (solange Account aktiv):</strong></p>
+    <ul>
+        <li>Profildaten, Rezepte, Wochenpläne, Einkaufslisten, Kommentare, Bewertungen</li>
+        <li>Werden bei Account-Löschung sofort und vollständig entfernt</li>
+    </ul>
+    <p><strong>Temporäre Daten:</strong></p>
+    <ul>
+        <li>Firebase Analytics: max. 14 Monate (Google-Standard)</li>
+        <li>Firebase Crashlytics Absturzberichte: 90 Tage</li>
+        <li>Server-Logs (Cloud Functions): 30 Tage</li>
+        <li>Google AdMob Werbedaten: gemäß Google Ads-Richtlinien (ca. 13–24 Monate)</li>
+    </ul>
+    <p><strong>KI-Verarbeitung:</strong></p>
+    <ul>
+        <li>Bilder, Texte und Spracheingaben, die an die Gemini API übermittelt werden, werden nach der Verarbeitung nicht dauerhaft gespeichert und nicht für das Training von KI-Modellen verwendet.</li>
+    </ul>
+    <p><strong>Gesetzliche Aufbewahrungspflichten:</strong></p>
+    <ul>
+        <li>Steuer- und handelsrechtliche Unterlagen: 10 Jahre (§ 147 AO, § 257 HGB)</li>
+        <li>Bei Rechtsstreitigkeiten können Daten länger aufbewahrt werden</li>
+    </ul>
 
     <h2 id="rechte">8. Deine Rechte</h2>
     <p>Du hast gemäß DSGVO folgende Rechte:</p>
@@ -263,7 +332,10 @@
         <li>Widerspruchsrecht (Art. 21 DSGVO)</li>
     </ul>
     <p>Zur Ausübung deiner Rechte kontaktiere uns unter der oben genannten E-Mail-Adresse.</p>
-    <p>Du kannst deinen Account und alle damit verbundenen Daten jederzeit direkt in der App unter Profileinstellungen → Account löschen.</p>
+    <p><strong>Datenexport (Art. 15 &amp; 20 DSGVO):</strong><br>
+    Du kannst alle deine Daten jederzeit direkt in der App unter Profileinstellungen → „Meine Daten exportieren" als JSON-Datei herunterladen.</p>
+    <p><strong>Account-Löschung (Art. 17 DSGVO):</strong><br>
+    Du kannst deinen Account und alle damit verbundenen Daten jederzeit direkt in der App unter Profileinstellungen → „Account löschen" vollständig entfernen.</p>
 
     <h2 id="entscheidungen">9. Automatisierte Entscheidungsfindung</h2>
     <p>Es findet keine automatisierte Entscheidungsfindung oder Profiling im Sinne von Art. 22 DSGVO statt. KI-gestützte Funktionen (siehe Abschnitt 4) dienen ausschließlich der Unterstützung und erzeugen keine rechtlich bindenden oder ähnlich erheblichen Entscheidungen.</p>
@@ -271,6 +343,24 @@
     <h2 id="kontakt">10. Kontakt &amp; Beschwerderecht</h2>
     <p>Bei Fragen zum Datenschutz kannst du uns jederzeit unter <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> kontaktieren.</p>
     <p>Du hast zudem das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Die zuständige Aufsichtsbehörde richtet sich nach dem Bundesland des Anbieters.</p>
+
+    <h2 id="iap">11. In-App-Käufe und Abonnements</h2>
+    <p>Die App bietet optionale kostenpflichtige Funktionen über In-App-Käufe und Abonnements an. Die Zahlungsabwicklung erfolgt ausschließlich über Apple (App Store) bzw. Google (Play Store).</p>
+    <p>Zur Verwaltung von Abonnements nutzen wir den Dienst RevenueCat (RevenueCat Inc., San Francisco, USA). Dabei werden folgende Daten an RevenueCat übermittelt:</p>
+    <ul>
+        <li>Anonymisierte App-User-ID</li>
+        <li>Kaufbelege und Abo-Status</li>
+        <li>Plattform (iOS/Android)</li>
+    </ul>
+    <p>Es werden keine persönlichen Daten wie Name oder E-Mail-Adresse an RevenueCat übermittelt.</p>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
+    <p>Weitere Informationen: <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">https://www.revenuecat.com/privacy</a></p>
+
+    <h2 id="jugendschutz">12. Jugendschutz und Mindestalter</h2>
+    <p>Die App richtet sich an Nutzer ab 16 Jahren. Dies entspricht dem in Deutschland geltenden Mindestalter für eine eigenständige Einwilligung in die Verarbeitung personenbezogener Daten in Bezug auf Dienste der Informationsgesellschaft (§ 22 BDSG i. V. m. Art. 8 Abs. 1 DSGVO).</p>
+    <p>Für Nutzer unter 16 Jahren ist die Nutzung der App nur mit Zustimmung eines Erziehungsberechtigten zulässig. Der Erziehungsberechtigte muss diese Datenschutzerklärung gelesen und der Verarbeitung zugestimmt haben.</p>
+    <p>Wir erheben wissentlich keine personenbezogenen Daten von Kindern ohne die nach Art. 8 DSGVO erforderliche elterliche Einwilligung. Sollten wir feststellen, dass personenbezogene Daten ohne die erforderliche Einwilligung übermittelt wurden, werden diese unverzüglich gelöscht.</p>
+    <p>Eltern, die glauben, dass ihr Kind Daten an ReciBee übermittelt hat, können uns unter <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> kontaktieren.</p>
 
 </div>
 
