@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelbook Support – HoneyApps</title>
+    <meta name="description" content="Hilfe zu Travelbook: FAQ zu Anmeldung, Travel Buddies, Fotos, Konto-Löschung und Datenschutz.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="/travelbook/icon.png">
+    <link rel="apple-touch-icon" href="/travelbook/icon.png">
+    <style>
+        .support-hero {
+            text-align: center;
+            padding: 120px 20px 60px;
+            background: linear-gradient(180deg, #fff5ec 0%, #ffffff 100%);
+        }
+        .support-hero h1 {
+            font-size: clamp(36px, 5vw, 54px);
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        .support-hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .support-contact {
+            max-width: 720px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .support-contact a {
+            display: block;
+            padding: 20px 24px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: border-color 0.15s ease;
+        }
+        .support-contact a:hover {
+            border-color: #E56A1C;
+        }
+        .support-contact .label {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+        .support-contact .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #E56A1C;
+        }
+        .faq-section {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        .faq-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+        }
+        .faq-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .faq-item p, .faq-item li {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        .faq-item ul {
+            margin: 10px 0 0 20px;
+        }
+        .faq-item a {
+            color: #E56A1C;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 40px;
+            color: #E56A1C;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="/travelbook">Travelbook</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="mailto:info@honeyapps.de">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="support-hero">
+    <h1>Travelbook Support</h1>
+    <p>Fragen zur App? Probleme beim Einloggen? Schreib uns — wir antworten normalerweise innerhalb von 24 Stunden.</p>
+    <div class="support-contact">
+        <a href="mailto:info@honeyapps.de">
+            <div class="label">E-Mail</div>
+            <div class="value">info@honeyapps.de</div>
+        </a>
+        <a href="tel:+491749783003">
+            <div class="label">Telefon</div>
+            <div class="value">+49 174 9783003</div>
+        </a>
+    </div>
+</section>
+
+<section id="faq" class="faq-section">
+    <h2>Häufige Fragen</h2>
+
+    <div class="faq-item">
+        <h3>Wie melde ich mich an?</h3>
+        <p>Travelbook bietet drei Login-Varianten:</p>
+        <ul>
+            <li><strong>Magic-Link per E-Mail</strong>: Gib deine E-Mail ein, wir schicken dir einen 6-stelligen Code.</li>
+            <li><strong>Sign in with Apple</strong> (iOS)</li>
+            <li><strong>Google Sign-In</strong> (iOS + Android)</li>
+        </ul>
+        <p>Dein Passwort speichern wir nicht — Anmeldungen laufen entweder über Einmal-Codes oder über Apple/Google.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Der Login-Code kommt nicht an</h3>
+        <ul>
+            <li>Prüfe Spam-/Werbung-Ordner</li>
+            <li>Der Code ist 5 Minuten gültig. Wenn er abgelaufen ist, schick dir einen neuen</li>
+            <li>Achte auf Tippfehler bei der E-Mail-Adresse</li>
+            <li>Manche Firmen-Mailserver blockieren automatisierte E-Mails — dann nutze bitte deine private Adresse oder Apple/Google-Login</li>
+        </ul>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie funktionieren Travel Buddies?</h3>
+        <p>Der Besitzer eines Trips kann andere Nutzer per Username-Suche einladen. Der Eingeladene sieht die Einladung im Reiter „Meine Routen" → „Buddy" und kann annehmen oder ablehnen.</p>
+        <p><strong>Was Buddies dürfen:</strong> Stops, POIs und Fotos hinzufügen, eigene POIs löschen, Stops bearbeiten.</p>
+        <p><strong>Was nur der Owner darf:</strong> Trip-Titel/Sichtbarkeit ändern, Trip löschen, Buddies einladen/entfernen, fremde POIs löschen.</p>
+        <p>Buddies können die Mitgliedschaft jederzeit selbst aufheben („Leave"). Ihre Beiträge bleiben dabei im Trip.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Kann ich Fotos hochladen, die ich mit anderen Apps gemacht habe?</h3>
+        <p>Ja. Beim Tippen auf „Foto hinzufügen" öffnet Travelbook die Foto-Bibliothek deines Geräts und du wählst aus. Du kannst auch direkt mit der Kamera aus der App heraus fotografieren.</p>
+        <p>Hochgeladene Fotos liegen in einem EU-gehosteten Cloudflare-R2-Bucket. Nur Bilder, die zu öffentlichen Trips gehören, sind für andere Nutzer sichtbar — alles, was in einem privaten Trip liegt, bleibt privat.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie lösche ich eine einzelne Route?</h3>
+        <p>In „Meine Routen" auf die Route tippen → Menü (⋮) oben rechts → „Route löschen". Die Route und alle ihre Stops, POIs, Medien und Kommentare werden unwiderruflich entfernt.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie lösche ich mein gesamtes Konto?</h3>
+        <p>Einstellungen → „Account löschen". Nach Bestätigung werden dein Profil, alle Routen, Stops, POIs, Medien, Kommentare, Likes, Saves und Follower-Beziehungen innerhalb von 30 Tagen unwiderruflich gelöscht.</p>
+        <p>Beiträge, die du in Trips von Travel Buddies geleistet hast, bleiben als Inhalt des Trips erhalten, werden aber dem anonymisierten Nutzer „ehem. Nutzer" zugeordnet.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie exportiere ich meine Daten (DSGVO)?</h3>
+        <p>Einstellungen → „Meine Daten exportieren (DSGVO)". Du erhältst eine strukturierte Übersicht deiner Profil- und Routen-Daten direkt in der App. Für einen vollständigen maschinenlesbaren Export per E-Mail schreib uns unter <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> — wir antworten spätestens innerhalb von 30 Tagen (Art. 12 Abs. 3 DSGVO).</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Welche Sprachen werden unterstützt?</h3>
+        <p>Travelbook gibt es nativ in <strong>Deutsch, Englisch und Spanisch</strong>. Die Sprache richtet sich standardmäßig nach deiner Systemsprache, lässt sich aber in den App-Einstellungen → „Sprache" jederzeit umstellen. Die Wahl bleibt zwischen Sessions erhalten.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Woher kommen die Karten?</h3>
+        <p>Die Kartenansicht in der App stammt von Mapbox mit OpenStreetMap-Daten. Beim Laden einer Karte werden Kartenausschnitt und IP-Adresse an Mapbox übertragen — Details dazu in unserer <a href="/travelbook/privacy">Datenschutzerklärung</a>.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Ich habe einen unangemessenen Inhalt gefunden</h3>
+        <p>Wenn du auf einen Trip, ein POI oder einen Kommentar stößt, der gegen unsere <a href="/travelbook/agb">AGB</a> verstößt (Hass, Spam, Rechtsverletzungen), melde den Inhalt bitte per E-Mail an <a href="mailto:info@honeyapps.de">info@honeyapps.de</a>. Wir prüfen offensichtlich rechtswidrige Inhalte innerhalb von 24 Stunden, komplexere Fälle innerhalb von sieben Tagen.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wann kommt Travelbook in den App Store / Play Store?</h3>
+        <p>Travelbook ist derzeit in der Beta-Phase. Wenn du Early-Access (TestFlight für iOS oder internes Testing für Android) haben willst, schreib uns mit dem Betreff „Travelbook Beta" an <a href="mailto:info@honeyapps.de">info@honeyapps.de</a>.</p>
+    </div>
+
+    <a href="/travelbook" class="back-link">← Zurück zu Travelbook</a>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Travelbook</h4>
+                <ul>
+                    <li><a href="/travelbook">Übersicht</a></li>
+                    <li><a href="/travelbook/support">Support &amp; FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/#impressum">Impressum</a></li>
+                    <li><a href="/travelbook/privacy">Datenschutz</a></li>
+                    <li><a href="/travelbook/agb">AGB</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@honeyapps.de">info@honeyapps.de</a></li>
+                    <li><a href="tel:+491749783003">+49 174 9783003</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="/travelbook/privacy">Datenschutz</a>
+                <a href="/travelbook/agb">AGB</a>
+                <a href="/#impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelbook – Reiserouten planen &amp; teilen | HoneyApps</title>
+    <meta name="description" content="Travelbook ist eine Social-Travel-App: Plane mehrwöchige Reisen mit Stops, Fotos und POIs, teile sie mit der Community und entdecke geprüfte Routen anderer Reisender.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="/travelbook/icon.png">
+    <link rel="apple-touch-icon" href="/travelbook/icon.png">
+    <meta property="og:title" content="Travelbook – Reiserouten planen &amp; teilen">
+    <meta property="og:description" content="Social-Travel-App zum Planen, Teilen und Entdecken von Reiserouten. Mit Travel Buddies, Rankings und DSGVO-konformer EU-Infrastruktur.">
+    <meta property="og:image" content="https://honeyapps.de/travelbook/icon.png">
+    <meta property="og:url" content="https://honeyapps.de/travelbook">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        .tb-hero {
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(180deg, #fff5ec 0%, #ffffff 100%);
+        }
+        .tb-app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 27px;
+            margin: 0 auto 32px;
+            display: block;
+            box-shadow: 0 12px 40px rgba(229, 106, 28, 0.25), 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .tb-hero .badge {
+            display: inline-block;
+            background: #FFE4CC;
+            color: #E56A1C;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .tb-hero h1 {
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .tb-hero .tb-accent {
+            background: linear-gradient(90deg, #E56A1C 0%, #FF8C42 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .tb-hero p.lead {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 32px;
+        }
+        .tb-hero .cta-group .btn-primary {
+            background: #E56A1C;
+        }
+        .tb-hero .cta-group .btn-primary:hover {
+            background: #C8581A;
+        }
+        .tb-features {
+            padding: 100px 20px;
+            max-width: var(--max-width-wide);
+            margin: 0 auto;
+        }
+        .tb-features h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+        .tb-features .sub {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 60px;
+            font-size: 18px;
+        }
+        .tb-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .tb-feature-card {
+            background: var(--bg-secondary);
+            padding: 32px;
+            border-radius: var(--radius);
+        }
+        .tb-feature-card .icon {
+            width: 48px;
+            height: 48px;
+            background: #E56A1C;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 16px;
+            font-size: 22px;
+        }
+        .tb-feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .tb-feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .tb-compliance {
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .tb-compliance h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .tb-compliance p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .tb-compliance .badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 32px;
+        }
+        .tb-compliance .badge-pill {
+            background: var(--bg-secondary);
+            padding: 10px 20px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .tb-cta-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: #E56A1C;
+            color: white;
+        }
+        .tb-cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .tb-cta-section p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+        .tb-cta-section .btn-primary {
+            background: white;
+            color: #E56A1C;
+        }
+        .tb-cta-section .btn-primary:hover {
+            background: #f5f5f7;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="/travelbook/support">Support</a></li>
+            <li><a href="/#kontakt">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="tb-hero">
+    <img src="icon.png" alt="Travelbook App-Icon" class="tb-app-icon">
+    <span class="badge">✈️ Social Travel · EU-Hosting</span>
+    <h1>Deine nächste Reise<br><span class="tb-accent">beginnt hier.</span></h1>
+    <p class="lead">Plane mehrwöchige Routen Stop für Stop, teile sie mit Mitreisenden und lass dich von geprüften Touren anderer Entdecker inspirieren.</p>
+    <div class="cta-group">
+        <a href="#features" class="btn-primary">Features entdecken</a>
+        <a href="/travelbook/support" class="btn-secondary">Support</a>
+    </div>
+</section>
+
+<section id="features" class="tb-features">
+    <h2>Das kann Travelbook</h2>
+    <p class="sub">Vom Wochenendtrip bis zur Weltreise — gestalte jede Route mit echten Karten, Fotos und den Tipps deiner Community.</p>
+    <div class="tb-feature-grid">
+        <div class="tb-feature-card">
+            <div class="icon">📍</div>
+            <h3>Routen Stop für Stop</h3>
+            <p>Lege Städte, Unterkünfte, Restaurants und Aktivitäten als einzelne Stops an. Jeder Stop bekommt Koordinaten, Notizen und Fotos.</p>
+        </div>
+        <div class="tb-feature-card">
+            <div class="icon">👥</div>
+            <h3>Travel Buddies</h3>
+            <p>Lade Mitreisende per Username-Suche ein. Sie dürfen Stops, POIs und Fotos beitragen — das Original bleibt unter deiner Kontrolle.</p>
+        </div>
+        <div class="tb-feature-card">
+            <div class="icon">🌍</div>
+            <h3>Explore &amp; Rankings</h3>
+            <p>Entdecke öffentliche Routen anderer Reisender, gefiltert nach Land und Zielgruppe. Globale und länderbezogene Top-Listen zeigen, was wirklich funktioniert.</p>
+        </div>
+        <div class="tb-feature-card">
+            <div class="icon">❤️</div>
+            <h3>Community</h3>
+            <p>Folge Reisenden, denen du vertraust. Speichere und klone ihre Routen, hinterlasse Likes oder Kommentare — ohne Algorithmus-Theater.</p>
+        </div>
+        <div class="tb-feature-card">
+            <div class="icon">📸</div>
+            <h3>Fotos &amp; Videos</h3>
+            <p>Hochgeladene Medien landen in einem eigenen Cloudflare-R2-Bucket in der EU. Kein Drittanbieter-Tracking, keine Werbe-IDs.</p>
+        </div>
+        <div class="tb-feature-card">
+            <div class="icon">🗣️</div>
+            <h3>Dreisprachig</h3>
+            <p>Travelbook ist nativ in Deutsch, Englisch und Spanisch verfügbar. Sprachwahl bleibt zwischen Sessions erhalten.</p>
+        </div>
+    </div>
+</section>
+
+<section class="tb-compliance">
+    <h2>DSGVO-konform aus Niedersachsen</h2>
+    <p>Travelbook wird in Deutschland entwickelt und gehostet. Datenbank und Medien-Speicher liegen in der EU. Drittanbieter wie Mapbox oder Apple/Google-Login nutzen ausschließlich das, was die App zum Funktionieren braucht.</p>
+    <p>Keine Werbetracker, kein Verkauf deiner Daten, keine Weitergabe an Datenhändler.</p>
+    <div class="badges">
+        <span class="badge-pill">🇪🇺 EU-Hosting (Frankfurt + WEUR)</span>
+        <span class="badge-pill">🔒 TLS-Verschlüsselung</span>
+        <span class="badge-pill">🧾 DSGVO-ready</span>
+        <span class="badge-pill">🧹 Daten-Export &amp; -Löschung</span>
+    </div>
+</section>
+
+<section class="tb-cta-section">
+    <h2>In Entwicklung</h2>
+    <p>Travelbook befindet sich aktuell in der Beta-Phase. Melde dich per E-Mail für TestFlight oder den Play-Store-Frühzugang an.</p>
+    <a href="mailto:info@honeyapps.de?subject=Travelbook%20Beta" class="btn-primary">TestFlight anfragen</a>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Travelbook</h4>
+                <ul>
+                    <li><a href="/travelbook">Übersicht</a></li>
+                    <li><a href="/travelbook/support">Support &amp; FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/#impressum">Impressum</a></li>
+                    <li><a href="/travelbook/privacy">Datenschutz</a></li>
+                    <li><a href="/travelbook/agb">AGB</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@honeyapps.de">info@honeyapps.de</a></li>
+                    <li><a href="tel:+491749783003">+49 174 9783003</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="/travelbook/privacy">Datenschutz</a>
+                <a href="/travelbook/agb">AGB</a>
+                <a href="/#impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
