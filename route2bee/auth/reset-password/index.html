@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate, max-age=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passwort zurücksetzen – Route2Bee</title>
+    <meta name="description" content="Setze dein Route2Bee-Passwort zurück.">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="icon" type="image/png" href="/route2bee/icon.png">
+    <link rel="apple-touch-icon" href="/route2bee/icon.png">
+    <style>
+        body {
+            background: linear-gradient(180deg, #eef4fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px 32px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(59, 115, 185, 0.08);
+        }
+        .card img.logo {
+            width: 84px;
+            height: 84px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+        .card h1 {
+            font-size: 26px;
+            letter-spacing: -0.01em;
+            margin: 0 0 12px;
+            color: var(--text-primary);
+        }
+        .card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0 0 20px;
+        }
+        .cta {
+            display: inline-block;
+            background: #3B73B9;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: background 0.15s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .cta:hover:not(:disabled) { background: #2E5FA3; }
+        .cta:disabled { opacity: 0.5; cursor: default; }
+        .hint {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+        .spinner {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            border: 3px solid #E8F0FA;
+            border-top-color: #3B73B9;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 8px 0 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .icon-success, .icon-error {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-success { background: #E8F5E9; }
+        .icon-error { background: #FDECEA; }
+        .icon-success svg { stroke: #2E7D32; }
+        .icon-error svg { stroke: #C62828; }
+        .state { display: none; }
+        .state.active { display: block; }
+
+        form { text-align: left; }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            margin-top: 16px;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            font-size: 16px;
+            font-family: inherit;
+            box-sizing: border-box;
+            background: #fafafa;
+            transition: border-color 0.15s ease, background 0.15s ease;
+        }
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #3B73B9;
+            background: #fff;
+        }
+        .form-error {
+            color: #C62828;
+            font-size: 13px;
+            margin-top: 12px;
+            min-height: 18px;
+        }
+        .strength {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+            align-items: center;
+        }
+        .strength-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border);
+        }
+        .strength-dot.active { background: #3B73B9; }
+        .strength-text {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-left: 8px;
+        }
+        .submit-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Loading (während Token-Verifikation) -->
+        <div id="state-loading" class="state active">
+            <img class="logo" src="/route2bee/icon.png" alt="Route2Bee">
+            <div class="spinner"></div>
+            <h1>Link wird geprüft…</h1>
+            <p>Einen Moment bitte.</p>
+        </div>
+
+        <!-- Form (Passwort-Eingabe) -->
+        <div id="state-form" class="state">
+            <img class="logo" src="/route2bee/icon.png" alt="Route2Bee">
+            <h1>Neues Passwort setzen</h1>
+            <p>Wähle ein Passwort mit mindestens 8 Zeichen.</p>
+            <form id="resetForm" autocomplete="off">
+                <label for="password">Neues Passwort</label>
+                <input
+                    type="password"
+                    id="password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                    placeholder="Mindestens 8 Zeichen"
+                >
+                <div class="strength">
+                    <div class="strength-dot" id="sd1"></div>
+                    <div class="strength-dot" id="sd2"></div>
+                    <div class="strength-dot" id="sd3"></div>
+                    <span class="strength-text" id="strengthText">Mindestens 8 Zeichen</span>
+                </div>
+                <label for="password2">Passwort wiederholen</label>
+                <input
+                    type="password"
+                    id="password2"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                    placeholder="Passwort zur Bestätigung"
+                >
+                <div class="form-error" id="formError"></div>
+                <button type="submit" class="cta submit-btn" id="submitBtn">Passwort speichern</button>
+            </form>
+        </div>
+
+        <!-- Success -->
+        <div id="state-success" class="state">
+            <div class="icon-success">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h1>Passwort geändert</h1>
+            <p>Dein Passwort wurde erfolgreich geändert. Du kannst dich jetzt in Route2Bee mit dem neuen Passwort anmelden.</p>
+            <a class="cta" href="fahrtenbuch://">Route2Bee öffnen</a>
+            <p class="hint">Falls die App nicht startet, öffne sie manuell vom Homescreen.</p>
+        </div>
+
+        <!-- Error -->
+        <div id="state-error" class="state">
+            <div class="icon-error">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+            <h1>Link ungültig oder abgelaufen</h1>
+            <p id="errorMsg">Der Reset-Link ist nicht mehr gültig. Bitte fordere in der App einen neuen an.</p>
+            <a class="cta" href="fahrtenbuch://">Route2Bee öffnen</a>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const SUPABASE_URL = 'https://knczicebzmxmiyaazoxc.supabase.co';
+            const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtuY3ppY2Viem14bWl5YWF6b3hjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2OTk5NjksImV4cCI6MjA4ODI3NTk2OX0.MTIDhyBs_xESRa1WlQP7W79xkBamGEJoEIuZ4OI8wt4';
+
+            let accessToken = null;
+
+            function showState(name) {
+                document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+                document.getElementById('state-' + name).classList.add('active');
+            }
+
+            function showError(message) {
+                if (message) document.getElementById('errorMsg').textContent = message;
+                showState('error');
+            }
+
+            // Parse token from query (?) and fragment (#)
+            const params = new URLSearchParams(
+                window.location.search.slice(1) +
+                '&' +
+                window.location.hash.slice(1)
+            );
+
+            const tokenHash = params.get('token_hash');
+            const type = params.get('type') || 'recovery';
+            const errorParam = params.get('error') || params.get('error_description');
+
+            if (errorParam) {
+                showError('Der Reset-Link ist nicht mehr gültig. Bitte fordere einen neuen an.');
+                return;
+            }
+
+            if (!tokenHash) {
+                showError('Reset-Link unvollständig. Bitte öffne ihn direkt aus deiner E-Mail.');
+                return;
+            }
+
+            // Token gegen Supabase verifizieren -> Access-Token für updateUser
+            fetch(SUPABASE_URL + '/auth/v1/verify', {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_ANON,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token_hash: tokenHash, type: type })
+            })
+            .then(async res => {
+                if (!res.ok) {
+                    const body = await res.json().catch(() => ({}));
+                    const msg = body.error_description || body.msg || body.message;
+                    showError(msg && /expired|invalid|not found|used/i.test(msg)
+                        ? 'Der Reset-Link ist nicht mehr gültig oder wurde bereits verwendet. Bitte fordere in der App einen neuen Link an.'
+                        : (msg || 'Der Reset-Link konnte nicht verifiziert werden.'));
+                    return;
+                }
+                const data = await res.json();
+                accessToken = data.access_token;
+                if (!accessToken) {
+                    showError('Session-Token fehlt. Bitte fordere einen neuen Link an.');
+                    return;
+                }
+                showState('form');
+                setTimeout(() => document.getElementById('password').focus(), 100);
+            })
+            .catch(() => {
+                showError('Netzwerkfehler. Bitte prüfe deine Internetverbindung und versuche es erneut.');
+            });
+
+            // Strength meter
+            const passwordEl = document.getElementById('password');
+            const sd = [document.getElementById('sd1'), document.getElementById('sd2'), document.getElementById('sd3')];
+            const strengthText = document.getElementById('strengthText');
+            passwordEl.addEventListener('input', () => {
+                const l = passwordEl.value.length;
+                sd[0].classList.toggle('active', l >= 1);
+                sd[1].classList.toggle('active', l >= 8);
+                sd[2].classList.toggle('active', l >= 12);
+                strengthText.textContent =
+                    l === 0 ? 'Mindestens 8 Zeichen' :
+                    l < 8 ? 'Noch zu kurz' :
+                    l < 12 ? 'Gut' : 'Sehr gut';
+            });
+
+            // Submit
+            document.getElementById('resetForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const pw = document.getElementById('password').value;
+                const pw2 = document.getElementById('password2').value;
+                const errEl = document.getElementById('formError');
+                const btn = document.getElementById('submitBtn');
+                errEl.textContent = '';
+
+                if (pw.length < 8) {
+                    errEl.textContent = 'Das Passwort muss mindestens 8 Zeichen lang sein.';
+                    return;
+                }
+                if (pw !== pw2) {
+                    errEl.textContent = 'Die Passwörter stimmen nicht überein.';
+                    return;
+                }
+                if (!accessToken) {
+                    errEl.textContent = 'Session fehlt. Bitte Seite neu laden.';
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = 'Wird gespeichert…';
+
+                try {
+                    const res = await fetch(SUPABASE_URL + '/auth/v1/user', {
+                        method: 'PUT',
+                        headers: {
+                            'apikey': SUPABASE_ANON,
+                            'Authorization': 'Bearer ' + accessToken,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ password: pw })
+                    });
+                    if (res.ok) {
+                        showState('success');
+                    } else {
+                        const body = await res.json().catch(() => ({}));
+                        errEl.textContent = body.msg || body.error_description || 'Das Passwort konnte nicht geändert werden.';
+                        btn.disabled = false;
+                        btn.textContent = 'Passwort speichern';
+                    }
+                } catch (err) {
+                    errEl.textContent = 'Netzwerkfehler. Bitte erneut versuchen.';
+                    btn.disabled = false;
+                    btn.textContent = 'Passwort speichern';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

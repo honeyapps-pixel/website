@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate, max-age=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Mail bestätigen – Route2Bee</title>
+    <meta name="description" content="Bestätige deine E-Mail-Adresse für Route2Bee.">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="icon" type="image/png" href="/route2bee/icon.png">
+    <link rel="apple-touch-icon" href="/route2bee/icon.png">
+    <style>
+        body {
+            background: linear-gradient(180deg, #eef4fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px 32px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(59, 115, 185, 0.08);
+        }
+        .card img.logo {
+            width: 84px;
+            height: 84px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+        .card h1 {
+            font-size: 26px;
+            letter-spacing: -0.01em;
+            margin: 0 0 12px;
+            color: var(--text-primary);
+        }
+        .card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0 0 20px;
+        }
+        .cta {
+            display: inline-block;
+            background: #3B73B9;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: background 0.15s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .cta:hover {
+            background: #2E5FA3;
+        }
+        .cta:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+        .hint {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+        .spinner {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            border: 3px solid #E8F0FA;
+            border-top-color: #3B73B9;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 8px 0 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .icon-success, .icon-error {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-success { background: #E8F5E9; }
+        .icon-error { background: #FDECEA; }
+        .icon-success svg { stroke: #2E7D32; }
+        .icon-error svg { stroke: #C62828; }
+        .state { display: none; }
+        .state.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Loading State -->
+        <div id="state-loading" class="state active">
+            <img class="logo" src="/route2bee/icon.png" alt="Route2Bee">
+            <div class="spinner"></div>
+            <h1>E-Mail wird bestätigt…</h1>
+            <p>Einen Moment bitte.</p>
+        </div>
+
+        <!-- Success State -->
+        <div id="state-success" class="state">
+            <div class="icon-success">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h1>E-Mail bestätigt</h1>
+            <p>Deine E-Mail-Adresse wurde erfolgreich bestätigt. Du kannst dich jetzt in Route2Bee anmelden.</p>
+            <a id="openApp" class="cta" href="fahrtenbuch://">Route2Bee öffnen</a>
+            <p class="hint">Falls die App nicht startet, öffne sie manuell vom Homescreen.</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="state-error" class="state">
+            <div class="icon-error">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+            <h1>Link ungültig oder abgelaufen</h1>
+            <p id="errorMsg">Der Bestätigungslink ist nicht mehr gültig. Bitte fordere in der App einen neuen an oder logge dich direkt ein, falls dein Konto schon bestätigt wurde.</p>
+            <a class="cta" href="fahrtenbuch://">Route2Bee öffnen</a>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const SUPABASE_URL = 'https://knczicebzmxmiyaazoxc.supabase.co';
+            const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtuY3ppY2Viem14bWl5YWF6b3hjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2OTk5NjksImV4cCI6MjA4ODI3NTk2OX0.MTIDhyBs_xESRa1WlQP7W79xkBamGEJoEIuZ4OI8wt4';
+
+            function showState(name) {
+                document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+                document.getElementById('state-' + name).classList.add('active');
+            }
+
+            function showError(message) {
+                if (message) document.getElementById('errorMsg').textContent = message;
+                showState('error');
+            }
+
+            // Params können in query (?) oder fragment (#) stehen. Supabase verwendet für
+            // verifyOtp-Links mit token_hash query-Params, für implicit-Flow fragment.
+            const params = new URLSearchParams(
+                window.location.search.slice(1) +
+                '&' +
+                window.location.hash.slice(1)
+            );
+
+            const tokenHash = params.get('token_hash');
+            const type = params.get('type');
+            const errorParam = params.get('error') || params.get('error_description');
+
+            if (errorParam) {
+                showError('Der Bestätigungslink ist nicht mehr gültig. Bitte fordere einen neuen an.');
+                return;
+            }
+
+            if (!tokenHash || !type) {
+                showError('Bestätigungslink unvollständig. Bitte öffne ihn direkt aus deiner E-Mail.');
+                return;
+            }
+
+            fetch(SUPABASE_URL + '/auth/v1/verify', {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_ANON,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token_hash: tokenHash, type: type })
+            })
+            .then(async res => {
+                if (res.ok) {
+                    showState('success');
+                } else {
+                    const body = await res.json().catch(() => ({}));
+                    const msg = body.error_description || body.msg || body.message;
+                    if (msg && /expired|invalid|not found|used/i.test(msg)) {
+                        showError('Der Bestätigungslink ist nicht mehr gültig oder wurde bereits verwendet. Falls dein Konto schon bestätigt ist, kannst du dich direkt einloggen.');
+                    } else {
+                        showError(msg || 'Die Bestätigung konnte nicht durchgeführt werden.');
+                    }
+                }
+            })
+            .catch(() => {
+                showError('Netzwerkfehler. Bitte prüfe deine Internetverbindung und versuche es erneut.');
+            });
+        })();
+    </script>
+</body>
+</html>
