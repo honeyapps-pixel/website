@@ -100,12 +100,6 @@
             transition: transform 0.2s, background 0.2s;
         }
         .store-badge:hover { transform: scale(1.04); background: #000; }
-        .store-badge-disabled {
-            background: #8a8a8e;
-            cursor: default;
-            opacity: 0.85;
-        }
-        .store-badge-disabled:hover { transform: none; background: #8a8a8e; }
         .store-badge svg { width: 24px; height: 24px; }
         .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
         .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -267,10 +261,10 @@
     <h1>Rezepte sammeln, planen,<br><span class="gradient">in Sekunden kochen.</span></h1>
     <p class="lead">ReciBee speichert Rezepte aus Links, Fotos oder dem Internet per KI, plant deine Woche und erstellt automatisch die Einkaufsliste – für dich und die ganze Familie.</p>
     <div class="store-badges">
-        <span class="store-badge store-badge-disabled" aria-label="App Store – Bald verfügbar">
+        <a href="https://apps.apple.com/de/app/recibee/id6761378123" class="store-badge" aria-label="Im App Store laden">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <div class="store-badge-text"><small>Bald im</small><strong>App Store</strong></div>
-        </span>
+            <div class="store-badge-text"><small>Laden im</small><strong>App Store</strong></div>
+        </a>
         <a href="https://play.google.com/store/apps/details?id=com.rezepteapp.rezepte_app" class="store-badge" aria-label="Bei Google Play laden">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
             <div class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></div>
@@ -452,10 +446,10 @@
     <h2>Jetzt kostenlos loslegen</h2>
     <p>Lade ReciBee und starte sofort mit dem KI-Rezept-Import – ohne Limit, ohne Kreditkarte.</p>
     <div class="store-badges" style="margin-top:1.5rem;">
-        <span class="store-badge store-badge-disabled" aria-label="App Store – Bald verfügbar">
+        <a href="https://apps.apple.com/de/app/recibee/id6761378123" class="store-badge" aria-label="Im App Store laden">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <div class="store-badge-text"><small>Bald im</small><strong>App Store</strong></div>
-        </span>
+            <div class="store-badge-text"><small>Laden im</small><strong>App Store</strong></div>
+        </a>
         <a href="https://play.google.com/store/apps/details?id=com.rezepteapp.rezepte_app" class="store-badge" aria-label="Bei Google Play laden">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
             <div class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></div>
