@@ -604,23 +604,24 @@
 })();
 </script>
 
-<!-- Google Ads Conversion Wiring
-     Aktiviert sich automatisch wenn der Google Tag oben im <head> aktiviert ist.
-     Wartet aktuell deaktiviert auf die echte Conversion ID.
-     AKTIVIERUNG:
-     1. CONVERSION_LABEL_APPSTORE und CONVERSION_LABEL_PLAYSTORE durch echte Labels aus Google Ads ersetzen
-     2. Auskommentierung entfernen
+<!-- Google Ads Conversion Wiring — Klick auf externen Link (App Store / Play Store)
+     Conversion ID: AW-18145804367
+     Conversion Label: zJvGCLnjhakcEM-AzMxD ("Klick auf externen Link", primäre Aktion)
+     Aktuell wird derselbe Label-Wert für App Store und Play Store gefeuert.
+     Falls später separate Conversions gewünscht: zweite Conversion-Action in Google Ads anlegen
+     und PLAY_STORE_LABEL hier durch deren Label ersetzen.
 -->
-<!--
 <script>
 (function() {
+  var APPSTORE_LABEL = 'zJvGCLnjhakcEM-AzMxD';
+  var PLAYSTORE_LABEL = 'zJvGCLnjhakcEM-AzMxD';
   document.querySelectorAll('[data-conversion]').forEach(function(el) {
     el.addEventListener('click', function() {
       var type = el.getAttribute('data-conversion');
-      var label = type === 'app-store' ? 'CONVERSION_LABEL_APPSTORE' : 'CONVERSION_LABEL_PLAYSTORE';
+      var label = type === 'app-store' ? APPSTORE_LABEL : PLAYSTORE_LABEL;
       if (typeof gtag === 'function') {
         gtag('event', 'conversion', {
-          'send_to': 'AW-XXXXXXXXX/' + label,
+          'send_to': 'AW-18145804367/' + label,
           'value': 1.0,
           'currency': 'EUR'
         });
@@ -629,7 +630,6 @@
   });
 })();
 </script>
--->
 
 </body>
 </html>
