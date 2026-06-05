@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diveo – Tauchtrips entdecken & buchen | HoneyApps</title>
+    <meta name="description" content="Diveo ist der Marktplatz fürs Tauchen: Entdecke und buche Tauchtrips, Kurse und Touren bei verifizierten Tauchbasen weltweit – sicher bezahlt, mit digitalem Waiver, Logbuch und Bewertungen.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="/diveo/icon.png">
+    <link rel="apple-touch-icon" href="/diveo/icon.png">
+    <meta property="og:title" content="Diveo – Tauchtrips entdecken & buchen">
+    <meta property="og:description" content="Der Marktplatz fürs Tauchen. Entdecke und buche Tauchtrips bei verifizierten Tauchbasen weltweit – sicher und unkompliziert.">
+    <meta property="og:image" content="https://honeyapps.de/diveo/icon.png">
+    <meta property="og:url" content="https://honeyapps.de/diveo">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Ads Tag (gtag.js) — Conversion ID AW-18145804367 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18145804367"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18145804367');
+    </script>
+
+    <style>
+        :root { --diveo: #0E97A1; --diveo-dark: #0B7A82; --diveo-soft: #E4F5F6; }
+        .dv-hero {
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(180deg, #f2fafb 0%, #ffffff 100%);
+        }
+        .dv-app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 27px;
+            margin: 0 auto 32px;
+            display: block;
+            box-shadow: 0 12px 40px rgba(14, 151, 161, 0.32), 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .dv-hero .badge {
+            display: inline-block;
+            background: var(--diveo-soft);
+            color: var(--diveo-dark);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .dv-hero h1 {
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .dv-accent {
+            background: linear-gradient(90deg, #0E97A1 0%, #4FD1C5 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .dv-hero p.lead {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 32px;
+        }
+        .store-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.625rem;
+            background: #1d1d1f;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .store-badge.is-soon { opacity: 0.55; cursor: default; }
+        .store-badge.is-soon:hover { transform: none; background: #1d1d1f; }
+        .store-badge:hover { transform: scale(1.04); background: #000; }
+        .store-badge svg { width: 24px; height: 24px; }
+        .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
+        .store-badge-text strong { font-size: 1rem; font-weight: 600; }
+        .dv-hero .cta-group .btn-primary { background: var(--diveo); }
+        .dv-hero .cta-group .btn-primary:hover { background: var(--diveo-dark); }
+
+        .dv-features {
+            padding: 100px 20px;
+            max-width: var(--max-width-wide);
+            margin: 0 auto;
+        }
+        .dv-features h2 { text-align: center; font-size: 42px; margin-bottom: 16px; }
+        .dv-features .sub {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 60px;
+            font-size: 18px;
+        }
+        .dv-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .dv-feature-card { background: var(--bg-secondary); padding: 32px; border-radius: var(--radius); }
+        .dv-feature-card .icon {
+            width: 48px; height: 48px;
+            background: var(--diveo);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; margin-bottom: 16px;
+        }
+        .dv-feature-card h3 { font-size: 20px; margin-bottom: 8px; }
+        .dv-feature-card p { color: var(--text-secondary); font-size: 15px; line-height: 1.5; }
+
+        .dv-steps { padding: 100px 20px; background: var(--bg-secondary); }
+        .dv-steps-inner { max-width: 900px; margin: 0 auto; }
+        .dv-steps h2 { text-align: center; font-size: 42px; margin-bottom: 16px; }
+        .dv-steps .sub { text-align: center; color: var(--text-secondary); margin-bottom: 60px; font-size: 18px; }
+        .dv-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            counter-reset: step;
+        }
+        .dv-step {
+            background: white;
+            padding: 32px;
+            border-radius: var(--radius);
+            border: 2px solid var(--border);
+            position: relative;
+        }
+        .dv-step::before {
+            counter-increment: step;
+            content: counter(step);
+            display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px;
+            background: var(--diveo); color: white;
+            border-radius: 999px; font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .dv-step h3 { font-size: 18px; margin-bottom: 8px; }
+        .dv-step p { color: var(--text-secondary); font-size: 15px; line-height: 1.5; }
+
+        .dv-centers { padding: 100px 20px; max-width: var(--max-width-wide); margin: 0 auto; }
+        .dv-centers-card {
+            background: linear-gradient(135deg, #0E97A1 0%, #0B7A82 100%);
+            color: white;
+            border-radius: 28px;
+            padding: 56px 48px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .dv-centers-card h2 { font-size: 34px; margin-bottom: 16px; }
+        .dv-centers-card p { font-size: 17px; line-height: 1.6; opacity: 0.95; margin-bottom: 12px; }
+        .dv-centers-card ul { list-style: none; padding: 0; margin: 0; }
+        .dv-centers-card li { padding: 8px 0 8px 28px; position: relative; font-size: 15px; }
+        .dv-centers-card li::before { content: "✓"; position: absolute; left: 0; font-weight: 700; }
+        @media (max-width: 720px) { .dv-centers-card { grid-template-columns: 1fr; padding: 40px 28px; } }
+
+        .dv-compliance { padding: 100px 20px; max-width: 900px; margin: 0 auto; text-align: center; }
+        .dv-compliance h2 { font-size: 36px; margin-bottom: 16px; }
+        .dv-compliance p { color: var(--text-secondary); font-size: 18px; line-height: 1.6; margin-bottom: 12px; }
+        .dv-compliance .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+        .dv-compliance .badge-pill {
+            background: var(--bg-secondary);
+            padding: 10px 20px; border-radius: 999px;
+            font-size: 14px; font-weight: 600; color: var(--text-primary);
+        }
+
+        .dv-cta-section { padding: 80px 20px; text-align: center; background: var(--diveo); color: white; }
+        .dv-cta-section h2 { font-size: 36px; margin-bottom: 16px; }
+        .dv-cta-section p { font-size: 18px; margin-bottom: 32px; opacity: 0.92; }
+        .dv-cta-section .btn-primary { background: white; color: var(--diveo); }
+        .dv-cta-section .btn-primary:hover { background: #f5f5f7; }
+        .dv-centers-card .btn-primary { background: white; color: var(--diveo); margin-top: 8px; display: inline-block; }
+        .dv-centers-card .btn-primary:hover { background: #f5f5f7; }
+    </style>
+</head>
+<body>
+
+<!-- Navigation (shared style with honeyapps.de) -->
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#so-gehts">So geht's</a></li>
+            <li><a href="#tauchschulen">Für Tauchschulen</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="dv-hero">
+    <img src="icon.png" alt="Diveo App-Icon" class="dv-app-icon">
+    <span class="badge">In Beta · TestFlight</span>
+    <h1>Tauchen buchen,<br><span class="dv-accent">wie es sein sollte.</span></h1>
+    <p class="lead">Diveo ist der Marktplatz fürs Tauchen: Entdecke Tauchtrips, Kurse und Touren bei verifizierten Tauchbasen weltweit – sicher gebucht und bezahlt, mit digitalem Waiver, Logbuch und echten Bewertungen.</p>
+    <div class="store-badges">
+        <span class="store-badge is-soon" aria-label="App Store – bald verfügbar">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div class="store-badge-text"><small>Bald im</small><strong>App Store</strong></div>
+        </span>
+        <span class="store-badge is-soon" aria-label="Google Play – bald verfügbar">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
+            <div class="store-badge-text"><small>Bald bei</small><strong>Google Play</strong></div>
+        </span>
+    </div>
+    <div class="cta-group" style="margin-top:1rem;">
+        <a href="mailto:info@honeyapps.de?subject=Diveo%20Beta-Zugang" class="btn-primary">Beta-Zugang anfragen</a>
+        <a href="#features" class="btn-secondary">Features entdecken</a>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="dv-features">
+    <h2>Alles für deinen nächsten Tauchgang</h2>
+    <p class="sub">Von der Suche bis zum Logbuch-Eintrag – ein durchgängiges Erlebnis, ohne E-Mail-Pingpong und Zettelwirtschaft.</p>
+    <div class="dv-feature-grid">
+        <div class="dv-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3>Trips entdecken</h3>
+            <p>Durchstöbere Tauchtrips, Kurse und Touren weltweit – mit Fotos, Tauchplätzen, Preisen und allem, was inklusive ist.</p>
+        </div>
+        <div class="dv-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Verifizierte Tauchbasen</h3>
+            <p>Anbieter und Guides werden geprüft. Brevet-Stufe und Voraussetzungen werden vor der Buchung klar angezeigt.</p>
+        </div>
+        <div class="dv-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <h3>Sicher bezahlen</h3>
+            <p>Zahlung direkt in der App über Stripe. Transparente Stornobedingungen und automatische Rückerstattungen.</p>
+        </div>
+        <div class="dv-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            </div>
+            <h3>Digitaler Waiver</h3>
+            <p>Haftungs- und Einverständniserklärungen unterschreibst du bequem digital – einmal ausfüllen statt am Counter warten.</p>
+        </div>
+        <div class="dv-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3>Echte Bewertungen</h3>
+            <p>Bewertungen stammen ausschließlich von Tauchern, die wirklich gebucht haben. Finde die Basis, die zu dir passt.</p>
+        </div>
+        <div class="dv-feature-card">
+            <div class="icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3>Digitales Logbuch</h3>
+            <p>Halte deine Tauchgänge fest, behalte dein Brevet und deine Ausrüstung im Blick – alles an einem Ort.</p>
+        </div>
+    </div>
+</section>
+
+<!-- So geht's -->
+<section id="so-gehts" class="dv-steps">
+    <div class="dv-steps-inner">
+        <h2>In drei Schritten ins Wasser</h2>
+        <p class="sub">Kein Hin und Her – von der Idee zum bestätigten Tauchgang in Minuten.</p>
+        <div class="dv-steps-grid">
+            <div class="dv-step">
+                <h3>Entdecken</h3>
+                <p>Suche nach Reisezielen, Tauchschulen und Trips, die zu deinem Brevet und deinen Terminen passen.</p>
+            </div>
+            <div class="dv-step">
+                <h3>Buchen</h3>
+                <p>Platz auswählen, Waiver digital unterschreiben und sicher in der App bezahlen – sofort bestätigt.</p>
+            </div>
+            <div class="dv-step">
+                <h3>Abtauchen</h3>
+                <p>Am Treffpunkt erscheinen, eintauchen und den Tauchgang anschließend im Logbuch festhalten.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Für Tauchschulen -->
+<section id="tauchschulen" class="dv-centers">
+    <div class="dv-centers-card">
+        <div>
+            <h2>Für Tauchschulen & Guides</h2>
+            <p>Diveo bringt dir Gäste – und nimmt dir die Verwaltung ab. Präsentiere deine Trips, fülle Abfahrten und steuere alles aus einer App.</p>
+            <a href="mailto:info@honeyapps.de?subject=Diveo%20f%C3%BCr%20meine%20Tauchschule" class="btn-primary">Tauchschule anmelden</a>
+        </div>
+        <ul>
+            <li>Trips, Kurse & Departures verwalten</li>
+            <li>Digitales Manifest & Check-in</li>
+            <li>Crew zuweisen & Aufgaben verteilen</li>
+            <li>Waiver-Status auf einen Blick</li>
+            <li>Auszahlungen direkt über Stripe</li>
+            <li>Schnell-Onboarding per Website-Import</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Vertrauen -->
+<section class="dv-compliance">
+    <h2>Gebaut für Vertrauen</h2>
+    <p>Deine Daten liegen sicher in der EU. Zahlungen laufen über zertifizierte Anbieter, und Diveo vermittelt transparent zwischen dir und der Tauchbasis.</p>
+    <div class="badges">
+        <span class="badge-pill">DSGVO-konform</span>
+        <span class="badge-pill">EU-Hosting (Frankfurt)</span>
+        <span class="badge-pill">TLS-verschlüsselt</span>
+        <span class="badge-pill">Zahlung via Stripe</span>
+        <span class="badge-pill">Verifizierte Anbieter</span>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="dv-cta-section">
+    <h2>Sei von Anfang an dabei</h2>
+    <p>Diveo ist gerade in der Beta. Sichere dir deinen Zugang und tauche mit uns ab.</p>
+    <div class="cta-group" style="justify-content:center;">
+        <a href="mailto:info@honeyapps.de?subject=Diveo%20Beta-Zugang" class="btn-primary">Beta-Zugang anfragen</a>
+    </div>
+</section>
+
+<!-- Support / Kontakt -->
+<section id="kontakt" class="impressum-section">
+    <div class="impressum-inner">
+        <h2>Support & Kontakt</h2>
+        <div class="impressum-grid">
+            <div class="impressum-card">
+                <h3>Fragen zur App?</h3>
+                <p>Schreib uns direkt – wir antworten normalerweise innerhalb von 24 Stunden.</p>
+                <p><a href="mailto:info@honeyapps.de" style="color:#0E97A1;font-weight:600;">info@honeyapps.de</a></p>
+            </div>
+            <div class="impressum-card">
+                <h3>Rechtliches</h3>
+                <p>
+                    <a href="/diveo/privacy" style="color:#0E97A1;">Datenschutzerklärung</a><br>
+                    <a href="/diveo/agb" style="color:#0E97A1;">AGB</a><br>
+                    <a href="/#impressum" style="color:#0E97A1;">Impressum</a>
+                </p>
+            </div>
+            <div class="impressum-card">
+                <h3>Telefon</h3>
+                <p>+49 174 9783003</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer (same as honeyapps.de) -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Diveo</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#so-gehts">So geht's</a></li>
+                    <li><a href="#tauchschulen">Für Tauchschulen</a></li>
+                    <li><a href="/diveo/support">Support &amp; FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/#impressum">Impressum</a></li>
+                    <li><a href="/diveo/privacy">Datenschutz</a></li>
+                    <li><a href="/diveo/agb">AGB</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@honeyapps.de">info@honeyapps.de</a></li>
+                    <li><a href="tel:+491749783003">+49 174 9783003</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="/diveo/privacy">Datenschutz</a>
+                <a href="/diveo/agb">AGB</a>
+                <a href="/#impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-to-top" aria-label="Nach oben scrollen" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+const backToTop = document.querySelector('.back-to-top');
+window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 400);
+}, { passive: true });
+</script>
+
+</body>
+</html>

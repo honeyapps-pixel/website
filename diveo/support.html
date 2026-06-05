@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diveo Support – HoneyApps</title>
+    <meta name="description" content="Support und häufige Fragen zur Diveo-App: Buchungen, Stornierungen, Tauchschulen, Konto und Datenschutz.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="/diveo/icon.png">
+    <link rel="apple-touch-icon" href="/diveo/icon.png">
+    <style>
+        .support-hero { text-align: center; padding: 120px 20px 60px; background: linear-gradient(180deg, #f2fafb 0%, #ffffff 100%); }
+        .support-hero h1 { font-size: clamp(36px, 5vw, 54px); letter-spacing: -0.02em; margin-bottom: 16px; }
+        .support-hero p { font-size: 18px; color: var(--text-secondary); max-width: 640px; margin: 0 auto; }
+        .support-contact { max-width: 720px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .support-contact a { display: block; padding: 20px 24px; background: white; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text-primary); transition: border-color 0.15s ease; }
+        .support-contact a:hover { border-color: #0E97A1; }
+        .support-contact .label { font-size: 13px; color: var(--text-tertiary); margin-bottom: 4px; }
+        .support-contact .value { font-size: 16px; font-weight: 600; color: #0E97A1; }
+        .faq-section { max-width: 880px; margin: 0 auto; padding: 80px 20px; }
+        .faq-section h2 { font-size: 36px; margin-bottom: 40px; text-align: center; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+        .faq-item h3 { font-size: 18px; margin-bottom: 10px; color: var(--text-primary); }
+        .faq-item p, .faq-item li { color: var(--text-secondary); line-height: 1.6; font-size: 15px; }
+        .faq-item ul { margin: 10px 0 0 20px; }
+        .faq-item a { color: #0E97A1; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 40px; color: #0E97A1; font-weight: 600; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="/diveo">Diveo</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="mailto:info@honeyapps.de">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="support-hero">
+    <h1>Diveo Support</h1>
+    <p>Fragen zur App, zu einer Buchung oder zu deiner Tauchschule? Schreib uns – wir helfen dir normalerweise innerhalb von 24 Stunden.</p>
+    <div class="support-contact">
+        <a href="mailto:info@honeyapps.de">
+            <div class="label">E-Mail</div>
+            <div class="value">info@honeyapps.de</div>
+        </a>
+        <a href="tel:+491749783003">
+            <div class="label">Telefon</div>
+            <div class="value">+49 174 9783003</div>
+        </a>
+    </div>
+</section>
+
+<section id="faq" class="faq-section">
+    <h2>Häufige Fragen</h2>
+
+    <div class="faq-item">
+        <h3>Was ist Diveo?</h3>
+        <p>Diveo ist ein Marktplatz fürs Tauchen. Taucher entdecken und buchen Tauchtrips, Kurse und Touren bei verifizierten Tauchbasen und Guides. Diveo vermittelt dabei zwischen dir und der Tauchbasis – der Tauchvertrag kommt direkt mit dem Anbieter zustande.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie buche ich einen Tauchtrip?</h3>
+        <p>Such dir in der App einen Trip aus, der zu deinem Brevet und deinen Terminen passt, wähle einen Platz, unterschreibe den digitalen Waiver und bezahle sicher in der App. Du erhältst sofort eine Bestätigung.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie funktionieren Stornierung und Erstattung?</h3>
+        <p>Jede Tauchbasis legt ihre eigenen Stornobedingungen fest, die dir vor der Buchung angezeigt werden. Stornierst du innerhalb der erlaubten Frist, wird die Erstattung automatisch über Stripe abgewickelt. Über Höhe und Voraussetzungen entscheiden die Bedingungen des Anbieters.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Brauche ich ein Brevet?</h3>
+        <p>Für die meisten Trips ja. Die erforderliche Brevet-Stufe und weitere Voraussetzungen werden beim jeweiligen Angebot angezeigt. Du bist selbst dafür verantwortlich, über eine gültige Ausbildung und die nötige Tauchtauglichkeit zu verfügen.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Ich betreibe eine Tauchschule – wie mache ich mit?</h3>
+        <p>Registriere dich in der App als Tauchschule oder schreib uns an <a href="mailto:info@honeyapps.de?subject=Diveo%20f%C3%BCr%20meine%20Tauchschule">info@honeyapps.de</a>. Du kannst Trips und Kurse anlegen, Abfahrten verwalten, das digitale Manifest nutzen, Crew zuweisen und Auszahlungen über Stripe erhalten.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Ist Diveo schon im App Store?</h3>
+        <p>Diveo befindet sich aktuell in der Beta-Phase. Frag deinen Beta-Zugang unter <a href="mailto:info@honeyapps.de?subject=Diveo%20Beta-Zugang">info@honeyapps.de</a> an – der reguläre App-Store- und Google-Play-Release folgt.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Wie kann ich mein Konto oder meine Daten löschen?</h3>
+        <p>Du kannst die Löschung direkt in der App oder per E-Mail an <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> beantragen. Mehr dazu in unserer <a href="/diveo/privacy">Datenschutzerklärung</a>.</p>
+    </div>
+
+    <a href="/diveo" class="back-link">← Zurück zu Diveo</a>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Diveo</h4>
+                <ul>
+                    <li><a href="/diveo">Übersicht</a></li>
+                    <li><a href="/diveo/support">Support &amp; FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/#impressum">Impressum</a></li>
+                    <li><a href="/diveo/privacy">Datenschutz</a></li>
+                    <li><a href="/diveo/agb">AGB</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@honeyapps.de">info@honeyapps.de</a></li>
+                    <li><a href="tel:+491749783003">+49 174 9783003</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="/diveo/privacy">Datenschutz</a>
+                <a href="/diveo/agb">AGB</a>
+                <a href="/#impressum">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
