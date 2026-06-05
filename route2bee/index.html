@@ -15,6 +15,11 @@
     <meta property="og:url" content="https://honeyapps.de/route2bee">
     <meta name="twitter:card" content="summary_large_image">
 
+    <!-- Google Fonts: Sora (display) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <!-- Google Ads Tag (gtag.js) — Conversion ID AW-18145804367
          Aktiv. Conversion-Wiring weiter unten wartet noch auf Conversion-Labels
          (App Store Click + Google Play Click Actions in Google Ads → Tools → Conversions). -->
@@ -331,9 +336,407 @@
             flex-shrink: 0;
         }
         .android-app-banner-cta:hover { background: #2B5A96; }
+
+        /* === SMART ENHANCEMENTS === */
+
+        /* Custom font override for Route2Bee page */
+        body { font-family: 'Inter', -apple-system, sans-serif; }
+        .r2b-hero h1, .r2b-features h2, .r2b-pricing h2,
+        .r2b-compliance h2, .r2b-cta-section h2, .r2b-screenshots h2 {
+            font-family: 'Sora', sans-serif;
+        }
+
+        /* Scroll progress bar */
+        #r2b-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #3B73B9, #5DA0E6);
+            z-index: 999;
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* Scroll-reveal base */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.65s cubic-bezier(.22,1,.36,1), transform 0.65s cubic-bezier(.22,1,.36,1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        .reveal-delay-6 { transition-delay: 0.6s; }
+
+        /* Feature card hover lift */
+        .r2b-feature-card {
+            transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease;
+        }
+        .r2b-feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(59,115,185,0.12);
+        }
+        .r2b-feature-card .icon {
+            transition: transform 0.3s cubic-bezier(.22,1,.36,1);
+        }
+        .r2b-feature-card:hover .icon {
+            transform: scale(1.12) rotate(-4deg);
+        }
+
+        /* Pricing card hover */
+        .r2b-plan {
+            transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease;
+        }
+        .r2b-plan:not(.featured):hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .r2b-plan.featured {
+            transform: scale(1.03);
+        }
+        .r2b-plan.featured:hover {
+            transform: scale(1.05) translateY(-4px);
+            box-shadow: 0 20px 48px rgba(59,115,185,0.2);
+        }
+
+        /* Sticky download CTA */
+        #r2b-sticky-cta {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.4s ease;
+            pointer-events: none;
+        }
+        #r2b-sticky-cta.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .r2b-sticky-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #1d1d1f;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+        .r2b-sticky-btn:hover { transform: scale(1.04); background: #000; }
+        .r2b-sticky-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        #r2b-sticky-close {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 22px;
+            height: 22px;
+            background: #6e6e73;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 14px;
+            line-height: 1;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #r2b-sticky-cta.visible #r2b-sticky-close { display: flex; }
+
+        /* cursor-pointer on all clickables */
+        a, button, [onclick], .r2b-slider-btn, .r2b-slider-dots button,
+        .r2b-lightbox-btn, .store-badge, .r2b-sticky-btn, .badge-pill { cursor: pointer; }
+
+        /* Prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: none; opacity: 1; transform: none; }
+            .r2b-app-icon { animation: none; }
+            #r2b-progress { transition: none; }
+            .r2b-feature-card, .r2b-plan, .store-badge { transition: none; }
+        }
+
+        /* Social Proof Strip */
+        .r2b-social-strip {
+            background: var(--bg-secondary);
+            padding: 28px 20px;
+            text-align: center;
+        }
+        .r2b-social-strip-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .r2b-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .r2b-stat-value {
+            font-family: 'Sora', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #3B73B9;
+            line-height: 1;
+        }
+        .r2b-stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 600;
+        }
+        .r2b-stat-stars {
+            color: #F5A623;
+            font-size: 16px;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+        .r2b-strip-divider {
+            width: 1px;
+            height: 36px;
+            background: var(--border);
+        }
+
+        /* Device frame for slider */
+        .r2b-slider {
+            position: relative;
+            max-width: 300px;
+        }
+        .r2b-device-frame {
+            position: relative;
+            padding: 14px 14px;
+            background: #1d1d1f;
+            border-radius: 44px;
+            box-shadow:
+                0 0 0 2px #3a3a3a,
+                0 32px 80px rgba(0,0,0,0.3),
+                0 8px 24px rgba(0,0,0,0.15);
+        }
+        .r2b-device-frame::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 6px;
+            background: #3a3a3a;
+            border-radius: 3px;
+            z-index: 5;
+        }
+        .r2b-slider-track {
+            border-radius: 32px;
+            overflow: hidden;
+        }
+        .r2b-slider-btn.prev { left: -28px; }
+        .r2b-slider-btn.next { right: -28px; }
+
+        /* Badge pill hover */
+        .r2b-compliance .badge-pill {
+            transition: background 0.2s, transform 0.2s;
+            cursor: default;
+        }
+        .r2b-compliance .badge-pill:hover {
+            background: #3B73B9;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Hero background mesh */
+        .r2b-hero {
+            position: relative;
+            overflow: hidden;
+        }
+        .r2b-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 20% 20%, rgba(59,115,185,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 60% at 80% 80%, rgba(93,160,230,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Hero icon float */
+        .r2b-app-icon {
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* App Screenshots Slider */
+        .r2b-screenshots {
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+        .r2b-screenshots h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        .r2b-screenshots .sub {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 48px;
+        }
+        .r2b-slider {
+            position: relative;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+        .r2b-slider-track {
+            overflow: hidden;
+            border-radius: 28px;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.15), 0 6px 16px rgba(0,0,0,0.08);
+        }
+        .r2b-slider-track img {
+            width: 100%;
+            display: block;
+            transition: opacity 0.35s ease;
+        }
+        .r2b-slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            border: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1d1d1f;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 10;
+        }
+        .r2b-slider-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+        .r2b-slider-btn.prev { left: -22px; }
+        .r2b-slider-btn.next { right: -22px; }
+        .r2b-slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+        }
+        .r2b-slider-dots button {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: none;
+            background: #d2d2d7;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .r2b-slider-dots button.active {
+            background: #3B73B9;
+            transform: scale(1.3);
+        }
+        /* Lightbox */
+        .r2b-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .r2b-lightbox.open { display: flex; }
+        .r2b-lightbox img {
+            max-height: 90vh;
+            max-width: 90vw;
+            border-radius: 16px;
+            object-fit: contain;
+        }
+        .r2b-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .r2b-lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 28px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .r2b-lightbox-btn:hover { background: rgba(255,255,255,0.3); }
+        .r2b-lightbox-btn.prev { left: 16px; }
+        .r2b-lightbox-btn.next { right: 16px; }
+        .r2b-slider-track { cursor: zoom-in; }
+        @media (max-width: 480px) {
+            .r2b-slider { max-width: 280px; }
+            .r2b-slider-btn.prev { left: -16px; }
+            .r2b-slider-btn.next { right: -16px; }
+        }
     </style>
 </head>
 <body>
+
+<!-- Scroll Progress Bar -->
+<div id="r2b-progress"></div>
+
+<!-- Sticky Download CTA -->
+<div id="r2b-sticky-cta" role="complementary" aria-label="App herunterladen">
+    <button id="r2b-sticky-close" aria-label="Ausblenden">×</button>
+    <a href="https://apps.apple.com/de/app/route2bee/id6761436614" class="r2b-sticky-btn" data-conversion="app-store">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.johannwarkentin.fahrtenbuch" class="r2b-sticky-btn" data-conversion="google-play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
+        Google Play
+    </a>
+</div>
 
 <!-- Android Smart Banner (sichtbar nur auf Android via JS, dismissible) -->
 <div id="android-app-banner" class="android-app-banner" role="banner" aria-label="Route2Bee in Google Play öffnen">
@@ -366,10 +769,10 @@
 
 <!-- Hero -->
 <section class="r2b-hero">
-    <img src="icon.png" alt="Route2Bee App-Icon" class="r2b-app-icon">
-    <h1>Fahrtenbuch,<br><span class="r2b-accent">das sich selbst schreibt.</span></h1>
-    <p class="lead">Route2Bee erkennt deine Fahrten automatisch per GPS, dokumentiert GoBD-konform und exportiert direkt ins DATEV, Lexoffice oder als PDF.</p>
-    <div class="store-badges">
+    <img src="icon.png" alt="Route2Bee App-Icon" class="r2b-app-icon reveal">
+    <h1 class="reveal reveal-delay-1">Fahrtenbuch,<br><span class="r2b-accent">das sich selbst schreibt.</span></h1>
+    <p class="lead reveal reveal-delay-2">Route2Bee erkennt deine Fahrten automatisch per GPS, dokumentiert GoBD-konform und exportiert direkt ins DATEV, Lexoffice oder als PDF.</p>
+    <div class="store-badges reveal reveal-delay-3">
         <a href="https://apps.apple.com/de/app/route2bee/id6761436614" class="store-badge" aria-label="Im App Store laden" data-conversion="app-store">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
             <div class="store-badge-text"><small>Laden im</small><strong>App Store</strong></div>
@@ -379,52 +782,110 @@
             <div class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></div>
         </a>
     </div>
-    <div class="cta-group" style="margin-top:1rem;">
+    <div class="cta-group reveal reveal-delay-4" style="margin-top:1rem;">
         <a href="#features" class="btn-secondary">Features entdecken</a>
     </div>
 </section>
+
+<!-- Social Proof Strip -->
+<div class="r2b-social-strip reveal">
+    <div class="r2b-social-strip-inner">
+        <div class="r2b-stat">
+            <div class="r2b-stat-stars">★★★★★</div>
+            <div class="r2b-stat-value">4.8</div>
+            <div class="r2b-stat-label">App Store Bewertung</div>
+        </div>
+        <div class="r2b-strip-divider"></div>
+        <div class="r2b-stat">
+            <div class="r2b-stat-value">GoBD</div>
+            <div class="r2b-stat-label">Steuerkonform</div>
+        </div>
+        <div class="r2b-strip-divider"></div>
+        <div class="r2b-stat">
+            <div class="r2b-stat-value">EU</div>
+            <div class="r2b-stat-label">Server Frankfurt</div>
+        </div>
+        <div class="r2b-strip-divider"></div>
+        <div class="r2b-stat">
+            <div class="r2b-stat-value">iOS + Android</div>
+            <div class="r2b-stat-label">Verfügbar</div>
+        </div>
+    </div>
+</div>
+
+<!-- Screenshots -->
+<section class="r2b-screenshots">
+    <h2>Die App in Aktion</h2>
+    <p class="sub">Einfach, übersichtlich, direkt.</p>
+    <div class="r2b-slider">
+        <div class="r2b-device-frame">
+            <div class="r2b-slider-track" id="sliderTrack">
+                <img src="images/1.png" alt="Route2Bee Screenshot 1" id="sliderImg">
+            </div>
+        </div>
+        <button class="r2b-slider-btn prev" aria-label="Vorheriges Bild" onclick="sliderMove(-1)">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="r2b-slider-btn next" aria-label="Nächstes Bild" onclick="sliderMove(1)">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="r2b-slider-dots" id="sliderDots"></div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="r2b-lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="r2b-lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="r2b-lightbox-btn prev" onclick="lightboxMove(-1, event)">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="r2b-lightbox-btn next" onclick="lightboxMove(1, event)">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+</div>
 
 <!-- Features -->
 <section id="features" class="r2b-features">
     <h2>Alles was du brauchst</h2>
     <p class="sub">Von der ersten Fahrt bis zum Finanzamt-tauglichen Export. Ohne Papierkram, ohne Excel.</p>
     <div class="r2b-feature-grid">
-        <div class="r2b-feature-card">
+        <div class="r2b-feature-card reveal reveal-delay-1">
             <div class="icon">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 4.42 8 12 8 12s8-7.58 8-12a8 8 0 0 0-8-8z"/></svg>
             </div>
             <h3>Automatische Erkennung</h3>
             <p>Route2Bee erkennt per GPS, wann du losfährst und wo du ankommst. Kein manuelles Starten, kein Vergessen.</p>
         </div>
-        <div class="r2b-feature-card">
+        <div class="r2b-feature-card reveal reveal-delay-2">
             <div class="icon">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.12 0 4.07.73 5.61 1.96"/></svg>
             </div>
             <h3>GoBD-konform</h3>
             <p>Unveränderbare Dokumentation mit Audit-Log, Finalisierung und 10-Jahres-Aufbewahrung. Für dein Finanzamt.</p>
         </div>
-        <div class="r2b-feature-card">
+        <div class="r2b-feature-card reveal reveal-delay-3">
             <div class="icon">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             </div>
             <h3>Exporte die zählen</h3>
             <p>PDF fürs Finanzamt. CSV für Excel. DATEV SKR03/SKR04 für deinen Steuerberater. Lexoffice für deine Buchhaltung.</p>
         </div>
-        <div class="r2b-feature-card">
+        <div class="r2b-feature-card reveal reveal-delay-4">
             <div class="icon">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
             </div>
             <h3>Mehrere Firmen & Kostensätze</h3>
             <p>Lege beliebig viele Firmen mit eigener Kilometerpauschale an. Perfekte Abrechnung pro Kunde.</p>
         </div>
-        <div class="r2b-feature-card">
+        <div class="r2b-feature-card reveal reveal-delay-5">
             <div class="icon">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
             </div>
             <h3>Cloud-Sync via EU-Server</h3>
             <p>Deine Daten bleiben in Frankfurt. GPS-Koordinaten verlassen niemals dein Gerät – nur aggregierte Fahrtdaten.</p>
         </div>
-        <div class="r2b-feature-card">
+        <div class="r2b-feature-card reveal reveal-delay-6">
             <div class="icon">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
             </div>
@@ -580,6 +1041,127 @@
     </div>
 </footer>
 
+
+<!-- Smart UX: Progress, Reveal, Sticky CTA -->
+<script>
+(function() {
+    // Scroll progress bar
+    var bar = document.getElementById('r2b-progress');
+    window.addEventListener('scroll', function() {
+        var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+        bar.style.width = Math.min(pct, 100) + '%';
+    }, {passive: true});
+
+    // Intersection Observer scroll-reveal
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+    // Sticky CTA: show after 600px scroll
+    var stickyCta = document.getElementById('r2b-sticky-cta');
+    var stickyClose = document.getElementById('r2b-sticky-close');
+    var stickyDismissed = false;
+    window.addEventListener('scroll', function() {
+        if (stickyDismissed) return;
+        if (window.scrollY > 600) stickyCta.classList.add('visible');
+        else stickyCta.classList.remove('visible');
+    }, {passive: true});
+    stickyClose.addEventListener('click', function() {
+        stickyDismissed = true;
+        stickyCta.classList.remove('visible');
+    });
+})();
+</script>
+
+<!-- Screenshot Slider & Lightbox -->
+<script>
+(function() {
+    var images = ['images/1.png','images/2.png','images/3.png','images/4.png','images/5.png','images/6.png'];
+    var current = 0;
+    var img = document.getElementById('sliderImg');
+    var dotsContainer = document.getElementById('sliderDots');
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+
+    // Build dots
+    images.forEach(function(_, i) {
+        var btn = document.createElement('button');
+        btn.setAttribute('aria-label', 'Bild ' + (i+1));
+        btn.onclick = function() { goTo(i); };
+        dotsContainer.appendChild(btn);
+    });
+
+    function updateDots() {
+        dotsContainer.querySelectorAll('button').forEach(function(b, i) {
+            b.classList.toggle('active', i === current);
+        });
+    }
+
+    function goTo(index) {
+        current = (index + images.length) % images.length;
+        img.style.opacity = 0;
+        setTimeout(function() {
+            img.src = images[current];
+            img.style.opacity = 1;
+        }, 175);
+        updateDots();
+        lightboxImg.src = images[current];
+    }
+
+    window.sliderMove = function(dir) { goTo(current + dir); };
+
+    // Open lightbox on image click
+    document.getElementById('sliderTrack').addEventListener('click', function() {
+        lightboxImg.src = images[current];
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+
+    window.closeLightbox = function(e) {
+        if (!e || e.target === lightbox || e.currentTarget === lightbox.querySelector('.r2b-lightbox-close')) {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    };
+
+    window.lightboxMove = function(dir, e) {
+        if (e) e.stopPropagation();
+        goTo(current + dir);
+    };
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (lightbox.classList.contains('open')) {
+            if (e.key === 'ArrowLeft') lightboxMove(-1);
+            else if (e.key === 'ArrowRight') lightboxMove(1);
+            else if (e.key === 'Escape') closeLightbox();
+        } else {
+            if (e.key === 'ArrowLeft') sliderMove(-1);
+            else if (e.key === 'ArrowRight') sliderMove(1);
+        }
+    });
+
+    // Touch/swipe support
+    var touchStartX = 0;
+    function addSwipe(el, onSwipe) {
+        el.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, {passive: true});
+        el.addEventListener('touchend', function(e) {
+            var dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 40) onSwipe(dx < 0 ? 1 : -1);
+        });
+    }
+    addSwipe(document.getElementById('sliderTrack'), sliderMove);
+    addSwipe(lightbox, lightboxMove);
+
+    goTo(0);
+})();
+</script>
 
 <!-- Android Smart Banner — Sichtbarkeitslogik
      Zeigt den Banner nur auf Android-Geräten und respektiert die Dismiss-Entscheidung des Users
