@@ -1,0 +1,550 @@
+/* ==========================================================================
+   Honeyapps — Design-System „Hell & präzise · Swiss"
+   Warmes Papier · Graphit-Tinte · EIN Honig/Bernstein-Akzent · Hairline-Raster
+   Verwendet die geteilte Motion-Engine (assets/motion.js, GSAP + Lenis).
+   ========================================================================== */
+
+/* ---------- Reset ---------- */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg,video{display:block;max-width:100%}
+img{height:auto}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--amber-deep);outline-offset:3px;border-radius:2px}
+
+/* ---------- Tokens ---------- */
+:root{
+  /* Flächen — Reinweiß + Apple-Grautöne (Originalpalette) */
+  --paper:#ffffff; --paper-2:#f5f5f7; --paper-3:#e8e8ed;
+  --ink:#1d1d1f; --ink-soft:#6e6e73; --ink-mute:#86868b;
+  --on-dark:#f5f5f7; --on-dark-soft:#a1a1a6;
+
+  /* EIN Akzent: Blau (Originalpalette) */
+  --amber:#0071e3;          /* Akzent: Flächen, CTA, Icons, Linien */
+  --amber-deep:#0066cc;     /* Text/Links auf Weiß (höherer Kontrast, WCAG AA) */
+  --amber-tint:#eaf3fd;     /* heller Blau-Wash für Badges/Hover */
+  --accent-on-dark:#4aa1ff; /* Akzent auf dunklen Bändern (Kontrast auf Schwarz) */
+
+  /* Hairlines */
+  --line:#d2d2d7;
+  --line-soft:rgba(0,0,0,.07);
+  --line-dark:rgba(255,255,255,.18);
+
+  /* Form & Bewegung */
+  --radius:4px; --radius-lg:10px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --t:.45s var(--ease);
+
+  /* Raster */
+  --wrap:1240px; --wrap-text:680px;
+  --gutter:clamp(20px,4vw,56px);
+  --section-y:clamp(64px,8vw,128px);
+
+  /* Schrift */
+  --font-display:"Switzer","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-body:"Switzer","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+  /* Typo-Skala */
+  --fs-display:clamp(2.6rem,1.5rem + 4.7vw,5.2rem);
+  --fs-h1:clamp(2.1rem,1.45rem + 2.7vw,3.5rem);
+  --fs-h2:clamp(1.7rem,1.3rem + 1.7vw,2.6rem);
+  --fs-h3:clamp(1.2rem,1.05rem + .6vw,1.5rem);
+  --fs-lead:clamp(1.08rem,1rem + .5vw,1.32rem);
+  --fs-body:1.0625rem;
+  --fs-small:.8125rem;
+  --fs-label:.7rem;
+}
+
+/* ---------- Base ---------- */
+body{
+  font-family:var(--font-body);
+  font-size:var(--fs-body);
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--paper);
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1.06;letter-spacing:-.02em;color:var(--ink);overflow-wrap:break-word}
+p,li{overflow-wrap:break-word}
+main{overflow-x:clip}
+h1{font-size:var(--fs-h1)} h2{font-size:var(--fs-h2)} h3{font-size:var(--fs-h3)}
+p{max-width:var(--wrap-text)}
+strong{font-weight:600}
+em{font-style:italic}
+::selection{background:var(--amber-tint);color:var(--ink)}
+
+/* ---------- Layout helpers ---------- */
+.wrap{width:min(100% - 2*var(--gutter),var(--wrap));margin-inline:auto}
+/* Grid-Kinder dürfen schrumpfen (verhindert Überlauf durch lange Wörter/Bilder) */
+.split>*,.hero-split>*,.app-row>*,.cards>*,.steps>*{min-width:0}
+.section{padding-block:var(--section-y)}
+.section--line{border-top:1px solid var(--line)}
+.lead{font-size:var(--fs-lead);color:var(--ink-soft);line-height:1.5;max-width:42ch}
+.measure{max-width:var(--wrap-text)}
+
+/* ---------- Eyebrow / Kicker (Swiss tick) ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--font-body);font-weight:600;
+  font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.24em;
+  color:var(--amber-deep);margin-bottom:1.3rem;
+}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--amber);display:inline-block}
+.eyebrow--mute{color:var(--ink-mute)}
+.eyebrow--mute::before{background:var(--ink-mute)}
+.eyebrow--dark{color:var(--accent-on-dark)}
+.eyebrow--dark::before{background:var(--accent-on-dark)}
+
+/* ---------- Section header ---------- */
+.s-head{max-width:760px;margin-bottom:clamp(2.4rem,5vw,4rem)}
+.s-head h2{margin-bottom:1.1rem}
+.s-head p{color:var(--ink-soft)}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-body);font-weight:600;font-size:.95rem;letter-spacing:.01em;
+  padding:.85em 1.6em;border-radius:2px;border:1px solid transparent;
+  transition:background var(--t),color var(--t),border-color var(--t),transform .2s var(--ease);
+  cursor:pointer;
+}
+.btn svg{width:18px;height:18px;transition:transform .3s var(--ease)}
+.btn-solid{background:var(--amber);color:#fff;border-color:var(--amber)}
+.btn-solid:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-solid:hover svg{transform:translateX(3px)}
+.btn-line{border-color:var(--line);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+.btn-line:hover svg{transform:translateX(3px)}
+.btn-ghost{padding-inline:0;color:var(--ink)}
+.btn-ghost:hover{color:var(--amber-deep)}
+.on-dark .btn-line,.section--dark .btn-line{border-color:var(--line-dark);color:var(--on-dark)}
+.on-dark .btn-line:hover,.section--dark .btn-line:hover{border-color:var(--on-dark)}
+
+/* arrow link */
+.arrow-link{display:inline-flex;align-items:center;gap:.45rem;font-weight:600;color:var(--ink);transition:gap .25s var(--ease),color var(--t)}
+.arrow-link svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+.arrow-link:hover{color:var(--amber-deep)}
+.arrow-link:hover svg{transform:translateX(4px)}
+
+/* ---------- Pills / Badges ---------- */
+.pill{display:inline-flex;align-items:center;gap:.45rem;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding:.32em .7em;border-radius:2px;background:var(--amber-tint);color:var(--amber-deep)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill--beta{background:transparent;color:var(--ink-soft);border:1px solid var(--line)}
+.pill--demo{background:transparent;color:var(--ink-mute);border:1px solid var(--line)}
+.pill--new{background:var(--ink);color:var(--paper)}
+
+/* ==========================================================================
+   HEADER / NAV
+   ========================================================================== */
+.site-header{position:fixed;inset:0 0 auto;z-index:100;transition:background .4s var(--ease),box-shadow .4s var(--ease)}
+.site-header.scrolled{background:rgba(255,255,255,.82);backdrop-filter:saturate(150%) blur(14px);-webkit-backdrop-filter:saturate(150%) blur(14px);box-shadow:0 1px 0 var(--line-soft)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:1.5rem}
+.wordmark{font-family:var(--font-display);font-weight:600;font-size:1.4rem;letter-spacing:-.03em;color:var(--ink)}
+.wordmark span{color:var(--amber-deep)}
+
+.nav{display:flex;align-items:center;gap:clamp(1.1rem,1.6vw,1.7rem)}
+.nav a{font-size:.92rem;font-weight:500;color:var(--ink-soft);position:relative;padding-block:.3rem;transition:color var(--t);white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="page"]{color:var(--ink)}
+.nav a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--amber)}
+
+.header-cta{display:inline-flex;padding:.42em 1.05em;font-size:.82rem}
+.nav-toggle{display:none;flex-direction:column;width:44px;height:44px;align-items:center;justify-content:center;margin-right:-10px}
+.nav-toggle span{display:block;width:22px;height:1.6px;background:var(--ink);border-radius:2px;transition:transform .3s var(--ease),opacity .2s}
+.nav-toggle span+span{margin-top:6px}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7.6px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.6px) rotate(-45deg)}
+
+@media(max-width:920px){
+  .header-cta{display:none}
+  .nav-toggle{display:flex}
+  .nav{
+    position:fixed;inset:68px 0 auto;flex-direction:column;align-items:flex-start;gap:0;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    padding:1rem var(--gutter) 1.6rem;
+    transform:translateY(-12px);opacity:0;pointer-events:none;
+    transition:transform .35s var(--ease),opacity .3s var(--ease);
+  }
+  .nav.open{transform:none;opacity:1;pointer-events:auto}
+  .nav a{width:100%;padding:.9rem 0;font-size:1.15rem;border-bottom:1px solid var(--line-soft)}
+  .nav a[aria-current="page"]::after{display:none}
+  .nav a[aria-current="page"]{color:var(--amber-deep)}
+}
+
+/* ==========================================================================
+   HERO (Basis; Varianten pro Seite)
+   ========================================================================== */
+.hero{padding-top:clamp(60px,2vh,70px);padding-bottom:clamp(20px,2.5vw,40px)}
+.hero + .section{padding-top:clamp(28px,3.5vw,52px)}
+.hero h1{font-size:var(--fs-display)}
+.hero .lead{margin-top:1.6rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
+
+/* Home: Split (Text | 2×2 Vitrine) */
+.hero-split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.hero-vitrine{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.vit{background:var(--paper);padding:clamp(1.1rem,2.5vw,1.8rem);min-height:150px;display:flex;flex-direction:column;justify-content:space-between;transition:background var(--t)}
+.vit:hover{background:#fff}
+.vit-idx{font-family:var(--font-display);font-weight:600;color:var(--amber-deep);font-size:1.05rem}
+.vit svg{width:26px;height:26px;color:var(--ink);stroke-width:1.4}
+.vit h3{font-size:1.05rem;margin-top:1.2rem;letter-spacing:-.01em}
+.vit p{font-size:.86rem;color:var(--ink-mute);margin-top:.3rem;line-height:1.45}
+
+/* Home Hero — Disziplinen-Collage: Webdesign · Software · Automatisierung & Visualisierung */
+.hero-collage{position:relative;width:100%;max-width:430px;margin-inline:auto;aspect-ratio:1/0.9;align-self:center}
+.win{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 26px 55px -22px rgba(0,0,0,.28),0 6px 16px rgba(0,0,0,.06);overflow:hidden}
+.win-bar{display:flex;align-items:center;gap:5px;padding:8px 11px;border-bottom:1px solid var(--line-soft)}
+.win-bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.win-bar .url{margin-left:8px;flex:1;max-width:160px;background:var(--paper-2);border-radius:7px;font-size:.6rem;line-height:1.4;color:var(--ink-mute);font-weight:500;padding:2px 9px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.win-body{padding:13px}
+.win-shot{overflow:hidden;aspect-ratio:16/10}
+.win-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+/* Browser → Webdesign (groß, hinten) */
+.win-web{top:0;left:4%;width:64%;z-index:1}
+.win-web .win-body{display:grid;gap:9px}
+.bk{background:var(--paper-2);border-radius:6px}
+.bk-hero{height:52px;background:linear-gradient(120deg,#d7e9fb,#eef4fb)}
+.bk-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.bk-row .bk{height:38px}
+.bk-line{height:9px;width:72%}
+.bk-line2{height:9px;width:48%;background:var(--paper-3)}
+/* Software → ITT-Dashboard: KPI-Kacheln (echte Zahlen) */
+.win-soft{bottom:5%;left:0;width:54%;z-index:2;transform:rotate(-3deg)}
+.dash{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:12px}
+.kpi{background:var(--paper-2);border-radius:7px;padding:8px 9px}
+.kpi span{display:block;font-size:.5rem;color:var(--ink-mute);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi b{font-family:var(--font-display);font-weight:600;font-size:1.12rem;line-height:1;color:var(--ink)}
+.kpi b.blue{color:#2f6df0}.kpi b.green{color:#22a06b}
+/* Apps → Phone mit echtem App-Screen */
+.appwin{position:absolute;bottom:0;right:13%;width:22%;z-index:3;transform:rotate(3deg);background:#1d1d1f;border-radius:18px;padding:5px;box-shadow:0 26px 50px -20px rgba(0,0,0,.4),0 6px 14px rgba(0,0,0,.12)}
+.appwin-screen{border-radius:13px;overflow:hidden;aspect-ratio:460/1000;background:#fff}
+.appwin-screen img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+/* Automatisierung → KNX-Heizungs-Panel (dunkel) */
+.win-auto{top:4%;right:2%;width:36%;z-index:2;transform:rotate(4deg);background:#0c0e13;border-color:#23262e}
+.knx{padding:14px 12px;color:#fff;text-align:center}
+.knx-title{font-size:.7rem;font-weight:600;letter-spacing:.02em}
+.knx-icons{display:flex;justify-content:center;gap:14px;margin:10px 0}
+.knx-icons svg{width:17px;height:17px}
+.knx-temp b{display:block;font-family:var(--font-display);font-weight:600;font-size:1.45rem;line-height:1.05}
+.knx-temp small{display:block;font-size:.56rem;color:#9aa3b2;margin-top:3px;letter-spacing:.02em}
+@media(max-width:980px){.hero-collage{margin-top:.5rem}}
+@media(max-width:560px){.hero-collage{max-width:330px}.win-bar .url{max-width:84px}}
+
+/* zentrierter Hero (Apps) */
+.hero-center{text-align:center}
+.hero-center .lead,.hero-center p{margin-inline:auto}
+.hero-center .hero-actions{justify-content:center}
+
+/* Vollbild-Hero (Hausautomatisierung) */
+.hero-full{position:relative;min-height:84vh;display:flex;align-items:flex-end;padding-bottom:clamp(3rem,7vw,6rem);color:var(--on-dark);overflow:hidden}
+.hero-full .hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-full .hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-full::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.32) 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,.8) 100%)}
+.hero-full h1,.hero-full .lead{color:var(--on-dark)}
+.hero-full .lead{color:var(--on-dark-soft)}
+
+/* media frame */
+.media-frame{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper-2)}
+.media-frame img{width:100%;height:100%;object-fit:cover}
+.media-note{font-size:var(--fs-small);color:var(--ink-mute);margin-top:.7rem}
+figure{margin:0}
+
+/* ==========================================================================
+   SÄULEN-INDEX (Home) — Swiss-Zeilen mit 01–04
+   ========================================================================== */
+.pillars{border-top:1px solid var(--line)}
+.pillar{
+  display:grid;grid-template-columns:auto 1fr auto;gap:clamp(1rem,4vw,3rem);align-items:baseline;
+  padding:clamp(1.6rem,3.5vw,2.6rem) 0;border-bottom:1px solid var(--line);
+  transition:background var(--t);
+}
+.pillar:hover{background:var(--paper-2)}
+.pillar-idx{font-family:var(--font-display);font-weight:600;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--amber-deep)}
+.pillar-main{max-width:none}
+.pillar-main h3{font-size:clamp(1.5rem,3.2vw,2.3rem);letter-spacing:-.02em}
+.pillar-main p{color:var(--ink-soft);margin-top:.5rem;max-width:60ch}
+.pillar .arrow-link{align-self:center;white-space:nowrap}
+@media(max-width:720px){
+  .pillar{grid-template-columns:auto 1fr;gap:1rem 1.2rem}
+  .pillar .arrow-link{grid-column:2;margin-top:.6rem}
+}
+
+/* ==========================================================================
+   CARD-RASTER (Leistungen) — Hairline-Felder, 1px-Gap
+   ========================================================================== */
+.cards{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.cards--2{grid-template-columns:repeat(2,1fr)}
+.cards--3{grid-template-columns:repeat(3,1fr)}
+.cards--4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--paper);padding:clamp(1.6rem,3vw,2.3rem);display:flex;flex-direction:column;gap:.8rem;transition:background var(--t)}
+.card:hover{background:#fff}
+.card-top{display:flex;align-items:center;justify-content:space-between}
+.card-idx{font-family:var(--font-display);font-weight:600;color:var(--amber-deep);font-size:1rem}
+.card-ic{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background var(--t),color var(--t),border-color var(--t)}
+.card-ic svg{width:22px;height:22px;stroke-width:1.5}
+.card:hover .card-ic{background:var(--amber);border-color:var(--amber);color:#fff}
+.card h3{font-size:1.18rem;letter-spacing:-.01em}
+.card p{font-size:.95rem;color:var(--ink-soft);line-height:1.55}
+@media(max-width:900px){.cards--4{grid-template-columns:repeat(2,1fr)}.cards--3{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cards--2,.cards--3,.cards--4{grid-template-columns:1fr}}
+
+/* ---------- Tick-Liste ---------- */
+.ticks{display:grid;gap:.8rem;max-width:640px}
+.ticks li{display:flex;align-items:flex-start;gap:.75rem;color:var(--ink-soft)}
+.ticks svg{flex:none;width:22px;height:22px;color:var(--amber-deep);margin-top:1px}
+
+/* ==========================================================================
+   ZWEISPALTER (Bild | Text)
+   ========================================================================== */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.split--narrow{grid-template-columns:1.1fr .9fr}
+.split--rev .split-media{order:2}
+@media(max-width:840px){.split,.split--narrow{grid-template-columns:1fr;gap:2.2rem}.split--rev .split-media{order:0}}
+
+/* ==========================================================================
+   APP-REIHE / APP-CARDS
+   ========================================================================== */
+.app-row{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,5rem);align-items:center;padding-block:clamp(2.4rem,5vw,4.5rem);border-bottom:1px solid var(--line)}
+.app-row:first-of-type{border-top:1px solid var(--line)}
+.app-row--rev .app-row-media{order:2}
+.app-row-media{display:flex;justify-content:center}
+.app-shot{width:100%;max-width:340px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--paper-2)}
+.app-bigicon{width:128px;height:128px;border-radius:28px;box-shadow:0 14px 40px rgba(26,23,20,.14)}
+.app-head{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.1rem}
+.app-head img{width:64px;height:64px;border-radius:15px;box-shadow:0 6px 18px rgba(26,23,20,.12)}
+.app-row h3{font-size:clamp(1.6rem,3vw,2.1rem)}
+.app-tag{color:var(--amber-deep);font-weight:600;font-size:.95rem;margin-top:.15rem}
+.app-row p{color:var(--ink-soft);margin-block:1rem}
+@media(max-width:840px){.app-row,.app-row--rev{grid-template-columns:1fr;gap:1.8rem}.app-row--rev .app-row-media{order:0}}
+
+/* App-Cards (Home-Raster) */
+.app-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.app-card{background:var(--paper);padding:clamp(1.5rem,2.6vw,2rem);display:flex;flex-direction:column;gap:.9rem;transition:background var(--t)}
+.app-card:hover{background:#fff}
+.app-card-top{display:flex;align-items:center;justify-content:space-between}
+.app-card img.icon{width:60px;height:60px;border-radius:14px;box-shadow:0 6px 18px rgba(26,23,20,.12)}
+.app-card h3{font-size:1.3rem}
+.app-card .app-tag{margin:0}
+.app-card p{font-size:.92rem;color:var(--ink-soft);line-height:1.55;flex:1}
+@media(max-width:880px){.app-cards{grid-template-columns:1fr}}
+
+/* Store-Badges (dunkle Pillen) */
+.store-badges{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.4rem}
+.store-badge{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--paper);padding:.6rem 1.1rem;border-radius:6px;transition:transform .2s var(--ease),opacity .2s}
+.store-badge:hover{transform:translateY(-2px)}
+.store-badge svg{width:22px;height:22px;fill:currentColor}
+.store-badge-text{display:flex;flex-direction:column;line-height:1.05;text-align:left}
+.store-badge-text small{font-size:.6rem;text-transform:uppercase;letter-spacing:.05em;opacity:.85}
+.store-badge-text strong{font-size:.95rem;font-weight:600}
+.store-badge.is-soon{background:transparent;color:var(--ink-mute);border:1px dashed var(--line);cursor:default}
+.store-badge.is-soon:hover{transform:none}
+
+/* ==========================================================================
+   ABLAUF / SCHRITTE (01–04 horizontal)
+   ========================================================================== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.step{background:var(--paper);padding:clamp(1.4rem,2.6vw,2rem) clamp(1.2rem,2vw,1.6rem)}
+.step-idx{font-family:var(--font-display);font-weight:600;font-size:1.6rem;color:var(--amber-deep);display:block;margin-bottom:.7rem}
+.step h3{font-size:1.1rem;margin-bottom:.4rem}
+.step p{font-size:.9rem;color:var(--ink-soft)}
+.steps--3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.steps--3{grid-template-columns:1fr}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* ==========================================================================
+   DUNKLES BAND (Praxis / Zitat / Stack)
+   ========================================================================== */
+.band{background:var(--ink);color:var(--on-dark)}
+.band h2,.band h3{color:var(--on-dark)}
+.band p{color:var(--on-dark-soft)}
+.band .eyebrow{color:var(--accent-on-dark)}
+.band .eyebrow::before{background:var(--accent-on-dark)}
+.band-quote{font-family:var(--font-display);font-weight:500;font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.25;letter-spacing:-.02em;color:var(--on-dark);max-width:20ch}
+
+/* Stack-Logos/Wörter */
+.stack-row{display:flex;flex-wrap:wrap;gap:clamp(1.5rem,5vw,3.5rem);align-items:center;margin-top:1.6rem}
+.stack-row span{font-family:var(--font-display);font-weight:500;font-size:clamp(1.3rem,3vw,1.9rem);color:var(--on-dark);opacity:.85}
+
+/* ==========================================================================
+   GALERIE (Webdesign-Showcase)
+   ========================================================================== */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.shot{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper-2);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.shot:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(26,23,20,.12)}
+.shot-img{aspect-ratio:16/11;overflow:hidden;background:var(--paper-3);position:relative}
+.shot-img img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s var(--ease)}
+.shot:hover .shot-img img{transform:scale(1.04)}
+.shot-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-family:var(--font-display);font-size:1.3rem;text-align:center;padding:1rem}
+.shot-meta{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem}
+.shot-meta b{font-weight:600;font-size:1rem}
+.shot-meta span{font-size:.8rem;color:var(--ink-mute)}
+@media(max-width:900px){.gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.gallery{grid-template-columns:1fr}}
+
+/* ==========================================================================
+   FAKTEN / FIGURE-BLOCK (nur echte Zahlen)
+   ========================================================================== */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.fact{background:var(--paper);padding:clamp(1.4rem,2.6vw,2rem);text-align:left}
+.fact b{display:block;font-family:var(--font-display);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);color:var(--ink);letter-spacing:-.02em}
+.fact span{font-size:.86rem;color:var(--ink-mute)}
+@media(max-width:760px){.facts{grid-template-columns:1fr 1fr}}
+
+/* ---------- Founder-Karten (ohne Foto, V2-Slot) ---------- */
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.founder{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper)}
+.founder-photo{aspect-ratio:4/5;background:var(--paper-3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;color:var(--ink-mute);position:relative;border-bottom:1px solid var(--line)}
+.founder-initials{font-family:var(--font-display);font-weight:600;font-size:2.4rem;color:var(--amber-deep)}
+.founder-note{font-size:.72rem;text-transform:uppercase;letter-spacing:.16em}
+.founder-body{padding:1.3rem 1.4rem 1.6rem}
+.founder-body b{font-size:1.2rem;font-weight:600}
+.founder-role{color:var(--amber-deep);font-weight:600;font-size:.9rem;margin-top:.1rem}
+.founder-body p{font-size:.92rem;color:var(--ink-soft);margin-top:.7rem}
+@media(max-width:620px){.founders{grid-template-columns:1fr}.founder-photo{aspect-ratio:16/10}}
+
+/* ==========================================================================
+   CTA-BLOCK
+   ========================================================================== */
+.cta{text-align:center}
+.cta h2{margin-bottom:1rem;max-width:18ch;margin-inline:auto}
+.cta .hero-actions{justify-content:center;margin-top:1.8rem}
+/* Kontaktformular */
+.contact-form{max-width:560px;margin:2.2rem auto 0;text-align:left;display:grid;gap:1rem}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.contact-form label{display:flex;flex-direction:column;gap:.4rem;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-mute)}
+.contact-form input,.contact-form textarea{font:inherit;font-weight:400;text-transform:none;letter-spacing:normal;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:.8rem .9rem;width:100%;transition:border-color var(--t),box-shadow var(--t)}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--ink-mute)}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-tint)}
+.contact-form textarea{resize:vertical;min-height:118px}
+.contact-form button{justify-self:start;margin-top:.2rem}
+.cf-hint{font-size:.78rem;color:var(--ink-mute);max-width:none}
+@media(max-width:520px){.cf-row{grid-template-columns:1fr}.contact-form button{justify-self:stretch;width:100%;justify-content:center}}
+
+.contact-lines{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:center;align-items:center;margin-top:1.6rem;color:var(--ink-soft)}
+.contact-lines a,.contact-lines span{display:inline-flex;align-items:center;gap:.5rem;font-weight:500}
+.contact-lines svg{flex:none}
+.contact-lines a:hover{color:var(--amber-deep)}
+.contact-lines svg{width:20px;height:20px;color:var(--amber-deep)}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer{background:var(--paper-2);border-top:1px solid var(--line);padding-block:clamp(3rem,6vw,4.5rem) 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.6rem}
+.footer-brand .wordmark{font-size:1.5rem}
+.footer-brand p{font-size:.9rem;color:var(--ink-soft);margin-top:.8rem;max-width:30ch}
+.footer-col h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute);margin-bottom:1rem;font-family:var(--font-body);font-weight:600}
+.footer-col li{margin-bottom:.55rem}
+.footer-col a{font-size:.9rem;color:var(--ink-soft);transition:color var(--t)}
+.footer-col a:hover{color:var(--amber-deep)}
+.footer-bottom{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;padding-top:1.6rem;border-top:1px solid var(--line)}
+.footer-bottom p,.footer-bottom a{font-size:.8rem;color:var(--ink-mute)}
+.footer-bottom-links{display:flex;gap:1.4rem}
+.footer-bottom-links a:hover{color:var(--ink)}
+@media(max-width:780px){.footer-grid{grid-template-columns:1fr 1fr;gap:1.8rem}.footer-brand{grid-column:1/-1}}
+@media(max-width:460px){.footer-grid{grid-template-columns:1fr}}
+
+/* ==========================================================================
+   LEGAL (Impressum etc. mit main.css)
+   ========================================================================== */
+.legal{padding-top:clamp(120px,15vh,170px)}
+.legal h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:.4rem}
+.legal .updated{color:var(--ink-mute);font-size:.85rem;margin-bottom:2.5rem}
+.legal h2{font-size:1.4rem;margin-top:2.4rem;margin-bottom:.8rem}
+.legal p,.legal li{color:var(--ink-soft);line-height:1.8;max-width:70ch}
+.legal a{color:var(--amber-deep)}
+
+/* ==========================================================================
+   MOTION — Startzustände & Reduced-Motion (Engine: assets/motion.js)
+   ========================================================================== */
+@media (prefers-reduced-motion:no-preference){
+  html.anim [data-reveal]{opacity:0}
+  html.anim [data-reveal="mask"]{opacity:1;clip-path:inset(0 0 100% 0)}
+  html.anim [data-reveal="wipe-left"]{opacity:1;clip-path:inset(0 0 0 100%)}
+  html.anim [data-reveal="wipe-right"]{opacity:1;clip-path:inset(0 100% 0 0)}
+}
+[data-tilt]{transform-style:preserve-3d}
+
+/* Utilities */
+.center{text-align:center}
+.mt-s{margin-top:1rem}.mt-m{margin-top:2rem}.mt-l{margin-top:3rem}
+.amber{color:var(--amber-deep)}
+.hide{display:none}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);padding:.7rem 1.2rem;z-index:200}
+.skip-link:focus{left:1rem;top:1rem}
+
+/* ==========================================================================
+   DSGVO Consent-Banner
+   ========================================================================== */
+.consent{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:300;max-width:540px;margin-inline:auto;background:var(--ink);color:var(--on-dark);border-radius:12px;padding:1.1rem 1.3rem;box-shadow:0 18px 50px rgba(0,0,0,.32);display:flex;flex-direction:column;gap:.9rem}
+.consent p{margin:0;max-width:none;font-size:.86rem;line-height:1.5;color:var(--on-dark-soft)}
+.consent a{color:var(--accent-on-dark);text-decoration:underline}
+.consent-actions{display:flex;gap:.6rem;justify-content:flex-end}
+.consent .btn{padding:.6em 1.2em;font-size:.85rem}
+.consent .consent-decline{color:var(--on-dark);border-color:var(--line-dark)}
+.consent .consent-decline:hover{border-color:var(--on-dark)}
+@media(max-width:480px){.consent-actions{justify-content:stretch}.consent .btn{flex:1;justify-content:center}}
+
+/* ==========================================================================
+   MOBIL-OPTIMIERUNG
+   ========================================================================== */
+.eyebrow{flex-wrap:wrap;row-gap:.4rem}
+
+@media (max-width: 980px){
+  /* Hero-Split (Home) stapeln, bevor das Mobil-Menü greift */
+  .hero-split{grid-template-columns:1fr;gap:2.4rem}
+  .hero{padding-top:clamp(86px,10vh,112px)}
+}
+
+@media (max-width: 640px){
+  :root{--section-y:clamp(52px,11vw,84px)}
+  .hero{padding-top:60px;padding-bottom:var(--section-y)}
+  .hero h1{font-size:clamp(2.25rem,8.5vw,3rem)}
+  .lead{font-size:1.05rem}
+
+  /* Buttons als volle Breite — größere, einfachere Touch-Ziele */
+  .hero-actions{flex-direction:column;align-items:stretch;width:100%}
+  .hero-actions .btn{width:100%;justify-content:center;padding-block:.95em}
+  .cta .hero-actions{max-width:380px;margin-inline:auto}
+
+  /* Header etwas kompakter */
+  .header-inner{height:60px}
+  .wordmark{font-size:1.25rem}
+  .nav{top:60px}
+
+  /* Vitrine: zwei kompakte Kacheln */
+  .vit{min-height:0;padding:1.1rem}
+  .vit svg{width:24px;height:24px}
+  .vit h3{margin-top:.9rem;font-size:1rem}
+
+  /* Säulen-Index: Pfeil unter den Text, mehr Luft */
+  .pillar{padding:1.4rem 0}
+  .pillar-main p{font-size:.95rem}
+
+  /* Karten-Raster: angenehmere Innenabstände */
+  .card{padding:1.5rem}
+  .step{padding:1.4rem}
+
+  /* Kontakt-Zeilen untereinander, zentriert */
+  .contact-lines{flex-direction:column;gap:.9rem;align-items:center;text-align:center}
+
+  /* Galerie/Showcase-Bild volle Breite */
+  .shot-img{aspect-ratio:16/10}
+
+  /* Footer: Links mit mehr Tap-Abstand */
+  .footer-col li{margin-bottom:.7rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:.8rem}
+
+  /* Store-Badges nebeneinander, gleichmäßig */
+  .store-badges{gap:.6rem}
+}
+
+@media (max-width: 380px){
+  .hero h1{font-size:2.1rem}
+  .hero-vitrine{grid-template-columns:1fr}
+}

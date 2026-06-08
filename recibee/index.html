@@ -15,6 +15,9 @@
     <link rel="icon" type="image/png" href="app-icon-512.png">
     <link rel="apple-touch-icon" href="app-icon-512.png">
     <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --accent: #74A87B;
@@ -233,9 +236,162 @@
         @media (max-width: 480px) {
             .hero-icon { width: 104px; height: 104px; }
         }
+
+        /* === SMART ENHANCEMENTS (same as Route2Bee) === */
+        body { font-family: 'Inter', -apple-system, sans-serif; }
+        .recibee-hero h1, .section-header h2, .cta-section h2,
+        .r2b-screenshots h2, .r2b-social-strip-inner .r2b-stat-value { font-family: 'Sora', sans-serif; }
+
+        /* Scroll progress bar */
+        #r2b-progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background: linear-gradient(90deg, #74A87B, #2E5E35);
+            z-index: 999; transition: width 0.1s linear; border-radius: 0 2px 2px 0;
+        }
+
+        /* Scroll-reveal */
+        .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.65s cubic-bezier(.22,1,.36,1), transform 0.65s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        .reveal-delay-6 { transition-delay: 0.6s; }
+
+        /* Hero enhancements */
+        .recibee-hero { position: relative; overflow: hidden; }
+        .recibee-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 60% 50% at 20% 20%, rgba(116,168,123,0.1) 0%, transparent 70%),
+                        radial-gradient(ellipse 50% 60% at 80% 80%, rgba(46,94,53,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-icon { animation: iconFloat 4s ease-in-out infinite; }
+        @keyframes iconFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        /* Service card hover */
+        .service-card { transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease; }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(116,168,123,0.15); }
+        .service-card .icon { transition: transform 0.3s cubic-bezier(.22,1,.36,1); }
+        .service-card:hover .icon { transform: scale(1.12) rotate(-4deg); }
+
+        /* Pricing hover */
+        .price-card { transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease; }
+        .price-card:not(.featured):hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+        .price-card.featured { transform: scale(1.03); }
+        .price-card.featured:hover { transform: scale(1.05) translateY(-4px); box-shadow: 0 20px 48px rgba(116,168,123,0.2); }
+
+        /* Social proof strip */
+        .r2b-social-strip { background: var(--bg-secondary); padding: 28px 20px; text-align: center; }
+        .r2b-social-strip-inner { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; max-width: 700px; margin: 0 auto; }
+        .r2b-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .r2b-stat-value { font-family: 'Sora', sans-serif; font-size: 28px; font-weight: 800; color: #74A87B; line-height: 1; }
+        .r2b-stat-label { font-size: 12px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+        .r2b-stat-stars { color: #F5A623; font-size: 16px; letter-spacing: 2px; line-height: 1; }
+        .r2b-strip-divider { width: 1px; height: 36px; background: var(--border); }
+
+        /* Screenshot slider */
+        .r2b-screenshots { padding: 80px 20px; background: #fff; }
+        .r2b-screenshots h2 { text-align: center; font-size: 36px; margin-bottom: 8px; font-family: 'Sora', sans-serif; }
+        .r2b-screenshots .sub { text-align: center; color: var(--text-secondary); font-size: 18px; margin-bottom: 48px; }
+        .r2b-slider { position: relative; max-width: 300px; margin: 0 auto; }
+        .r2b-device-frame {
+            padding: 14px; background: #1d1d1f; border-radius: 44px;
+            box-shadow: 0 0 0 2px #3a3a3a, 0 32px 80px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        .r2b-device-frame::before {
+            content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+            width: 90px; height: 6px; background: #3a3a3a; border-radius: 3px; z-index: 5;
+        }
+        .r2b-slider-track { border-radius: 32px; overflow: hidden; cursor: zoom-in; }
+        .r2b-slider-track img { width: 100%; display: block; transition: opacity 0.35s ease; }
+        .r2b-slider-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(255,255,255,0.95); border: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: #1d1d1f; transition: background 0.2s, transform 0.2s; z-index: 10;
+        }
+        .r2b-slider-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+        .r2b-slider-btn.prev { left: -28px; }
+        .r2b-slider-btn.next { right: -28px; }
+        .r2b-slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+        .r2b-slider-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; background: #d2d2d7; cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
+        .r2b-slider-dots button.active { background: #74A87B; transform: scale(1.3); }
+
+        /* Lightbox */
+        .r2b-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .r2b-lightbox.open { display: flex; }
+        .r2b-lightbox img { max-height: 90vh; max-width: 90vw; border-radius: 16px; object-fit: contain; }
+        .r2b-lightbox-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: white; font-size: 36px; cursor: pointer; line-height: 1; }
+        .r2b-lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); border: none; color: white; font-size: 28px; width: 52px; height: 52px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .r2b-lightbox-btn:hover { background: rgba(255,255,255,0.3); }
+        .r2b-lightbox-btn.prev { left: 16px; }
+        .r2b-lightbox-btn.next { right: 16px; }
+
+        /* Sticky CTA */
+        #r2b-sticky-cta { position: fixed; bottom: 24px; right: 24px; z-index: 200; display: flex; flex-direction: column; gap: 10px; transform: translateY(120px); opacity: 0; transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.4s ease; pointer-events: none; }
+        #r2b-sticky-cta.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .r2b-sticky-btn { display: flex; align-items: center; gap: 8px; background: #1d1d1f; color: white; padding: 10px 18px; border-radius: 14px; text-decoration: none; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; box-shadow: 0 8px 24px rgba(0,0,0,0.2); transition: transform 0.2s, background 0.2s; white-space: nowrap; }
+        .r2b-sticky-btn:hover { transform: scale(1.04); background: #000; }
+        .r2b-sticky-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        #r2b-sticky-close { position: absolute; top: -8px; right: -8px; width: 22px; height: 22px; background: #6e6e73; border: none; border-radius: 50%; color: white; font-size: 14px; line-height: 1; cursor: pointer; display: none; align-items: center; justify-content: center; }
+        #r2b-sticky-cta.visible #r2b-sticky-close { display: flex; }
+
+        /* Trust row hover */
+        .trust-row span { transition: color 0.2s; cursor: default; }
+        .trust-row span:hover { color: #74A87B; }
+
+        /* cursor-pointer */
+        a, button, [onclick], .r2b-slider-btn, .r2b-slider-dots button, .r2b-lightbox-btn, .store-badge, .r2b-sticky-btn { cursor: pointer; }
+
+        /* prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: none; opacity: 1; transform: none; }
+            .hero-icon { animation: none; }
+            #r2b-progress { transition: none; }
+            .service-card, .price-card, .store-badge { transition: none; }
+        }
+
+        @media (max-width: 480px) {
+            .r2b-slider-btn.prev { left: -16px; }
+            .r2b-slider-btn.next { right: -16px; }
+        }
     </style>
 </head>
 <body>
+
+<!-- Scroll Progress Bar -->
+<div id="r2b-progress"></div>
+
+<!-- Sticky Download CTA -->
+<div id="r2b-sticky-cta" role="complementary" aria-label="App herunterladen">
+    <button id="r2b-sticky-close" aria-label="Ausblenden">×</button>
+    <a href="https://apps.apple.com/de/app/recibee/id6761378123" class="r2b-sticky-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.rezepteapp.rezepte_app" class="r2b-sticky-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
+        Google Play
+    </a>
+</div>
+
+<!-- Lightbox -->
+<div class="r2b-lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="r2b-lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="r2b-lightbox-btn prev" onclick="lightboxMove(-1, event)">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="r2b-lightbox-btn next" onclick="lightboxMove(1, event)">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+</div>
 
 <!-- Navigation -->
 <nav>
@@ -256,11 +412,11 @@
 
 <!-- Hero -->
 <section class="recibee-hero">
-    <img src="app-icon-512.png" alt="ReciBee App Icon" class="hero-icon">
-    <div class="hero-badge">🍯 Dein smarter Küchen-Assistent</div>
-    <h1>Rezepte sammeln, planen,<br><span class="gradient">in Sekunden kochen.</span></h1>
-    <p class="lead">ReciBee speichert Rezepte aus Links, Fotos oder dem Internet per KI, plant deine Woche und erstellt automatisch die Einkaufsliste – für dich und die ganze Familie.</p>
-    <div class="store-badges">
+    <img src="app-icon-512.png" alt="ReciBee App Icon" class="hero-icon reveal">
+    <div class="hero-badge reveal reveal-delay-1">🍯 Dein smarter Küchen-Assistent</div>
+    <h1 class="reveal reveal-delay-2">Rezepte sammeln, planen,<br><span class="gradient">in Sekunden kochen.</span></h1>
+    <p class="lead reveal reveal-delay-3">ReciBee speichert Rezepte aus Links, Fotos oder dem Internet per KI, plant deine Woche und erstellt automatisch die Einkaufsliste – für dich und die ganze Familie.</p>
+    <div class="store-badges reveal reveal-delay-4">
         <a href="https://apps.apple.com/de/app/recibee/id6761378123" class="store-badge" aria-label="Im App Store laden">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
             <div class="store-badge-text"><small>Laden im</small><strong>App Store</strong></div>
@@ -272,6 +428,53 @@
     </div>
 </section>
 
+<!-- Screenshots -->
+<section class="r2b-screenshots">
+    <h2>Die App in Aktion</h2>
+    <p class="sub">Einfach, übersichtlich, direkt.</p>
+    <div class="r2b-slider">
+        <div class="r2b-device-frame">
+            <div class="r2b-slider-track" id="sliderTrack">
+                <img src="images/1.png" alt="ReciBee Screenshot 1" id="sliderImg">
+            </div>
+        </div>
+        <button class="r2b-slider-btn prev" aria-label="Vorheriges Bild" onclick="sliderMove(-1)">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="r2b-slider-btn next" aria-label="Nächstes Bild" onclick="sliderMove(1)">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="r2b-slider-dots" id="sliderDots"></div>
+    </div>
+</section>
+
+<!-- Social Proof Strip -->
+<div class="r2b-social-strip reveal">
+    <div class="r2b-social-strip-inner">
+        <div class="r2b-stat">
+            <div class="r2b-stat-stars">★★★★★</div>
+            <div class="r2b-stat-value">4.9</div>
+            <div class="r2b-stat-label">App Store Bewertung</div>
+        </div>
+        <div class="r2b-strip-divider"></div>
+        <div class="r2b-stat">
+            <div class="r2b-stat-value">KI</div>
+            <div class="r2b-stat-label">Rezept-Import</div>
+        </div>
+        <div class="r2b-strip-divider"></div>
+        <div class="r2b-stat">
+            <div class="r2b-stat-value">EU</div>
+            <div class="r2b-stat-label">DSGVO-konform</div>
+        </div>
+        <div class="r2b-strip-divider"></div>
+        <div class="r2b-stat">
+            <div class="r2b-stat-value">iOS + Android</div>
+            <div class="r2b-stat-label">Verfügbar</div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Features -->
 <section id="features" class="section-dark">
     <div class="section-inner">
@@ -280,63 +483,63 @@
             <p>Von der Rezept-Idee bis zum fertigen Gericht – ReciBee begleitet dich durch den ganzen Prozess.</p>
         </div>
         <div class="features-grid">
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal reveal-delay-1">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2l2.09 6.26L20 9.27l-5 4.87L16.18 22 12 18.77 7.82 22 9 14.14 4 9.27l5.91-1.01L12 2z"/></svg>
                 </div>
                 <h3>KI-Import <span style="font-size:0.75em;color:var(--accent);font-weight:600;white-space:nowrap;">· für alle kostenlos</span></h3>
                 <p>Rezept-Link, Screenshot oder Foto einwerfen – ReciBee liest Zutaten und Schritte automatisch aus und legt ein sauberes Rezept an.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                 </div>
                 <h3>Was soll ich kochen?</h3>
                 <p>Keine Idee? Gib Kriterien wie „schnell", „vegetarisch" oder „Reste verwerten" an – die KI schlägt das perfekte Gericht aus deiner Sammlung vor.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
                 <h3>Familien-Sharing</h3>
                 <p>Rezeptbuch, Einkaufsliste und Speiseplan werden live mit deiner Familie synchronisiert. Jeder trägt bei, alle sehen dasselbe.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 11H3v10h6V11zM21 3h-6v18h6V3zM15 7H9v14h6V7z"/></svg>
                 </div>
                 <h3>Automatische Einkaufsliste</h3>
                 <p>Mit einem Tipp werden Zutaten aus deinem Speiseplan in die Einkaufsliste übertragen – Mengen werden smart zusammengerechnet.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 </div>
                 <h3>Wochen-Speiseplan</h3>
                 <p>Ziehe Rezepte per Drag-&-Drop auf die Woche. KI-Tipps zur Abwechslung inklusive – nie wieder dreimal hintereinander Nudeln.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" y1="17" x2="18" y2="17"/></svg>
                 </div>
                 <h3>Kochmodus</h3>
                 <p>Großflächige Schritt-Ansicht mit Swipe-Navigation, integrierten Timern und Zutaten-Sheet. Das Display bleibt dabei automatisch an – keine klebrigen Finger am Bildschirm.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                 </div>
                 <h3>Unverträglichkeiten</h3>
                 <p>Hinterlege Laktose, Gluten, Nüsse &amp; Co. für deine Familie. ReciBee markiert problematische Zutaten und filtert Vorschläge automatisch passend.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m4.93 10.93 2.83 2.83"/><path d="M2 18h4"/><path d="M18 18h4"/><path d="m19.07 10.93-2.83 2.83"/><path d="M12 22a8 8 0 0 0 8-8 8 8 0 0 0-16 0 8 8 0 0 0 8 8z"/></svg>
                 </div>
                 <h3>KI-Rezept-Anpassung</h3>
                 <p>„Mach es vegan", „ohne Gluten" oder „für 6 Personen": Die KI schreibt dein Rezept passend um – inklusive sinnvoller Zutaten-Alternativen.</p>
             </div>
-            <div class="service-card fade-in">
+            <div class="service-card fade-in reveal">
                 <div class="icon">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
@@ -508,20 +711,102 @@
 </button>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
+// Scroll progress bar
+var bar = document.getElementById('r2b-progress');
+window.addEventListener('scroll', function() {
+    bar.style.width = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100, 100) + '%';
+}, {passive: true});
+
+// Scroll-reveal (fade-in + reveal)
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
     });
 }, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in, .reveal').forEach(function(el) { revealObserver.observe(el); });
 
-const backToTop = document.querySelector('.back-to-top');
-window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('show', window.scrollY > 400);
-}, { passive: true });
+// Back to top
+var backToTop = document.querySelector('.back-to-top');
+if (backToTop) {
+    window.addEventListener('scroll', function() { backToTop.classList.toggle('show', window.scrollY > 400); }, {passive: true});
+}
+
+// Sticky CTA
+var stickyCta = document.getElementById('r2b-sticky-cta');
+var stickyClose = document.getElementById('r2b-sticky-close');
+var stickyDismissed = false;
+window.addEventListener('scroll', function() {
+    if (stickyDismissed) return;
+    stickyCta.classList.toggle('visible', window.scrollY > 600);
+}, {passive: true});
+stickyClose.addEventListener('click', function() { stickyDismissed = true; stickyCta.classList.remove('visible'); });
+
+// Screenshot Slider & Lightbox
+(function() {
+    var images = ['images/1.png','images/2.png','images/3.png','images/4.png','images/5.png','images/6.png'];
+    var current = 0;
+    var img = document.getElementById('sliderImg');
+    var dotsContainer = document.getElementById('sliderDots');
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+
+    images.forEach(function(_, i) {
+        var btn = document.createElement('button');
+        btn.setAttribute('aria-label', 'Bild ' + (i+1));
+        btn.onclick = function() { goTo(i); };
+        dotsContainer.appendChild(btn);
+    });
+
+    function updateDots() {
+        dotsContainer.querySelectorAll('button').forEach(function(b, i) { b.classList.toggle('active', i === current); });
+    }
+
+    function goTo(index) {
+        current = (index + images.length) % images.length;
+        img.style.opacity = 0;
+        setTimeout(function() { img.src = images[current]; img.style.opacity = 1; }, 175);
+        updateDots();
+        lightboxImg.src = images[current];
+    }
+
+    window.sliderMove = function(dir) { goTo(current + dir); };
+
+    document.getElementById('sliderTrack').addEventListener('click', function() {
+        lightboxImg.src = images[current];
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+
+    window.closeLightbox = function(e) {
+        if (!e || e.target === lightbox || e.currentTarget === lightbox.querySelector('.r2b-lightbox-close')) {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    };
+
+    window.lightboxMove = function(dir, e) { if (e) e.stopPropagation(); goTo(current + dir); };
+
+    document.addEventListener('keydown', function(e) {
+        if (lightbox.classList.contains('open')) {
+            if (e.key === 'ArrowLeft') lightboxMove(-1);
+            else if (e.key === 'ArrowRight') lightboxMove(1);
+            else if (e.key === 'Escape') closeLightbox();
+        } else {
+            if (e.key === 'ArrowLeft') sliderMove(-1);
+            else if (e.key === 'ArrowRight') sliderMove(1);
+        }
+    });
+
+    var touchStartX = 0;
+    function addSwipe(el, fn) {
+        el.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, {passive: true});
+        el.addEventListener('touchend', function(e) { var dx = e.changedTouches[0].clientX - touchStartX; if (Math.abs(dx) > 40) fn(dx < 0 ? 1 : -1); });
+    }
+    addSwipe(document.getElementById('sliderTrack'), sliderMove);
+    addSwipe(lightbox, lightboxMove);
+
+    goTo(0);
+})();
 </script>
 
 </body>

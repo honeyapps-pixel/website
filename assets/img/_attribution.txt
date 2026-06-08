@@ -1,0 +1,18 @@
+Bildnachweise — Honeyapps Website
+Atmosphärische Bilder von Pexels.com (kostenlos nutzbar, Pexels-Lizenz).
+Stand: 2026-06-08
+
+home-studio.jpg (Home: Studio): Foto von gravity cut auf Pexels — https://www.pexels.com/photo/laptop-on-a-wooden-table-6446678/
+home-tech.jpg (Home: Praxis-Band): Foto von Atlantic Ambience auf Pexels — https://www.pexels.com/photo/close-up-shot-of-a-laptop-computer-12969403/
+software-hero.jpg (Software: Hero): Foto von cottonbro studio auf Pexels — https://www.pexels.com/photo/a-person-using-a-computer-5473299/
+software-case.jpg (Software: Case): Foto von Lukas Blazek auf Pexels — https://www.pexels.com/photo/close-up-photo-of-gray-laptop-577210/
+smarthome-hero.jpg (Hausautomatisierung: Hero): Foto von Max Vakhtbovych auf Pexels — https://www.pexels.com/photo/modern-design-of-an-apartment-flat-6580378/
+smarthome-viz.jpg (Hausautomatisierung: Visualisierung): Foto von Jakub Zerdzicki auf Pexels — https://www.pexels.com/photo/analyst-using-tablet-for-data-visualization-36950633/
+about-workshop.jpg (Über uns): Foto von Pixabay auf Pexels — https://www.pexels.com/photo/lighted-lamp-280014/
+webdesign-hero.jpg (Webdesign: Hero): Foto von Tranmautritam auf Pexels — https://www.pexels.com/photo/two-imac-s-with-keyboard-and-phones-on-desk-326503/
+
+showcase/*.jpg: Screenshots eigener Demo-Designs (Honeyapps), keine externe Lizenz nötig.
+planung.jpg (Hausautomatisierung: Planung): Foto von Anete Lusina auf Pexels — https://www.pexels.com/photo/pen-with-ruler-and-eyeglasses-placed-on-house-plan-4792480/
+
+apps/route2bee-screen.jpg + apps/recibee-screen.jpg: Echte App-Screenshots (Honeyapps – Route2Bee, ReciBee), keine externe Lizenz.
+apps/diveo-screen.jpg: Echter App-Screenshot (Honeyapps – Diveo), keine externe Lizenz.
