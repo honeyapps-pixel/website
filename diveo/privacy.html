@@ -94,6 +94,9 @@
     <h2>7. Push-Benachrichtigungen und App-Infrastruktur (Expo)</h2>
     <p>Die App nutzt Expo für Build-/Update-Infrastruktur sowie für den Versand von Push-Benachrichtigungen (Expo Push Service). Hierzu wird ein gerätebezogener Push-Token verarbeitet; die Auslieferung erfolgt technisch über Apple (APNs) bzw. Google (FCM). Du kannst Push-Benachrichtigungen jederzeit in den Geräteeinstellungen deaktivieren.</p>
 
+    <h2>7a. Fehler- und Absturzberichte (Sentry)</h2>
+    <p>Zur Sicherstellung der Stabilität der App nutzen wir Sentry (Functional Software, Inc., 45 Fremont Street, 8th Floor, San Francisco, CA 94105, USA; <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">Datenschutzerklärung von Sentry</a>). Bei einem Absturz oder technischen Fehler (einschließlich fehlgeschlagener Zahlungsvorgänge) werden ausschließlich technische Fehlerdaten übermittelt: Fehlermeldung und Stack-Trace, Gerätetyp, Betriebssystem- und App-Version, Zeitpunkt sowie bei Zahlungsfehlern interne Vorgangskennungen (z. B. eine Buchungsnummer). Dein Name, deine E-Mail-Adresse und deine IP-Adresse werden <strong>nicht</strong> übermittelt. Die Verarbeitung erfolgt in der EU-Region von Sentry; soweit ein Zugriff aus den USA erfolgt, stützt sich die Übermittlung auf das EU-US Data Privacy Framework (Art. 45 DSGVO) und Standardvertragsklauseln. Fehlerberichte werden nach 90 Tagen automatisch gelöscht. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Stabilität, Sicherheit und Fehlerfreiheit der App, insbesondere der Zahlungsabwicklung).</p>
+
     <h2>8. Geräteberechtigungen</h2>
     <ul>
         <li><strong>Kamera und Fotos:</strong> nur zur Aufnahme/Auswahl eines Profilbilds.</li>
@@ -106,10 +109,10 @@
     <p>Bei „Mit Apple anmelden" und „Mit Google anmelden" wird ein vom Anbieter bereitgestelltes Identitäts-Token verarbeitet; Diveo erhält die zur Kontoerstellung nötigen Daten (z. B. Name, E-Mail bzw. eine anonymisierte Relay-Adresse bei Apple). Es gelten ergänzend die Datenschutzbestimmungen von Apple bzw. Google.</p>
 
     <h2>10. Empfänger der Daten</h2>
-    <p>Daten werden nur weitergegeben, soweit dies zur Vertragserfüllung erforderlich oder gesetzlich zulässig ist. Empfänger sind insbesondere der gebuchte Anbieter (erhält die zur Durchführung erforderlichen Daten und ist insoweit eigenständig Verantwortlicher), Supabase, Stripe, Expo/Apple/Google sowie ggf. Behörden bei gesetzlicher Verpflichtung. Mit Auftragsverarbeitern bestehen Verträge nach Art. 28 DSGVO.</p>
+    <p>Daten werden nur weitergegeben, soweit dies zur Vertragserfüllung erforderlich oder gesetzlich zulässig ist. Empfänger sind insbesondere der gebuchte Anbieter (erhält die zur Durchführung erforderlichen Daten und ist insoweit eigenständig Verantwortlicher), Supabase, Stripe, Expo/Apple/Google, Sentry (Fehler- und Absturzberichte, EU-Region) sowie ggf. Behörden bei gesetzlicher Verpflichtung. Beim optionalen KI-gestützten Website-Import (Onboarding-Funktion für Tauchschulen) werden die Inhalte der angegebenen Website an Anthropic (Claude API, USA) sowie einen Web-Lesedienst (Jina) übermittelt und ausschließlich zur einmaligen Extraktion der Angebotsdaten verarbeitet. Mit Auftragsverarbeitern bestehen Verträge nach Art. 28 DSGVO.</p>
 
     <h2>11. Übermittlung in Drittländer</h2>
-    <p>Einzelne Dienste (insb. Stripe, Apple, Google, Expo) können Daten außerhalb der EU/des EWR, insbesondere in den USA, verarbeiten. Die Übermittlung erfolgt auf Grundlage geeigneter Garantien gemäß Art. 44 ff. DSGVO, insbesondere Standardvertragsklauseln und – soweit zertifiziert – des EU-US Data Privacy Framework.</p>
+    <p>Einzelne Dienste (insb. Stripe, Apple, Google, Expo, Sentry sowie – beim Website-Import – Anthropic und Jina) können Daten außerhalb der EU/des EWR, insbesondere in den USA, verarbeiten. Die Übermittlung erfolgt auf Grundlage geeigneter Garantien gemäß Art. 44 ff. DSGVO, insbesondere Standardvertragsklauseln und – soweit zertifiziert – des EU-US Data Privacy Framework.</p>
 
     <h2>12. Speicherdauer</h2>
     <p>Wir speichern personenbezogene Daten nur so lange, wie es für die genannten Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten (insb. handels- und steuerrechtlich, regelmäßig bis zu 10 Jahre) bestehen. Konto- und Profildaten werden mit Löschung des Kontos entfernt, soweit keine Aufbewahrungspflichten entgegenstehen.</p>
