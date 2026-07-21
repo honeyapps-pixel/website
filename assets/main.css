@@ -313,10 +313,14 @@ figure{margin:0}
 .app-row--rev .app-row-media{order:2}
 .app-row-media{display:flex;justify-content:center}
 .app-shot{width:100%;max-width:340px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--paper-2)}
-.app-bigicon{width:128px;height:128px;border-radius:28px;box-shadow:0 14px 40px rgba(26,23,20,.14)}
+.app-bigicon{width:128px;height:128px;border-radius:28px;box-shadow:0 14px 40px rgba(26,23,20,.14);transition:transform .3s var(--ease)}
+.app-row-media a{display:flex;justify-content:center}
+.app-row-media a:hover .app-bigicon{transform:translateY(-4px)}
 .app-head{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.1rem}
 .app-head img{width:64px;height:64px;border-radius:15px;box-shadow:0 6px 18px rgba(26,23,20,.12)}
 .app-row h3{font-size:clamp(1.6rem,3vw,2.1rem)}
+.app-row h3 a{transition:color var(--t)}
+.app-row h3 a:hover{color:var(--amber-deep)}
 .app-tag{color:var(--amber-deep);font-weight:600;font-size:.95rem;margin-top:.15rem}
 .app-row p{color:var(--ink-soft);margin-block:1rem}
 @media(max-width:840px){.app-row,.app-row--rev{grid-template-columns:1fr;gap:1.8rem}.app-row--rev .app-row-media{order:0}}
