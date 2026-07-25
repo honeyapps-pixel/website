@@ -20,15 +20,39 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Google Ads Tag (gtag.js) — Conversion ID AW-18145804367
-         Aktiv. Conversion-Wiring weiter unten wartet noch auf Conversion-Labels
-         (App Store Click + Google Play Click Actions in Google Ads → Tools → Conversions). -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18145804367"></script>
+    <!-- Marketing-Tags (Google Ads Conversion-Tracking, Meta Pixel) — Cookie-Consent-Gate
+         Beide Tags laden erst NACH Einwilligung im Cookie-Banner (TTDSG §25 / Art. 6 Abs. 1 lit. a DSGVO).
+         Zustimmung wird lokal in localStorage gespeichert (r2b_consent: "granted" | "denied") und lässt
+         sich über den Link "Cookie-Einstellungen" im Footer jederzeit ändern. Siehe Datenschutzerklärung
+         Abschnitt 8. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-18145804367');
+
+      // Meta Pixel ID aus Meta Events Manager → Datenquellen → Datensatz erstellen (Web).
+      // TODO: Platzhalter durch die echte numerische Pixel-ID ersetzen.
+      var R2B_META_PIXEL_ID = 'REPLACE_WITH_PIXEL_ID';
+
+      function r2bLoadMarketingTags() {
+        // Google Ads (Conversion ID AW-18145804367)
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18145804367';
+        document.head.appendChild(gtagScript);
+        gtag('js', new Date());
+        gtag('config', 'AW-18145804367');
+
+        // Meta Pixel
+        if (R2B_META_PIXEL_ID && R2B_META_PIXEL_ID.indexOf('REPLACE_WITH') !== 0) {
+          !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+          n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+          document,'script','https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', R2B_META_PIXEL_ID);
+          fbq('track', 'PageView');
+        }
+      }
     </script>
 
     <style>
@@ -718,9 +742,75 @@
             .r2b-slider-btn.prev { left: -16px; }
             .r2b-slider-btn.next { right: -16px; }
         }
+
+        /* Cookie-Consent-Banner */
+        .r2b-cookie-banner {
+            display: none;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 500;
+            background: #1d1d1f;
+            color: #f5f5f7;
+            padding: 18px 24px;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+        }
+        .r2b-cookie-banner.is-visible { display: flex; }
+        .r2b-cookie-banner p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+            max-width: 640px;
+            color: #f5f5f7;
+        }
+        .r2b-cookie-banner a { color: #8fc0f2; text-decoration: underline; }
+        .r2b-cookie-banner-actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .r2b-cookie-banner-actions button {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        #r2b-cookie-decline {
+            background: transparent;
+            color: #f5f5f7;
+            border: 1px solid #6e6e73;
+        }
+        #r2b-cookie-decline:hover { border-color: #f5f5f7; }
+        #r2b-cookie-accept {
+            background: #3B73B9;
+            color: white;
+        }
+        #r2b-cookie-accept:hover { background: #2B5A96; }
+        @media (max-width: 600px) {
+            .r2b-cookie-banner { justify-content: flex-start; padding: 16px; }
+            .r2b-cookie-banner-actions { width: 100%; }
+            .r2b-cookie-banner-actions button { flex: 1; }
+        }
     </style>
 </head>
 <body>
+
+<!-- Cookie-Consent-Banner (gated: Google Ads + Meta Pixel laden erst nach Klick auf "Akzeptieren") -->
+<div id="r2b-cookie-banner" class="r2b-cookie-banner" role="dialog" aria-label="Cookie-Einstellungen">
+    <p>Wir verwenden Cookies zur Werbe- und Reichweitenmessung (Google Ads, Meta Pixel), um zu sehen, welche Anzeigen bei euch ankommen. Optional — die Seite funktioniert auch ohne. Details in unserer <a href="/route2bee/privacy">Datenschutzerklärung</a>.</p>
+    <div class="r2b-cookie-banner-actions">
+        <button id="r2b-cookie-decline" type="button">Nur notwendige</button>
+        <button id="r2b-cookie-accept" type="button">Akzeptieren</button>
+    </div>
+</div>
 
 <!-- Scroll Progress Bar -->
 <div id="r2b-progress"></div>
@@ -1021,6 +1111,7 @@
                     <li><a href="/#impressum">Impressum</a></li>
                     <li><a href="/route2bee/privacy">Datenschutz</a></li>
                     <li><a href="/route2bee/agb">AGB</a></li>
+                    <li><a href="#" onclick="r2bOpenCookieSettings(event)">Cookie-Einstellungen</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1037,6 +1128,7 @@
                 <a href="/route2bee/privacy">Datenschutz</a>
                 <a href="/route2bee/agb">AGB</a>
                 <a href="/#impressum">Impressum</a>
+                <a href="#" onclick="r2bOpenCookieSettings(event)">Cookie-Einstellungen</a>
             </div>
         </div>
     </div>
@@ -1187,12 +1279,68 @@
 })();
 </script>
 
-<!-- Google Ads Conversion Wiring — Klick auf externen Link (App Store / Play Store)
-     Conversion ID: AW-18145804367
-     Conversion Label: zJvGCLnjhakcEM-AzMxD ("Klick auf externen Link", primäre Aktion)
+<!-- Cookie-Consent-Banner: Logik
+     Zeigt den Banner bis eine Entscheidung getroffen wurde, lädt Google Ads + Meta Pixel
+     nur nach "Akzeptieren", persistiert die Wahl in localStorage (r2b_consent).
+     r2bOpenCookieSettings() ist global, damit der Footer-Link die Entscheidung neu abfragen kann. -->
+<script>
+(function() {
+  var CONSENT_KEY = 'r2b_consent';
+
+  function getConsent() {
+    try { return localStorage.getItem(CONSENT_KEY); } catch(e) { return null; }
+  }
+  function setConsent(value) {
+    try { localStorage.setItem(CONSENT_KEY, value); } catch(e) {}
+  }
+  function showBanner() {
+    var b = document.getElementById('r2b-cookie-banner');
+    if (b) b.classList.add('is-visible');
+  }
+  function hideBanner() {
+    var b = document.getElementById('r2b-cookie-banner');
+    if (b) b.classList.remove('is-visible');
+  }
+
+  window.r2bOpenCookieSettings = function(e) {
+    if (e) e.preventDefault();
+    showBanner();
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var acceptBtn = document.getElementById('r2b-cookie-accept');
+    var declineBtn = document.getElementById('r2b-cookie-decline');
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function() {
+        setConsent('granted');
+        hideBanner();
+        r2bLoadMarketingTags();
+      });
+    }
+    if (declineBtn) {
+      declineBtn.addEventListener('click', function() {
+        setConsent('denied');
+        hideBanner();
+      });
+    }
+
+    var consent = getConsent();
+    if (consent === 'granted') {
+      r2bLoadMarketingTags();
+    } else if (consent !== 'denied') {
+      showBanner();
+    }
+  });
+})();
+</script>
+
+<!-- Conversion-Wiring — Klick auf externen Link (App Store / Play Store)
+     Google Ads Conversion ID: AW-18145804367, Label: zJvGCLnjhakcEM-AzMxD ("Klick auf externen Link").
      Aktuell wird derselbe Label-Wert für App Store und Play Store gefeuert.
      Falls später separate Conversions gewünscht: zweite Conversion-Action in Google Ads anlegen
      und PLAY_STORE_LABEL hier durch deren Label ersetzen.
+     Meta Pixel: feuert daneben ein Custom Event "AppStoreClick"/"PlayStoreClick" (analoges Signal).
+     Beide Aufrufe sind No-Ops, solange kein Consent erteilt wurde (gtag/fbq dann nicht geladen).
 -->
 <script>
 (function() {
@@ -1208,6 +1356,9 @@
           'value': 1.0,
           'currency': 'EUR'
         });
+      }
+      if (typeof fbq === 'function') {
+        fbq('trackCustom', type === 'app-store' ? 'AppStoreClick' : 'PlayStoreClick');
       }
     });
   });
