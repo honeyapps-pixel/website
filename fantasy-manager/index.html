@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy Manager – AI Fantasy Football Assistant | HoneyApps</title>
-    <meta name="description" content="Fantasy Manager: AI-assisted rankings, lineup, trade, and waiver tools for fantasy football. By HoneyApps.">
+    <meta name="description" content="Fantasy Manager: AI-assisted rankings, lineup, trade, and waiver tools for fantasy football. Available on the App Store and Google Play. By HoneyApps.">
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="/fantasy-manager/icon.png">
     <link rel="apple-touch-icon" href="/fantasy-manager/icon.png">
@@ -19,7 +19,17 @@
         .app-body ul { margin:8px 0 18px 22px; }
         .app-links { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
         .app-links a { color:#0E9F6E; font-weight:600; text-decoration:none; }
+        .store-badges { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin:0 0 26px; }
+        .store-badge { display:inline-flex; align-items:center; gap:0.625rem; background:#1d1d1f; color:#fff; padding:0.75rem 1.5rem; border-radius:12px; text-decoration:none; font-weight:500; transition:transform .2s, background .2s; }
+        .store-badge:hover { transform:scale(1.04); background:#000; }
+        .store-badge svg { width:24px; height:24px; }
+        .store-badge-text { display:flex; flex-direction:column; line-height:1.1; text-align:left; }
+        .store-badge-text small { font-size:0.625rem; opacity:0.85; text-transform:uppercase; letter-spacing:0.04em; }
+        .store-badge-text strong { font-size:1rem; font-weight:600; }
     </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Fantasy Manager","applicationCategory":"SportsApplication","operatingSystem":"iOS, Android","url":"https://www.honeyapps.de/fantasy-manager/","installUrl":"https://apps.apple.com/app/id6790166294","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"Honeyapps","legalName":"Lukas Schachtmaier & Johann Warkentin GbR"}}
+    </script>
 </head>
 <body>
 
@@ -42,6 +52,16 @@
     <img src="/fantasy-manager/icon.png" alt="Fantasy Manager app icon">
     <h1>Fantasy Manager</h1>
     <p class="tag">Your AI assistant for fantasy football — rankings, lineups, trades, and waiver intelligence, powered by data and Claude AI.</p>
+    <div class="store-badges">
+        <a href="https://apps.apple.com/app/id6790166294" class="store-badge" aria-label="Download Fantasy Manager on the App Store">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div class="store-badge-text"><small>Download on the</small><strong>App Store</strong></div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.fantasygm.app" class="store-badge" aria-label="Get Fantasy Manager on Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.69.39-1.28.97-1.58l10.98 10.08L3.97 22.08A1.8 1.8 0 0 1 3 20.5m13.81-9.44l2.52 2.31c.47.43.47 1.16 0 1.6l-2.52 2.31-2.93-2.69c-.09-.08-.09-.23 0-.31l2.93-3.22zM5.12 2.03l11.37 6.52-2.44 2.44L5.12 2.03zm0 19.94l8.93-8.93 2.44 2.44L5.12 21.97z"/></svg>
+            <div class="store-badge-text"><small>Get it on</small><strong>Google Play</strong></div>
+        </a>
+    </div>
     <div class="app-links">
         <a href="/fantasy-manager/support">Support &amp; FAQ</a>
         <a href="/fantasy-manager/privacy">Privacy Policy</a>
