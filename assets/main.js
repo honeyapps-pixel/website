@@ -45,26 +45,8 @@
   }
 })();
 
-/* ---------- DSGVO Consent (Google Consent Mode v2) ----------
- * Tracking (Google Ads/gtag) startet erst nach „Akzeptieren". Default = denied (im <head> gesetzt).
- * Läuft nur auf Seiten mit gtag. Auswahl wird in localStorage gemerkt. */
-(function(){
-  'use strict';
-  if(typeof window.gtag!=='function') return;        // keine Tracking-Einbindung → kein Banner
-  var KEY='ha-consent-v1', stored=null;
-  function update(state){
-    window.gtag('consent','update',{ad_storage:state,ad_user_data:state,ad_personalization:state,analytics_storage:state});
-  }
-  try{stored=localStorage.getItem(KEY);}catch(e){}
-  if(stored==='granted'){update('granted');return;}
-  if(stored==='denied'){return;}                     // bleibt auf denied (Default)
-
-  var bar=document.createElement('div');
-  bar.className='consent'; bar.setAttribute('role','dialog'); bar.setAttribute('aria-label','Cookie-Hinweis');
-  bar.innerHTML='<p>Wir nutzen Cookies für anonyme Statistik und Marketing (Google&nbsp;Ads). Du entscheidest. <a href="/datenschutz.html">Mehr in der Datenschutzerklärung</a>.</p>'+
-    '<div class="consent-actions"><button class="btn btn-line consent-decline" type="button">Ablehnen</button><button class="btn btn-solid consent-accept" type="button">Akzeptieren</button></div>';
-  function choose(v){try{localStorage.setItem(KEY,v);}catch(e){} if(v==='granted')update('granted'); bar.remove();}
-  document.body.appendChild(bar);
-  bar.querySelector('.consent-accept').addEventListener('click',function(){choose('granted');});
-  bar.querySelector('.consent-decline').addEventListener('click',function(){choose('denied');});
-})();
+/* ---------- DSGVO Consent ----------
+ * Umgezogen nach /assets/consent.js (im <head> eingebunden). Grund: gtag.js darf
+ * erst NACH der Zustimmung vom Google-Server geladen werden — das muss passieren,
+ * bevor main.js am Seitenende überhaupt läuft. Nicht hierher zurückholen, sonst
+ * gibt es zwei Banner. */
