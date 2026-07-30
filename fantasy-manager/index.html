@@ -26,6 +26,9 @@
         .store-badge-text { display:flex; flex-direction:column; line-height:1.1; text-align:left; }
         .store-badge-text small { font-size:0.625rem; opacity:0.85; text-transform:uppercase; letter-spacing:0.04em; }
         .store-badge-text strong { font-size:1rem; font-weight:600; }
+        .app-shots { max-width:1080px; margin:0 auto; padding:34px 24px 10px; }
+        .shots-track { display:flex; gap:16px; overflow-x:auto; padding:6px 4px 20px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+        .shots-track img { width:min(232px,62vw); height:auto; flex:0 0 auto; border-radius:18px; box-shadow:0 10px 26px rgba(26,23,20,.16); scroll-snap-align:center; }
     </style>
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Fantasy Manager","applicationCategory":"SportsApplication","operatingSystem":"iOS, Android","url":"https://www.honeyapps.de/fantasy-manager/","installUrl":"https://apps.apple.com/app/id6790166294","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"Honeyapps","legalName":"Lukas Schachtmaier & Johann Warkentin GbR"}}
@@ -66,6 +69,17 @@
         <a href="/fantasy-manager/support">Support &amp; FAQ</a>
         <a href="/fantasy-manager/privacy">Privacy Policy</a>
         <a href="/fantasy-manager/terms">Terms of Service</a>
+    </div>
+</section>
+
+<section class="app-shots" aria-label="Screenshots from the App Store">
+    <div class="shots-track">
+        <img src="/fantasy-manager/screenshots/01-opener.jpg" alt="Fantasy Manager – from last place to the playoffs" width="640" height="1385">
+        <img src="/fantasy-manager/screenshots/02-best-lineup.jpg" alt="Best lineup every week – weekly lineup with AI game plan" width="640" height="1385" loading="lazy" decoding="async">
+        <img src="/fantasy-manager/screenshots/03-perfect-draft.jpg" alt="Perfect draft – AI-powered cheat sheet" width="640" height="1385" loading="lazy" decoding="async">
+        <img src="/fantasy-manager/screenshots/04-draft-room.jpg" alt="Draft like a pro – live draft room with pick recommendations" width="640" height="1385" loading="lazy" decoding="async">
+        <img src="/fantasy-manager/screenshots/05-week1-lineup.jpg" alt="Week 1 lineup – starters with matchup insights" width="640" height="1385" loading="lazy" decoding="async">
+        <img src="/fantasy-manager/screenshots/06-download.jpg" alt="Download Fantasy Manager now and start winning" width="640" height="1385" loading="lazy" decoding="async">
     </div>
 </section>
 
