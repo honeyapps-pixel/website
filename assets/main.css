@@ -37,6 +37,9 @@ ul{list-style:none}
   --ease:cubic-bezier(.22,.61,.36,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
   --t:.45s var(--ease);
+  /* Press-Feedback: sofort sichtbar, nicht erst beim Loslassen (Apple §1 „Response") */
+  --t-press:110ms cubic-bezier(.2,0,0,1);
+  --press-scale:.975;
 
   /* Raster */
   --wrap:1240px; --wrap-text:680px;
@@ -56,22 +59,47 @@ ul{list-style:none}
   --fs-body:1.0625rem;
   --fs-small:.8125rem;
   --fs-label:.7rem;
+
+  /* Tracking ist GRÖSSENABHÄNGIG — ein fester Wert ist irgendwo immer falsch.
+     Große Schrift wirkt zu weit gesperrt → negativ; kleine braucht Luft → leicht positiv. */
+  --track-display:-.038em;
+  --track-h1:-.032em;
+  --track-h2:-.024em;
+  --track-h3:-.015em;
+  --track-lead:-.008em;
+  --track-body:0em;
+  --track-small:.005em;
+
+  /* Leading läuft invers zur Größe: eng bei Display, luftig im Fließtext. */
+  --lead-display:1.0;
+  --lead-h1:1.04;
+  --lead-h2:1.12;
+  --lead-h3:1.26;
+  --lead-body:1.65;
 }
 
 /* ---------- Base ---------- */
 body{
   font-family:var(--font-body);
   font-size:var(--fs-body);
-  line-height:1.65;
+  line-height:var(--lead-body);
+  letter-spacing:var(--track-body);
   color:var(--ink);
   background:var(--paper);
   overflow-x:hidden;
+  font-optical-sizing:auto;
+  /* Eigenes Press-Feedback statt des grauen System-Blitzes */
+  -webkit-tap-highlight-color:transparent;
 }
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1.06;letter-spacing:-.02em;color:var(--ink);overflow-wrap:break-word}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;color:var(--ink);overflow-wrap:break-word;font-optical-sizing:auto}
 p,li{overflow-wrap:break-word}
 main{overflow-x:clip}
-h1{font-size:var(--fs-h1)} h2{font-size:var(--fs-h2)} h3{font-size:var(--fs-h3)}
+h1{font-size:var(--fs-h1);line-height:var(--lead-h1);letter-spacing:var(--track-h1)}
+h2{font-size:var(--fs-h2);line-height:var(--lead-h2);letter-spacing:var(--track-h2)}
+h3{font-size:var(--fs-h3);line-height:var(--lead-h3);letter-spacing:var(--track-h3)}
+h4{line-height:var(--lead-h3);letter-spacing:var(--track-h3)}
 p{max-width:var(--wrap-text)}
+small,.fs-small{letter-spacing:var(--track-small)}
 strong{font-weight:600}
 em{font-style:italic}
 ::selection{background:var(--amber-tint);color:var(--ink)}
@@ -82,7 +110,7 @@ em{font-style:italic}
 .split>*,.hero-split>*,.app-row>*,.cards>*,.steps>*{min-width:0}
 .section{padding-block:var(--section-y)}
 .section--line{border-top:1px solid var(--line)}
-.lead{font-size:var(--fs-lead);color:var(--ink-soft);line-height:1.5;max-width:42ch}
+.lead{font-size:var(--fs-lead);color:var(--ink-soft);line-height:1.5;letter-spacing:var(--track-lead);max-width:42ch}
 .measure{max-width:var(--wrap-text)}
 
 /* ---------- Eyebrow / Kicker (Swiss tick) ---------- */
@@ -129,6 +157,32 @@ em{font-style:italic}
 .arrow-link:hover{color:var(--amber-deep)}
 .arrow-link:hover svg{transform:translateX(4px)}
 
+/* ==========================================================================
+   RESPONSE — Feedback auf den DRUCK, nicht auf das Loslassen
+   `.is-pressed` setzt die Engine bei pointerdown (funktioniert auch auf iOS,
+   wo :active ohne Touch-Listener unzuverlässig ist). Cancel-by-drag-away
+   inklusive: verlässt der Finger das Ziel, geht der Zustand sofort zurück.
+   ========================================================================== */
+.btn,.app-card,.card,.pillar,.store-badge,.vit,.nav-toggle,.arrow-link,.consent .btn{
+  transition:background var(--t),color var(--t),border-color var(--t),
+             transform var(--t-press),box-shadow var(--t-press);
+  touch-action:manipulation; /* nimmt die ~300 ms Tap-Verzögerung */
+}
+.btn.is-pressed,.store-badge.is-pressed{transform:scale(var(--press-scale))}
+.app-card.is-pressed,.card.is-pressed,.vit.is-pressed{transform:scale(.99);background:var(--paper-2)}
+.pillar.is-pressed{background:var(--paper-2)}
+.arrow-link.is-pressed{color:var(--amber-deep)}
+.arrow-link.is-pressed svg{transform:translateX(3px)}
+.nav-toggle.is-pressed span{background:var(--amber-deep)}
+/* Galerie behält den ruhigeren Hover-Lift, reagiert beim Druck aber sofort */
+.shot{touch-action:manipulation}
+.shot.is-pressed{transform:scale(.99) translateY(-2px);transition-duration:var(--t-press)}
+/* Trefferflächen kleiner Textlinks vergrößern — ohne dass Nachbarn kollidieren */
+.nav a{position:relative}
+.nav a::before{content:"";position:absolute;inset:-6px -8px}
+.footer-col a,.footer-bottom-links a{display:inline-block;padding-block:.28rem}
+.nav a.is-pressed,.footer-col a.is-pressed,.footer-bottom-links a.is-pressed{color:var(--amber-deep)}
+
 /* ---------- Pills / Badges ---------- */
 .pill{display:inline-flex;align-items:center;gap:.45rem;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding:.32em .7em;border-radius:2px;background:var(--amber-tint);color:var(--amber-deep)}
 .pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
@@ -139,8 +193,24 @@ em{font-style:italic}
 /* ==========================================================================
    HEADER / NAV
    ========================================================================== */
-.site-header{position:fixed;inset:0 0 auto;z-index:100;transition:background .4s var(--ease),box-shadow .4s var(--ease)}
-.site-header.scrolled{background:rgba(255,255,255,.82);backdrop-filter:saturate(150%) blur(14px);-webkit-backdrop-filter:saturate(150%) blur(14px);box-shadow:0 1px 0 var(--line-soft)}
+/* Der Header ist eine schwebende, durchscheinende Materialschicht — der Inhalt
+   läuft darunter hindurch. `--chrome` (0→1) fährt die Engine kontinuierlich mit
+   dem Scroll hoch, statt bei 40 px hart umzuschalten. */
+.site-header{
+  position:fixed;inset:0 0 auto;z-index:100;--chrome:0;
+  background:rgba(255,255,255,calc(.72 * var(--chrome)));
+  backdrop-filter:saturate(calc(100% + 60% * var(--chrome))) blur(calc(20px * var(--chrome)));
+  -webkit-backdrop-filter:saturate(calc(100% + 60% * var(--chrome))) blur(calc(20px * var(--chrome)));
+  will-change:background,backdrop-filter;
+}
+/* Scroll-Edge statt 1-px-Trennlinie: weicher Auslauf genau dort, wo schwebende
+   Chrome den Inhalt überlappt. Eine Hairline würde die Schicht „ankleben". */
+.site-header::after{
+  content:"";position:absolute;left:0;right:0;top:100%;height:26px;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(255,255,255,calc(.7 * var(--chrome))),rgba(255,255,255,0));
+  -webkit-mask-image:linear-gradient(to bottom,#000,transparent);
+  mask-image:linear-gradient(to bottom,#000,transparent);
+}
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:1.5rem}
 .wordmark{font-family:var(--font-display);font-weight:600;font-size:1.4rem;letter-spacing:-.03em;color:var(--ink)}
 .wordmark span{color:var(--amber-deep)}
@@ -162,25 +232,58 @@ em{font-style:italic}
 @media(max-width:920px){
   .header-cta{display:none}
   .nav-toggle{display:flex}
+  /* Das Menü ist ein modales Blatt: durchscheinendes Material über dem Inhalt,
+     verankert an der Oberkante (dort, wo der Toggle sitzt) — es kommt und geht
+     denselben Weg. Bewegung übernimmt die Spring-Engine (motion.js). */
   .nav{
     position:fixed;inset:68px 0 auto;flex-direction:column;align-items:flex-start;gap:0;
-    background:var(--paper);border-bottom:1px solid var(--line);
-    padding:1rem var(--gutter) 1.6rem;
+    /* Bewusst TRAGEND, nicht durchscheinend: das Blatt liegt direkt unter der
+       ohnehin durchscheinenden Kopfleiste. Zwei helle Glasflächen übereinander
+       kosten die Lesbarkeit — und der Blur käme hier gar nicht an der Seite an,
+       weil der Header als Backdrop-Wurzel davorsteht. Die Tiefe macht der
+       Schatten, nicht die Transparenz. */
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 26px 54px -20px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.05);
+    padding:.7rem var(--gutter) 1.6rem;
     transform:translateY(-12px);opacity:0;pointer-events:none;
+    transform-origin:top center;
     transition:transform .35s var(--ease),opacity .3s var(--ease);
+    z-index:99;
   }
   .nav.open{transform:none;opacity:1;pointer-events:auto}
+  /* Solange das Blatt offen ist, gehört die vertikale Geste UNS — sonst
+     übernimmt der Browser das Scrollen und bricht den Zeiger ab. */
+  html.js-nav-spring .nav.open{touch-action:none}
+  /* Sobald die Engine läuft, treibt sie transform/opacity per Spring —
+     eine CSS-Transition würde dagegenarbeiten und ließe sich nicht greifen. */
+  html.js-nav-spring .nav{transition:none}
   .nav a{width:100%;padding:.9rem 0;font-size:1.15rem;border-bottom:1px solid var(--line-soft)}
+  .nav a::before{content:none}
   .nav a[aria-current="page"]::after{display:none}
   .nav a[aria-current="page"]{color:var(--amber-deep)}
+
+  /* Abdunkelnder Scrim: schiebt den Hintergrund zurück, ohne ihn zu verdecken.
+     Antippen schließt — der Nutzer sitzt nie in der Falle. */
+  .nav-scrim{
+    position:fixed;inset:0;z-index:98;background:rgba(0,0,0,.28);
+    opacity:0;pointer-events:none;
+  }
+  .nav-scrim.is-active{pointer-events:auto}
+  /* Greifpunkt: sichtbarer Hinweis, dass sich das Blatt nach oben wegwischen lässt */
+  .nav-grip{
+    display:block;width:38px;height:4px;border-radius:2px;background:var(--line);
+    margin:.1rem auto .7rem;flex:none;
+  }
 }
+@media(min-width:921px){.nav-scrim,.nav-grip{display:none}}
 
 /* ==========================================================================
    HERO (Basis; Varianten pro Seite)
    ========================================================================== */
 .hero{padding-top:clamp(60px,2vh,70px);padding-bottom:clamp(20px,2.5vw,40px)}
 .hero + .section{padding-top:clamp(28px,3.5vw,52px)}
-.hero h1{font-size:var(--fs-display)}
+.hero h1{font-size:var(--fs-display);line-height:var(--lead-display);letter-spacing:var(--track-display)}
 .hero .lead{margin-top:1.6rem}
 .hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
 
@@ -265,7 +368,7 @@ figure{margin:0}
 .pillar:hover{background:var(--paper-2)}
 .pillar-idx{font-family:var(--font-display);font-weight:600;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--amber-deep)}
 .pillar-main{max-width:none}
-.pillar-main h3{font-size:clamp(1.5rem,3.2vw,2.3rem);letter-spacing:-.02em}
+.pillar-main h3{font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:var(--lead-h2);letter-spacing:var(--track-h2)}
 .pillar-main p{color:var(--ink-soft);margin-top:.5rem;max-width:60ch}
 .pillar .arrow-link{align-self:center;white-space:nowrap}
 @media(max-width:720px){
@@ -318,7 +421,7 @@ figure{margin:0}
 .app-row-media a:hover .app-bigicon{transform:translateY(-4px)}
 .app-head{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.1rem}
 .app-head img{width:64px;height:64px;border-radius:15px;box-shadow:0 6px 18px rgba(26,23,20,.12)}
-.app-row h3{font-size:clamp(1.6rem,3vw,2.1rem)}
+.app-row h3{font-size:clamp(1.6rem,3vw,2.1rem);line-height:var(--lead-h2);letter-spacing:var(--track-h2)}
 .app-row h3 a{transition:color var(--t)}
 .app-row h3 a:hover{color:var(--amber-deep)}
 .app-tag{color:var(--amber-deep);font-weight:600;font-size:.95rem;margin-top:.15rem}
@@ -326,7 +429,8 @@ figure{margin:0}
 @media(max-width:840px){.app-row,.app-row--rev{grid-template-columns:1fr;gap:1.8rem}.app-row--rev .app-row-media{order:0}}
 
 /* App-Cards (Home-Raster) */
-.app-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+/* Vier Apps in vier Spalten — das 3er-Raster ließ eine leere Zelle stehen. */
+.app-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .app-card{background:var(--paper);padding:clamp(1.5rem,2.6vw,2rem);display:flex;flex-direction:column;gap:.9rem;transition:background var(--t)}
 .app-card:hover{background:#fff}
 .app-card-top{display:flex;align-items:center;justify-content:space-between}
@@ -334,7 +438,8 @@ figure{margin:0}
 .app-card h3{font-size:1.3rem}
 .app-card .app-tag{margin:0}
 .app-card p{font-size:.92rem;color:var(--ink-soft);line-height:1.55;flex:1}
-@media(max-width:880px){.app-cards{grid-template-columns:1fr}}
+@media(max-width:1080px){.app-cards{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.app-cards{grid-template-columns:1fr}}
 
 /* Store-Badges (dunkle Pillen) */
 .store-badges{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.4rem}
@@ -368,7 +473,7 @@ figure{margin:0}
 .band p{color:var(--on-dark-soft)}
 .band .eyebrow{color:var(--accent-on-dark)}
 .band .eyebrow::before{background:var(--accent-on-dark)}
-.band-quote{font-family:var(--font-display);font-weight:500;font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.25;letter-spacing:-.02em;color:var(--on-dark);max-width:20ch}
+.band-quote{font-family:var(--font-display);font-weight:500;font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.22;letter-spacing:var(--track-h2);color:var(--on-dark);max-width:20ch}
 
 /* Stack-Logos/Wörter */
 .stack-row{display:flex;flex-wrap:wrap;gap:clamp(1.5rem,5vw,3.5rem);align-items:center;margin-top:1.6rem}
@@ -395,7 +500,7 @@ figure{margin:0}
    ========================================================================== */
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .fact{background:var(--paper);padding:clamp(1.4rem,2.6vw,2rem);text-align:left}
-.fact b{display:block;font-family:var(--font-display);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);color:var(--ink);letter-spacing:-.02em}
+.fact b{display:block;font-family:var(--font-display);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);line-height:var(--lead-h1);color:var(--ink);letter-spacing:var(--track-h1)}
 .fact span{font-size:.86rem;color:var(--ink-mute)}
 @media(max-width:760px){.facts{grid-template-columns:1fr 1fr}}
 
@@ -429,6 +534,24 @@ figure{margin:0}
 .cf-hint{font-size:.78rem;color:var(--ink-mute);max-width:none}
 @media(max-width:520px){.cf-row{grid-template-columns:1fr}.contact-form button{justify-self:stretch;width:100%;justify-content:center}}
 
+/* Feldweise Rückmeldung statt eines Fehlers erst beim Absenden.
+   Der Hinweis erscheint beim Verlassen des Feldes und verschwindet wieder,
+   sobald die Eingabe stimmt — er verurteilt niemanden beim Tippen. */
+.cf-error{
+  display:block;font-size:.75rem;font-weight:500;text-transform:none;letter-spacing:0;
+  color:#b3261e;margin-top:.35rem;min-height:0;
+}
+.contact-form label.has-error input,
+.contact-form label.has-error textarea{border-color:#b3261e}
+.contact-form label.has-error input:focus,
+.contact-form label.has-error textarea:focus{box-shadow:0 0 0 3px rgba(179,38,30,.14)}
+.cf-status{
+  font-size:.85rem;font-weight:500;color:var(--amber-deep);
+  display:flex;align-items:center;gap:.5rem;max-width:none;
+}
+.cf-status svg{width:18px;height:18px;flex:none}
+.cf-status:empty{display:none}
+
 .contact-lines{display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:center;align-items:center;margin-top:1.6rem;color:var(--ink-soft)}
 .contact-lines a,.contact-lines span{display:inline-flex;align-items:center;gap:.5rem;font-weight:500}
 .contact-lines svg{flex:none}
@@ -443,7 +566,7 @@ figure{margin:0}
 .footer-brand .wordmark{font-size:1.5rem}
 .footer-brand p{font-size:.9rem;color:var(--ink-soft);margin-top:.8rem;max-width:30ch}
 .footer-col h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-mute);margin-bottom:1rem;font-family:var(--font-body);font-weight:600}
-.footer-col li{margin-bottom:.55rem}
+.footer-col li{margin-bottom:0}
 .footer-col a{font-size:.9rem;color:var(--ink-soft);transition:color var(--t)}
 .footer-col a:hover{color:var(--amber-deep)}
 .footer-bottom{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;padding-top:1.6rem;border-top:1px solid var(--line)}
@@ -474,6 +597,52 @@ figure{margin:0}
 }
 [data-tilt]{transform-style:preserve-3d}
 
+/* --------------------------------------------------------------------------
+   Reduzierte Bewegung — nicht „kein Feedback", sondern sanfteres Feedback.
+   Alles, was durch den Raum fährt, wird zur kurzen Überblendung; Farbe und
+   Deckkraft bleiben, weil sie beim Verstehen helfen.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
+  /* Übrig bleiben Deckkraft/Farbe — keine Wege durch den Raum, kein Überschwingen */
+  .btn,.app-card,.card,.pillar,.shot,.store-badge,.vit,.arrow-link,.nav,.site-header{
+    transition:background .18s linear,color .18s linear,border-color .18s linear,opacity .18s linear !important;
+  }
+  .btn.is-pressed,.store-badge.is-pressed,.app-card.is-pressed,.card.is-pressed,
+  .vit.is-pressed,.shot.is-pressed{transform:none}
+  .shot:hover,.store-badge:hover,.app-row-media a:hover .app-bigicon{transform:none}
+  .shot:hover .shot-img img{transform:none}
+  .btn:hover svg,.arrow-link:hover svg,.arrow-link.is-pressed svg{transform:none}
+  .app-card.is-pressed,.card.is-pressed,.vit.is-pressed{background:var(--paper-2)}
+}
+
+/* --------------------------------------------------------------------------
+   Reduzierte Transparenz — Material wird milchiger bis deckend, Blur fällt weg.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-transparency:reduce){
+  .site-header{background:rgba(255,255,255,calc(.55 + .45 * var(--chrome)));backdrop-filter:none;-webkit-backdrop-filter:none}
+  .site-header::after{background:none}
+  .nav{background:var(--paper);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .consent{background:var(--ink);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .nav-scrim{background:rgba(0,0,0,.45)}
+}
+
+/* --------------------------------------------------------------------------
+   Erhöhter Kontrast — nahezu deckende Flächen mit klar gezeichneter Kante.
+   -------------------------------------------------------------------------- */
+@media (prefers-contrast:more){
+  :root{--line:#8e8e93;--line-soft:rgba(0,0,0,.28);--ink-soft:#3a3a3c;--ink-mute:#4a4a4f}
+  .site-header{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid var(--line)}
+  .site-header::after{background:none}
+  .nav{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;border:1px solid var(--line)}
+  .consent{background:#000;backdrop-filter:none;-webkit-backdrop-filter:none;border:1px solid #fff}
+  .btn-line{border-color:var(--ink)}
+  .pill{border:1px solid var(--amber-deep)}
+}
+
 /* Utilities */
 .center{text-align:center}
 .mt-s{margin-top:1rem}.mt-m{margin-top:2rem}.mt-l{margin-top:3rem}
@@ -485,7 +654,9 @@ figure{margin:0}
 /* ==========================================================================
    DSGVO Consent-Banner
    ========================================================================== */
-.consent{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:300;max-width:540px;margin-inline:auto;background:var(--ink);color:var(--on-dark);border-radius:12px;padding:1.1rem 1.3rem;box-shadow:0 18px 50px rgba(0,0,0,.32);display:flex;flex-direction:column;gap:.9rem}
+/* Schwebendes Blatt: dunkles Material mit Blur statt undurchsichtiger Kachel —
+   große Fläche liest sich „dicker" (stärkerer Blur, tieferer Schatten). */
+.consent{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:300;max-width:540px;margin-inline:auto;background:rgba(29,29,31,.82);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);color:var(--on-dark);border-radius:14px;border-top:1px solid rgba(255,255,255,.14);padding:1.1rem 1.3rem;box-shadow:0 26px 60px -14px rgba(0,0,0,.5),0 4px 14px rgba(0,0,0,.2);display:flex;flex-direction:column;gap:.9rem}
 .consent p{margin:0;max-width:none;font-size:.86rem;line-height:1.5;color:var(--on-dark-soft)}
 .consent a{color:var(--accent-on-dark);text-decoration:underline}
 .consent-actions{display:flex;gap:.6rem;justify-content:flex-end}
@@ -541,7 +712,7 @@ figure{margin:0}
   .shot-img{aspect-ratio:16/10}
 
   /* Footer: Links mit mehr Tap-Abstand */
-  .footer-col li{margin-bottom:.7rem}
+  .footer-col a{padding-block:.45rem}
   .footer-bottom{flex-direction:column;align-items:flex-start;gap:.8rem}
 
   /* Store-Badges nebeneinander, gleichmäßig */

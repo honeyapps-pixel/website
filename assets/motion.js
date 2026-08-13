@@ -23,6 +23,123 @@
   var hasST = hasGSAP && typeof window.ScrollTrigger !== 'undefined';
   if (hasST) gsap.registerPlugin(ScrollTrigger);
 
+  /* Brücke zwischen Menü und Header: solange das Blatt offen ist, braucht es
+     tragende Chrome darunter. (Oben deklariert — die Zuweisung darf nicht
+     nach den init-Aufrufen stehen, sonst überschreibt sie sie wieder.) */
+  var headerSync = null;
+  var navOpen = false;
+
+  /* ======================================================================
+     SPRING — für alles, was der Nutzer anfassen kann.
+     Eine Animation mit fester Dauer kann auf neue Eingaben nicht reagieren;
+     eine Feder schon: ein neues Ziel ändert nur das Ziel, die Bewegung läuft
+     ohne Sprung weiter. Sie startet immer beim AKTUELLEN Bildschirmwert und
+     nimmt die Geschwindigkeit mit — deshalb lässt sie sich jederzeit greifen
+     und umkehren.
+
+     Parametrisiert wie bei Apple, nicht über Masse/Steifigkeit:
+       damping  1.0 = kritisch gedämpft, kein Überschwingen (Standard)
+                ~0.8 = leichter Nachschwinger — NUR wenn die Geste selbst
+                       Schwung hatte (Wischen, Werfen)
+       response = wie schnell der Wert das Ziel erreicht (Sekunden).
+                  Das ist KEINE Dauer: die Einschwingzeit ergibt sich.
+     ====================================================================== */
+  var springs = [];
+  var springRAF = null;
+  var springLast = 0;
+
+  function springTick(now) {
+    var dt = Math.min((now - springLast) / 1000, 0.064); // Tab-Wechsel abfangen
+    springLast = now;
+    for (var i = springs.length - 1; i >= 0; i--) {
+      var s = springs[i];
+      // Feste Substeps: sonst wird die Integration bei Frame-Drops instabil.
+      var steps = Math.max(1, Math.ceil(dt / (1 / 240)));
+      var h = dt / steps;
+      for (var n = 0; n < steps; n++) {
+        var a = -s.k * (s.x - s.target) - s.c * s.v;
+        s.v += a * h;
+        s.x += s.v * h;
+      }
+      s.onUpdate(s.x, s.v);
+      if (Math.abs(s.x - s.target) < s.eps && Math.abs(s.v) < s.eps * 12) {
+        s.x = s.target; s.v = 0;
+        s.onUpdate(s.x, s.v);
+        springs.splice(i, 1);
+        if (s.onRest) s.onRest();
+      }
+    }
+    springRAF = springs.length ? requestAnimationFrame(springTick) : null;
+  }
+
+  function startSpringLoop() {
+    if (springRAF) return;
+    springLast = performance.now();
+    springRAF = requestAnimationFrame(springTick);
+  }
+
+  function createSpring(opts) {
+    var s = {
+      x: opts.from || 0,
+      v: opts.velocity || 0,
+      target: opts.from || 0,
+      eps: opts.eps || 0.25,
+      onUpdate: opts.onUpdate || function () {},
+      onRest: opts.onRest || null,
+      k: 0, c: 0
+    };
+    s.tune = function (damping, response) {
+      var omega = (2 * Math.PI) / response;
+      s.k = omega * omega;          // Steifigkeit
+      s.c = 2 * damping * omega;    // Dämpfung
+    };
+    s.tune(opts.damping == null ? 1.0 : opts.damping, opts.response || 0.4);
+
+    return {
+      /* Neues Ziel. Die vorhandene Geschwindigkeit wird MITGENOMMEN — genau das
+         verhindert die „Wand", wenn eine Geste mitten in der Bewegung umkehrt. */
+      to: function (target, cfg) {
+        cfg = cfg || {};
+        if (cfg.damping != null || cfg.response != null)
+          s.tune(cfg.damping == null ? 1.0 : cfg.damping, cfg.response || 0.4);
+        if (cfg.velocity != null) s.v = cfg.velocity;
+        s.target = target;
+        if (springs.indexOf(s) === -1) springs.push(s);
+        startSpringLoop();
+      },
+      /* Während einer Geste: Position direkt setzen, Feder pausiert. */
+      set: function (x, v) {
+        var i = springs.indexOf(s);
+        if (i !== -1) springs.splice(i, 1);
+        s.x = x; s.v = v || 0; s.target = x;
+        s.onUpdate(s.x, s.v);
+      },
+      value: function () { return s.x; },
+      velocity: function () { return s.v; },
+      stop: function () {
+        var i = springs.indexOf(s);
+        if (i !== -1) springs.splice(i, 1);
+        s.v = 0;
+      }
+    };
+  }
+
+  /* Ruhepunkt einer Wurfbewegung — dieselbe exponentielle Abbremsung wie beim
+     Scrollen. Wichtig: NICHT zum nächsten Rastpunkt ab dem Loslass-Punkt
+     springen, sondern dorthin, wo die Geste HIN WOLLTE. */
+  function project(velocity, decelerationRate) {
+    var d = decelerationRate || 0.998;
+    return (velocity / 1000) * d / (1 - d);
+  }
+
+  /* Weiche Grenze: je weiter darüber hinaus, desto weniger folgt das Element.
+     Ein harter Stopp liest sich als „eingefroren", nachgebender Widerstand als
+     „reagiert — hier ist nur nichts mehr". */
+  function rubberband(overshoot, dimension, constant) {
+    var c = constant || 0.55;
+    return (overshoot * dimension * c) / (dimension + c * Math.abs(overshoot));
+  }
+
   /* ---------- Smooth Scroll (Lenis) ---------- */
   var lenis = null;
   if (!reduce && typeof window.Lenis !== 'undefined') {
@@ -58,6 +175,7 @@
     revealAll();
     initHeaderState();
     initMobileMenu();
+    initPressFeedback();
     return;
   }
   // Ab hier Effekte — bei jedem Fehler nichts verschlucken, sondern sichtbar schalten.
@@ -161,24 +279,248 @@
 
   initHeaderState();
   initMobileMenu();
+  initPressFeedback();
 
-  /* ---------- Header: Hintergrund ab Scroll ---------- */
+  /* ---------- Header: Material fährt STUFENLOS mit dem Scroll hoch ----------
+   * Ein Umschalten bei 40 px ist ein Ereignis; ein durchgehender Verlauf ist
+   * Rückmeldung. `--chrome` (0→1) steuert Deckkraft, Blur und Scroll-Edge. */
   function initHeaderState() {
     var header = document.querySelector('[data-header]') || document.querySelector('header');
     if (!header) return;
-    function upd() { header.classList.toggle('scrolled', window.scrollY > 40); }
-    upd(); window.addEventListener('scroll', upd, { passive: true });
+    var RAMP = 80, ticking = false, last = -1;
+    function apply() {
+      ticking = false;
+      var c = Math.min(1, Math.max(0, window.scrollY / RAMP));
+      if (navOpen) c = 1; // offenes Menü braucht tragende Chrome darunter
+      if (Math.abs(c - last) < 0.005) return;
+      last = c;
+      header.style.setProperty('--chrome', c.toFixed(3));
+      header.classList.toggle('scrolled', c > 0.5);
+    }
+    headerSync = apply;
+    apply();
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    }, { passive: true });
   }
 
-  /* ---------- Mobiles Menü ---------- */
+  /* ---------- Mobiles Menü: federnd, greifbar, jederzeit umkehrbar ----------
+   * Das Blatt hängt an einer Feder statt an einer CSS-Transition. Dadurch:
+   *   · ein Tap mitten in der Bewegung kehrt sie um, ohne zu springen (§3)
+   *   · es lässt sich mit dem Finger 1:1 nach oben wegwischen (§2)
+   *   · beim Loslassen zählt, wohin die Geste WOLLTE, nicht wo sie endete (§6)
+   *   · die Wurfgeschwindigkeit geht nahtlos in die Feder über (§5)
+   *   · über die Öffnungsposition hinaus federt es weich zurück (§9)
+   */
   function initMobileMenu() {
-    var t = document.querySelector('[data-nav-toggle]'); var n = document.querySelector('[data-nav]');
-    if (!t || !n) return;
-    t.addEventListener('click', function () {
-      var open = n.classList.toggle('open');
-      t.setAttribute('aria-expanded', open ? 'true' : 'false');
-      t.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    var toggle = document.querySelector('[data-nav-toggle]');
+    var nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    var mq = window.matchMedia('(max-width:920px)');
+
+    function syncToggle(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    }
+
+    /* Reduzierte Bewegung: keine Feder, keine Geste — nur die Überblendung,
+       die das Stylesheet ohnehin liefert. Ein sanfteres Äquivalent, nicht
+       „gar kein Feedback". */
+    if (reduce) {
+      toggle.addEventListener('click', function () { syncToggle(nav.classList.toggle('open')); });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); syncToggle(false); });
+      });
+      return;
+    }
+
+    document.documentElement.classList.add('js-nav-spring');
+
+    /* Der Scrim gehört an den Body, NICHT neben die Nav: die liegt im Header,
+       und dessen Stapelkontext würde den Scrim über den Menü-Button legen —
+       dann ließe sich das Menü nicht mehr schließen. */
+    var scrim = document.createElement('div');
+    scrim.className = 'nav-scrim';
+    scrim.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(scrim);
+
+    var grip = document.createElement('span');
+    grip.className = 'nav-grip';
+    grip.setAttribute('aria-hidden', 'true');
+    nav.insertBefore(grip, nav.firstChild);
+
+    var H = 1, handoffVelocity = null, dragging = false;
+
+    function measure() { H = Math.max(1, nav.offsetHeight); }
+
+    function render(y) {
+      var p = Math.min(1, Math.max(0, 1 + y / H)); // 1 = offen, 0 = zu
+      nav.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0)';
+      nav.style.opacity = p.toFixed(3);
+      nav.style.pointerEvents = p > 0.02 ? 'auto' : 'none';
+      scrim.style.opacity = p.toFixed(3);
+      scrim.classList.toggle('is-active', p > 0.02);
+      navOpen = p > 0.5;
+      if (headerSync) headerSync();
+    }
+
+    var sheet = createSpring({
+      from: -1, damping: 1.0, response: 0.34,
+      onUpdate: function (y) { render(y); },
+      onRest: function () { nav.style.willChange = ''; }
     });
-    n.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { n.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); t.setAttribute('aria-label', 'Menü öffnen'); }); });
+
+    function settle(open, velocity) {
+      nav.style.willChange = 'transform,opacity';
+      sheet.to(open ? 0 : -H, {
+        velocity: velocity,
+        // Nachschwingen nur, wenn die Geste selbst Schwung hatte.
+        damping: velocity ? 0.82 : 1.0,
+        response: velocity ? 0.3 : 0.34
+      });
+    }
+
+    /* Die `.open`-Klasse bleibt der Zustand — so wirken auch Escape und
+       Link-Klicks aus main.js weiter, ohne dass sie die Feder kennen müssen. */
+    new MutationObserver(function () {
+      if (dragging || !mq.matches) return;
+      var open = nav.classList.contains('open');
+      syncToggle(open);
+      if (open) measure();
+      settle(open, handoffVelocity);
+      handoffVelocity = null;
+    }).observe(nav, { attributes: true, attributeFilter: ['class'] });
+
+    function setOpen(open, velocity) {
+      handoffVelocity = velocity || null;
+      if (nav.classList.contains('open') === open) {
+        // Zustand stimmt schon — die Feder trotzdem neu ausrichten (Umkehr).
+        settle(open, velocity);
+        handoffVelocity = null;
+      } else {
+        nav.classList.toggle('open', open);
+      }
+    }
+
+    toggle.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+    scrim.addEventListener('click', function () { setOpen(false); });
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+
+    /* ---- Wischen: 1:1 am Finger, Umkehr jederzeit ---- */
+    var startY = 0, startPos = 0, captured = false, samples = [];
+    var THRESHOLD = 10; // erst ab ~10 px auf eine Richtung festlegen
+
+    nav.addEventListener('pointerdown', function (e) {
+      if (!mq.matches || e.pointerType === 'mouse') return;
+      if (nav.offsetHeight > window.innerHeight - 68) return; // dann lieber scrollen lassen
+      measure();
+      dragging = true; captured = false;
+      startY = e.clientY;
+      startPos = sheet.value();
+      samples = [{ y: e.clientY, t: performance.now() }];
+      sheet.stop();
+    });
+
+    nav.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dy = e.clientY - startY;
+      if (!captured) {
+        if (Math.abs(dy) < THRESHOLD) return;
+        captured = true;
+        nav.setPointerCapture(e.pointerId);
+        nav.style.willChange = 'transform,opacity';
+      }
+      var y = startPos + dy;
+      if (y > 0) y = rubberband(y, H); // über „offen" hinaus: weicher Widerstand
+      if (y < -H) y = -H - rubberband(-(y + H), H);
+      samples.push({ y: e.clientY, t: performance.now() });
+      if (samples.length > 6) samples.shift();
+      sheet.set(y, 0);
+      e.preventDefault();
+    });
+
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      if (!captured) return;
+      captured = false;
+      if (nav.hasPointerCapture && nav.hasPointerCapture(e.pointerId)) nav.releasePointerCapture(e.pointerId);
+
+      // Geschwindigkeit aus den letzten Samples, nicht aus dem letzten Punkt
+      var v = 0, first = samples[0], lastS = samples[samples.length - 1];
+      if (first && lastS && lastS.t > first.t) v = (lastS.y - first.y) / ((lastS.t - first.t) / 1000);
+
+      var pos = sheet.value();
+      var projected = pos + project(v);           // wohin die Geste wollte
+      var open = projected > -H / 2;
+      if (Math.abs(v) > 320) open = v > 0;        // klarer Wurf schlägt Position
+      setOpen(open, v);
+    }
+    nav.addEventListener('pointerup', endDrag);
+    nav.addEventListener('pointercancel', endDrag);
+
+    /* Breitenwechsel: auf Desktop alle Inline-Werte zurückgeben. */
+    function syncViewport() {
+      if (mq.matches) {
+        measure();
+        // `set` statt `render`: die Feder muss den Wert kennen, der WIRKLICH auf
+        // dem Schirm steht. Rendert man nur, glaubt sie weiter ihren alten Wert
+        // und springt beim nächsten Ziel, statt von dort loszulaufen.
+        sheet.set(nav.classList.contains('open') ? 0 : -H, 0);
+      } else {
+        sheet.stop();
+        nav.style.cssText = '';
+        scrim.style.cssText = '';
+        scrim.classList.remove('is-active');
+        nav.classList.remove('open');
+        navOpen = false;
+        syncToggle(false);
+        if (headerSync) headerSync();
+      }
+    }
+    if (mq.addEventListener) mq.addEventListener('change', syncViewport);
+    window.addEventListener('resize', function () { if (mq.matches && !nav.classList.contains('open')) syncViewport(); }, { passive: true });
+    syncViewport();
+  }
+
+  /* ---------- Press-Feedback beim DRÜCKEN, nicht beim Loslassen ----------
+   * Sichtbar ab pointerdown; zieht der Finger weg, geht es zurück und kommt
+   * wieder, wenn er zurückkehrt (Abbrechen durch Wegziehen, §10). */
+  function initPressFeedback() {
+    var SEL = '.btn,.app-card,.card,.pillar,.shot,.store-badge,.vit,.nav-toggle,' +
+              '.arrow-link,.nav a,.footer-col a,.footer-bottom-links a';
+    var el = null, pid = null;
+
+    function within(e) {
+      if (!el) return false;
+      var r = el.getBoundingClientRect(), m = 10; // ~10 px Hysterese
+      return e.clientX >= r.left - m && e.clientX <= r.right + m &&
+             e.clientY >= r.top - m && e.clientY <= r.bottom + m;
+    }
+    function release() {
+      if (el) el.classList.remove('is-pressed');
+      el = null; pid = null;
+    }
+
+    document.addEventListener('pointerdown', function (e) {
+      if (e.button != null && e.button !== 0) return;
+      var hit = e.target.closest && e.target.closest(SEL);
+      if (!hit) return;
+      release();
+      el = hit; pid = e.pointerId;
+      el.classList.add('is-pressed');
+    }, { passive: true });
+
+    document.addEventListener('pointermove', function (e) {
+      if (!el || e.pointerId !== pid) return;
+      el.classList.toggle('is-pressed', within(e));
+    }, { passive: true });
+
+    document.addEventListener('pointerup', release, { passive: true });
+    document.addEventListener('pointercancel', release, { passive: true });
+    window.addEventListener('blur', release);
   }
 })();
