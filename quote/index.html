@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote – Bundesliga-Quoten mit Spielgeld | HoneyApps</title>
+    <meta name="description" content="Quote ist ein Wettspiel mit Spielgeld rund um Bundesliga und 2. Bundesliga: 23 Wettarten, Kombischein, eigenes Quotenmodell, Ligen mit Freunden. Ohne Kauf, ohne Umtausch, ohne Auszahlung.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="/quote/icon.png">
+    <link rel="apple-touch-icon" href="/quote/icon.png">
+    <meta property="og:title" content="Quote – Bundesliga-Quoten mit Spielgeld">
+    <meta property="og:description" content="23 Wettarten, Kombischein, eigenes Quotenmodell, Ligen mit Freunden. Reines Spielgeld — ohne Kauf, ohne Umtausch, ohne Auszahlung.">
+    <meta property="og:image" content="https://honeyapps.de/quote/icon.png">
+    <meta property="og:url" content="https://honeyapps.de/quote">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="/assets/consent.js"></script>
+
+    <style>
+        :root { --quote: #3C6343; --quote-dark: #2E4E34; --quote-soft: #D3ECDB; }
+        .qt-hero {
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(180deg, #EDF3E7 0%, #ffffff 100%);
+        }
+        .qt-app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 27px;
+            margin: 0 auto 32px;
+            display: block;
+            box-shadow: 0 12px 40px rgba(60, 99, 67, 0.32), 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .qt-hero .badge {
+            display: inline-block;
+            background: var(--quote-soft);
+            color: var(--quote-dark);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .qt-hero h1 {
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .qt-accent {
+            background: linear-gradient(90deg, #3C6343 0%, #74A87B 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .qt-hero p.lead {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 32px;
+        }
+        .store-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+        .store-badge {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background: #1d1d1f; color: #fff; padding: 0.75rem 1.5rem; border-radius: 12px;
+            text-decoration: none; font-weight: 500; transition: transform 0.2s, background 0.2s;
+        }
+        .store-badge.is-soon { opacity: 0.55; cursor: default; }
+        .store-badge.is-soon:hover { transform: none; background: #1d1d1f; }
+        .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
+        .store-badge-text strong { font-size: 1rem; font-weight: 600; }
+
+        .qt-playmoney {
+            max-width: 760px; margin: 0 auto; padding: 0 20px 40px;
+            text-align: center; color: var(--text-secondary); font-size: 14px;
+        }
+        .qt-playmoney strong { color: var(--text-primary); }
+
+        .qt-features { padding: 100px 20px; max-width: var(--max-width-wide); margin: 0 auto; }
+        .qt-features h2 { text-align: center; font-size: 42px; margin-bottom: 16px; }
+        .qt-features .sub { text-align: center; color: var(--text-secondary); max-width: 640px; margin: 0 auto 60px; font-size: 18px; }
+        .qt-feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .qt-feature-card { background: var(--bg-secondary); padding: 32px; border-radius: var(--radius); }
+        .qt-feature-card .icon {
+            width: 48px; height: 48px; background: var(--quote); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 16px;
+            font-size: 22px;
+        }
+        .qt-feature-card h3 { font-size: 20px; margin-bottom: 8px; }
+        .qt-feature-card p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; }
+
+        .qt-cta {
+            text-align: center; padding: 100px 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #EDF3E7 100%);
+        }
+        .qt-cta h2 { font-size: 36px; margin-bottom: 16px; }
+        .qt-cta p { color: var(--text-secondary); font-size: 18px; max-width: 560px; margin: 0 auto 32px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="#features">Funktionen</a></li>
+            <li><a href="/quote/support">Support</a></li>
+            <li><a href="mailto:info@honeyapps.de">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="qt-hero">
+    <img src="/quote/icon.png" alt="Quote App-Icon" class="qt-app-icon">
+    <div class="badge">17+ · Simuliertes Glücksspiel · reines Spielgeld</div>
+    <h1>Bundesliga-Quoten<br>mit <span class="qt-accent">Spielgeld</span></h1>
+    <p class="lead">Setze Punkte auf Bundesliga und 2. Bundesliga — 23 Wettarten, Kombischein, ein eigenes Quotenmodell. Ohne Kauf, ohne Umtausch, ohne Auszahlung.</p>
+    <div class="store-badges">
+        <span class="store-badge is-soon" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.55-1.71-2.51-3.02-7.11-1.26-10.21.87-1.54 2.43-2.52 4.12-2.54 1.28-.02 2.5.87 3.28.87.78 0 2.25-1.07 3.79-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.85M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span class="store-badge-text"><small>In Vorbereitung</small><strong>App Store</strong></span>
+        </span>
+        <span class="store-badge is-soon" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35l13.69 9.85-4.28 4.28-10.25-1.78zm14.06-8.15l3.35 1.9c.5.29.83.83.83 1.44s-.33 1.15-.83 1.44l-3.35 1.9-4.3-4.3 4.3-4.38z"/></svg>
+            <span class="store-badge-text"><small>In Vorbereitung</small><strong>Google Play</strong></span>
+        </span>
+    </div>
+</section>
+
+<p class="qt-playmoney"><strong>Reines Spielgeld:</strong> Punkte haben keinen Geldwert. Es gibt keinen Kauf, keinen Umtausch und keine Auszahlung — Details in den <a href="/quote/agb" style="color: var(--quote);">Nutzungsbedingungen</a>.</p>
+
+<section id="features" class="qt-features">
+    <h2>Was drin ist</h2>
+    <p class="sub">Ein eigenes Quotenmodell statt eines Buchmachers, und ein Wettspiel, das nie um echtes Geld geht.</p>
+    <div class="qt-feature-grid">
+        <div class="qt-feature-card">
+            <div class="icon">⚽</div>
+            <h3>23 Wettarten je Spiel</h3>
+            <p>Spielausgang, Doppelte Chance, Über/Unter, Handicap, Halbzeit/Endstand und mehr — jede Wettart mit Erklärung und Beispiel.</p>
+        </div>
+        <div class="qt-feature-card">
+            <div class="icon">🎟️</div>
+            <h3>Einzelwette oder Kombischein</h3>
+            <p>Freier Einsatz, eigene Höchstquote und Höchstbonus je Spieltag.</p>
+        </div>
+        <div class="qt-feature-card">
+            <div class="icon">🏆</div>
+            <h3>Zwei Wettbewerbe</h3>
+            <p>Bundesliga und 2. Bundesliga, mit eigenem Guthaben, eigener Rangliste und eigenem Vereinswappen.</p>
+        </div>
+        <div class="qt-feature-card">
+            <div class="icon">💱</div>
+            <h3>Vorzeitig verkaufen</h3>
+            <p>Ein offener Schein lässt sich vor Spielende verkaufen — zum aktuellen Marktwert deiner noch offenen Spiele.</p>
+        </div>
+        <div class="qt-feature-card">
+            <div class="icon">👥</div>
+            <h3>Ligen mit Freunden</h3>
+            <p>Eigene Liga gründen oder per Link beitreten. Rangliste nach Guthaben, dazu eine weltweite Rangliste.</p>
+        </div>
+        <div class="qt-feature-card">
+            <div class="icon">📊</div>
+            <h3>Vereinstabelle &amp; Spieldetail</h3>
+            <p>Die echte Tabelle, Form der letzten fünf Spiele, und zu jedem Spiel Siegwahrscheinlichkeit und alle Wettarten auf einen Blick.</p>
+        </div>
+        <div class="qt-feature-card">
+            <div class="icon">📅</div>
+            <h3>Täglicher Check-in</h3>
+            <p>Ein Punkt pro Tag und Wettbewerb, ab einer Serie von 7 Tagen drei. Dazu ein Bonus nach jedem abgerechneten Spieltag.</p>
+        </div>
+        <div class="qt-feature-card">
+            <div class="icon">📖</div>
+            <h3>Journal statt Blackbox</h3>
+            <p>Jede Buchung ist nachlesbar. Wird ein Ergebnis nachträglich berichtigt, rechnet die App nach — und sagt es dir.</p>
+        </div>
+    </div>
+</section>
+
+<section class="qt-cta">
+    <h2>Fragen zu Quote?</h2>
+    <p>Schreib uns oder wirf einen Blick in die FAQ.</p>
+    <a href="/quote/support" class="btn btn-solid">Support &amp; FAQ ansehen</a>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo">honey<span>apps</span></a>
+                <p>Hochwertige App-Entwicklung mit Liebe zum Detail.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quote</h4>
+                <ul>
+                    <li><a href="#features">Funktionen</a></li>
+                    <li><a href="/quote/support">Support &amp; FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/impressum.html">Impressum</a></li>
+                    <li><a href="/quote/privacy">Datenschutz</a></li>
+                    <li><a href="/quote/agb">AGB / EULA</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:info@honeyapps.de">info@honeyapps.de</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lukas Schachtmaier &amp; Johann Warkentin GbR. Alle Rechte vorbehalten.</p>
+            <div class="footer-bottom-links">
+                <a href="/quote/privacy">Datenschutz</a>
+                <a href="/quote/agb">AGB</a>
+                <a href="/impressum.html">Impressum</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
