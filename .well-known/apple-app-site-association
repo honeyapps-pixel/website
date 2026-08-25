@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["J4HRVGR6G9.app.tippmaster"],
+        "components": [
+          {
+            "/": "/quote/j/*",
+            "comment": "Einladungslinks in eine Gruppe"
+          }
+        ]
+      }
+    ]
+  }
+}
