@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.tippduell",
+      "sha256_cert_fingerprints": [
+        "37:5F:28:FA:F0:A3:4D:09:A7:52:B9:F6:1D:31:75:D2:FE:54:FD:47:40:FF:4A:67:C3:90:FC:3E:4D:5B:15:2B"
+      ]
+    }
+  }
+]

@@ -28,17 +28,103 @@
   </div>
 </header>
 
+<!--
+  ═══════════ Warum die Einladung auf der 404-Seite wohnt ═══════════
+
+  GitHub Pages kennt keine Platzhalterpfade. `/quote/j/ABCD1234` ist damit
+  keine Datei und kann keine sein — aber Pages liefert fuer JEDEN unbekannten
+  Pfad diese Seite aus, und `location.pathname` traegt den Code noch.
+
+  Der HTTP-Status bleibt 404. Fuer den Menschen davor ist das unsichtbar, und
+  fuer Suchmaschinen steht `noindex` ohnehin oben. Der saubere Weg waere eine
+  echte Route (Vercel, `vercel.json` liegt im Repo) — die kostet einen
+  Domainumzug und ist genau dann faellig, wenn hier mehr steht als das hier.
+
+  WEN diese Seite ueberhaupt erreicht: auf iOS mit installierter App faengt
+  der Universal Link den Aufruf ab, das Web sieht ihn nie. Hier landen also
+  die ohne App, die auf Android (solange `assetlinks.json` fehlt oder die
+  Pruefung noch nicht durch ist) und alle am Rechner.
+-->
 <main class="hero" style="text-align:center">
   <div class="wrap">
-    <p class="eyebrow" style="justify-content:center">Fehler 404</p>
-    <h1 style="font-size:clamp(2.6rem,8vw,5rem)">Diese Seite gibt es nicht.</h1>
-    <p class="lead" style="margin-inline:auto">Der Link ist vielleicht veraltet oder vertippt. Kein Problem — hier geht es zurück.</p>
-    <div class="hero-actions" style="justify-content:center">
-      <a href="/" class="btn btn-solid">Zur Startseite<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a href="mailto:info@honeyapps.de" class="btn btn-line">Kontakt</a>
+
+    <div data-einladung hidden>
+      <p class="eyebrow" style="justify-content:center">Quote</p>
+      <h1 style="font-size:clamp(2.2rem,6vw,3.6rem)">Du wurdest zu einer Gruppe eingeladen.</h1>
+      <p class="lead" style="margin-inline:auto">Öffne die Einladung in der App — oder lade sie und gib den Code ein.</p>
+
+      <p style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(2rem,7vw,3rem);letter-spacing:.14em;margin:2rem 0 .4rem"><span data-code></span></p>
+      <p style="opacity:.65;margin-top:0">Dein Einladungscode</p>
+
+      <div class="hero-actions" style="justify-content:center;flex-wrap:wrap">
+        <!--
+          Das eigene Schema traegt aus JEDEM Browser und ist damit die
+          Rueckfallebene fuer genau die Luecke, die Android bis zur
+          verifizierten `assetlinks.json` hat. Ohne App passiert nichts
+          Sichtbares — deshalb steht der Store gleich daneben und nicht
+          dahinter.
+        -->
+        <a href="#" data-app class="btn btn-solid">In der App öffnen<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="https://apps.apple.com/de/app/id6802586174" data-store-ios class="btn btn-line">Für iPhone laden</a>
+        <a href="https://play.google.com/store/apps/details?id=app.tippduell" data-store-android class="btn btn-line">Für Android laden</a>
+      </div>
+
+      <!--
+        Es gibt KEIN verzoegertes Deep Linking. Nach dem Sprung in den Store
+        ist der Link fort, und was bleibt, ist der Code auf diesem Bildschirm.
+        Der Satz sagt das, bevor jemand danach sucht.
+      -->
+      <p style="opacity:.65;max-width:34rem;margin:1.6rem auto 0">Nach der Installation den Code oben in der App unter „Beitreten" eingeben — der Link gilt danach nicht mehr.</p>
     </div>
+
+    <div data-fehler>
+      <p class="eyebrow" style="justify-content:center">Fehler 404</p>
+      <h1 style="font-size:clamp(2.6rem,8vw,5rem)">Diese Seite gibt es nicht.</h1>
+      <p class="lead" style="margin-inline:auto">Der Link ist vielleicht veraltet oder vertippt. Kein Problem — hier geht es zurück.</p>
+      <div class="hero-actions" style="justify-content:center">
+        <a href="/" class="btn btn-solid">Zur Startseite<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="mailto:info@honeyapps.de" class="btn btn-line">Kontakt</a>
+      </div>
+    </div>
+
   </div>
 </main>
+
+<script>
+/*
+  Der Code wird GENAUSO gelesen wie in der App (`normalisiereCode` in
+  src/features/leagues/pendingInvite.ts): Grossbuchstaben, O wird 0, I und L
+  werden 1. Das Alphabet der Codes hat diese vier Zeichen nicht — wer sie
+  abgetippt oder ein Programm sie „korrigiert" hat, meinte die Ziffern.
+
+  Weicht diese Zeile von der App ab, zeigt die Seite einen anderen Code an,
+  als der Absender gemeint hat.
+*/
+(function () {
+  var treffer = location.pathname.match(/^\/quote\/j\/([0-9A-Za-z]{8})\/?$/);
+  if (!treffer) return;
+
+  var code = treffer[1].toUpperCase().replace(/O/g, '0').replace(/[IL]/g, '1');
+
+  var einladung = document.querySelector('[data-einladung]');
+  var fehler = document.querySelector('[data-fehler]');
+  if (!einladung || !fehler) return;
+
+  document.querySelector('[data-code]').textContent = code.slice(0, 4) + ' ' + code.slice(4);
+  document.querySelector('[data-app]').setAttribute('href', 'quote://j/' + code);
+
+  // Der passende Store zuerst. Der andere bleibt stehen — geteilt wird ueber
+  // WhatsApp, und dort oeffnet auch mal jemand den Link am falschen Geraet.
+  if (/Android/i.test(navigator.userAgent)) {
+    var ios = document.querySelector('[data-store-ios]');
+    ios.parentNode.appendChild(ios);
+  }
+
+  fehler.hidden = true;
+  einladung.hidden = false;
+  document.title = 'Einladung zu einer Quote-Gruppe';
+})();
+</script>
 
 <footer class="site-footer">
   <div class="wrap">
