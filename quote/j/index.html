@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga-Einladung – Quote</title>
+    <meta name="description" content="Du wurdest zu einer Quote-Liga eingeladen. Quote ist ein Wettspiel mit reinem Spielgeld rund um Bundesliga, 2. Bundesliga, Premier League, DFB-Pokal, Champions League und Europa League.">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/png" href="/quote/icon.png">
+    <link rel="apple-touch-icon" href="/quote/icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Einladung zu einer Quote-Liga">
+    <meta property="og:description" content="Tritt einer Liga bei und wette mit reinem Spielgeld auf echte Spiele. Ohne Kauf, ohne Umtausch, ohne Auszahlung.">
+    <meta property="og:image" content="https://www.honeyapps.de/quote/icon.png">
+    <meta name="twitter:card" content="summary">
+
+    <style>
+        :root { --quote: #3C6343; --quote-dark: #2E4E34; --quote-soft: #D3ECDB; }
+
+        .inv { max-width: 560px; margin: 0 auto; padding: 100px 20px 60px; text-align: center; }
+        .inv-icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 24px; }
+        .inv h1 { font-size: clamp(28px, 5vw, 40px); letter-spacing: -0.02em; margin-bottom: 12px; }
+        .inv .lead { color: var(--text-secondary); font-size: 17px; line-height: 1.6; margin-bottom: 32px; }
+
+        /* Der Code ist der eigentliche Inhalt dieser Seite — siehe Kommentar unten. */
+        .inv-code-box { background: var(--quote-soft); border-radius: 16px; padding: 24px; margin-bottom: 12px; }
+        .inv-code-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--quote-dark); margin-bottom: 10px; }
+        .inv-code {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+            font-size: clamp(28px, 7vw, 40px); font-weight: 700; letter-spacing: 0.12em;
+            color: var(--quote-dark); word-break: break-all;
+        }
+        .inv-copy {
+            margin-top: 14px; border: 1px solid var(--quote); background: transparent; color: var(--quote-dark);
+            border-radius: 8px; padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer;
+            font-family: inherit; transition: background 0.15s ease;
+        }
+        .inv-copy:hover { background: rgba(60, 99, 67, 0.08); }
+        .inv-hint { font-size: 14px; color: var(--text-tertiary); margin-bottom: 32px; }
+
+        .inv-steps { text-align: left; margin: 0 auto 32px; max-width: 420px; }
+        .inv-steps li { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 10px; }
+
+        .store-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .store-badge {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background: #1d1d1f; color: #fff; padding: 0.75rem 1.5rem; border-radius: 12px;
+            text-decoration: none; font-weight: 500; transition: transform 0.2s, background 0.2s;
+        }
+        .store-badge:hover { transform: translateY(-2px); }
+        .store-badge.is-soon { opacity: 0.55; cursor: default; }
+        .store-badge.is-soon:hover { transform: none; }
+        .store-badge svg { width: 22px; height: 22px; }
+        .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
+        .store-badge-text strong { font-size: 1rem; font-weight: 600; }
+
+        .inv-playmoney { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; margin-top: 28px; }
+        .inv-playmoney a { color: var(--quote); }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 32px; color: var(--quote); font-weight: 600; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="/quote">Quote</a></li>
+            <li><a href="/quote/support">Support</a></li>
+            <li><a href="mailto:info@honeyapps.de">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="inv">
+    <img src="/quote/icon.png" alt="Quote App-Icon" class="inv-icon" width="84" height="84">
+    <h1>Du bist eingeladen</h1>
+    <p class="lead">
+        Jemand möchte mit dir in einer <strong>Quote</strong>-Liga spielen —
+        Wetten auf echte Spiele, aber mit reinem Spielgeld.
+    </p>
+
+    <!--
+      Der Code steht hier gross und zum Kopieren, und das ist der Kern dieser
+      Seite.
+
+      Grund: es gibt KEIN verzoegertes Deep Linking. Wer die App noch nicht hat,
+      springt von hier in den Store — und danach ist der Link fort. Was bleibt,
+      muss der Code sein, den man von Hand eingibt. (Dieselbe Entscheidung wie
+      in `docs/DEEPLINKS.md` der App.)
+
+      Wer die App schon hat, sieht diese Seite ohnehin nie: iOS und Android
+      fangen den Link vorher ab und oeffnen die App direkt.
+    -->
+    <div class="inv-code-box" id="codeBox" hidden>
+        <div class="inv-code-label">Einladungscode</div>
+        <div class="inv-code" id="code">–</div>
+        <button class="inv-copy" id="copy" type="button">Code kopieren</button>
+    </div>
+    <p class="inv-hint" id="hint" hidden>Notier ihn dir — nach der Installation gibst du ihn in der App ein.</p>
+
+    <ol class="inv-steps">
+        <li><strong>Quote installieren</strong> — kostenlos, unten im Store.</li>
+        <li><strong>Konto anlegen</strong> und einen Wettbewerb wählen.</li>
+        <li>Unter <strong>Tabelle → Liga erstellen oder beitreten</strong> den Code eingeben.</li>
+    </ol>
+
+    <div class="store-badges">
+        <span class="store-badge is-soon" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.55-1.71-2.51-3.02-7.11-1.26-10.21.87-1.54 2.43-2.52 4.12-2.54 1.28-.02 2.5.87 3.28.87.78 0 2.25-1.07 3.79-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.85M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span class="store-badge-text"><small>In Vorbereitung</small><strong>App Store</strong></span>
+        </span>
+        <a class="store-badge" href="https://play.google.com/store/apps/details?id=app.tippduell"
+           rel="noopener" aria-label="Quote bei Google Play herunterladen">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35l13.69 9.85-4.28 4.28-10.25-1.78zm14.06-8.15l3.35 1.9c.5.29.83.83.83 1.44s-.33 1.15-.83 1.44l-3.35 1.9-4.3-4.3 4.3-4.38z"/></svg>
+            <span class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></span>
+        </a>
+    </div>
+
+    <p class="inv-playmoney">
+        <strong>Reines Spielgeld:</strong> Punkte haben keinen Geldwert. Es gibt keinen Kauf,
+        keinen Umtausch und keine Auszahlung. Ab 18 — Details in den
+        <a href="/quote/agb">Nutzungsbedingungen</a>.
+    </p>
+
+    <a href="/quote" class="back-link">← Mehr über Quote</a>
+</section>
+
+<script>
+(function () {
+    /*
+      Der Code kommt auf zwei Wegen herein:
+
+        /quote/j/ABCD1234        der geteilte Link. GitHub Pages hat dort keine
+                                 Datei und liefert `404.html`; die schickt uns
+                                 den Code als `?code=` herueber.
+        /quote/j/?code=ABCD1234  dieser Weg, und der Direktaufruf.
+
+      Gelesen wird grosszuegig — GENAU SO wie `normalisiereCode()` in der App
+      (`src/features/leagues/pendingInvite.ts`). Das Alphabet kennt kein I, L,
+      O und U; wer sie vom Bildschirm abliest, meinte die Ziffern. Weichen die
+      beiden Normalisierungen voneinander ab, zeigt diese Seite einen anderen
+      Code an, als die App danach annimmt.
+    */
+    function normalisiere(roh) {
+        var sauber = (roh || '')
+            .toUpperCase()
+            .replace(/[^0-9A-Z]/g, '')
+            .replace(/O/g, '0')
+            .replace(/[IL]/g, '1');
+        return sauber.length === 8 ? sauber : '';
+    }
+
+    var ausPfad = (location.pathname.match(/\/quote\/j\/([^/?#]+)/) || [])[1] || '';
+    var ausAbfrage = (location.search.match(/[?&]code=([^&]+)/) || [])[1] || '';
+    var code = normalisiere(decodeURIComponent(ausAbfrage) || decodeURIComponent(ausPfad));
+
+    if (code) {
+        document.getElementById('code').textContent = code;
+        document.getElementById('codeBox').hidden = false;
+        document.getElementById('hint').hidden = false;
+        document.title = 'Liga-Einladung ' + code + ' – Quote';
+    }
+
+    var knopf = document.getElementById('copy');
+    knopf.addEventListener('click', function () {
+        /*
+          `navigator.clipboard` gibt es nur in sicheren Kontexten und nicht in
+          jedem In-App-Browser (WhatsApp, Instagram). Der Rueckfall ueber ein
+          verstecktes Feld ist deshalb kein Zierrat: genau dort kommen diese
+          Links an.
+        */
+        var fertig = function () {
+            knopf.textContent = 'Kopiert ✓';
+            setTimeout(function () { knopf.textContent = 'Code kopieren'; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(fertig, ersatz);
+        } else {
+            ersatz();
+        }
+        function ersatz() {
+            var feld = document.createElement('textarea');
+            feld.value = code;
+            feld.setAttribute('readonly', '');
+            feld.style.position = 'fixed';
+            feld.style.opacity = '0';
+            document.body.appendChild(feld);
+            feld.select();
+            try { document.execCommand('copy'); fertig(); } catch (e) { /* dann eben von Hand */ }
+            document.body.removeChild(feld);
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

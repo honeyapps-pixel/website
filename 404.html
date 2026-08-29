@@ -2,6 +2,29 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<script>
+/*
+  Einladungslinks auffangen — VOR allem anderen im <head>.
+
+  GitHub Pages ist statisch und kennt keine Umschreibungen. Ein geteilter Link
+  `/quote/j/ABCD1234` hat dort keine Datei, also liefert Pages diese Seite aus
+  — und der Eingeladene las bis zum 29.8.2026 „Seite nicht gefunden". Das traf
+  genau die Gruppe, fuer die eine Einladung gedacht ist: Leute OHNE die App.
+  (Wer sie hat, sieht diese Seite nie — iOS und Android fangen den Link ab und
+  oeffnen die App.)
+
+  Deshalb wird der Code hier abgegriffen und an die echte Seite weitergereicht.
+  `location.replace` und nicht `href`: der Zurueck-Knopf soll nicht auf einen
+  404 zeigen, den es nur technisch gab.
+
+  Ganz oben im <head>, damit es geschieht, bevor Schriften, Stile und der
+  Einwilligungsdialog geladen werden — sonst blitzt „Seite nicht gefunden" auf.
+*/
+(function () {
+  var t = location.pathname.match(/^\/quote\/j\/([^/?#]+)\/?$/);
+  if (t) location.replace('/quote/j/?code=' + encodeURIComponent(t[1]));
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seite nicht gefunden – Honeyapps</title>
 <meta name="robots" content="noindex">
