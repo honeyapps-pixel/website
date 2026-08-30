@@ -7,6 +7,14 @@
   <url><loc>https://www.honeyapps.de/software/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.honeyapps.de/ueber-uns/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.honeyapps.de/route2bee/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/ratgeber</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/ratgeber/sonderfahrten-privat-absetzen</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/ratgeber/kilometergeld-2026-absetzen</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/ratgeber/fahrtenbuch-oder-1-prozent-regelung</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/ratgeber/fahrtenbuch-pflichtangaben-finanzamt</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/support</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.honeyapps.de/route2bee/agb</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://www.honeyapps.de/recibee/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.honeyapps.de/fantasy-manager/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.honeyapps.de/fantasy-manager/support</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
