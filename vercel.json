@@ -1,3 +1,9 @@
 {
-  "trailingSlash": true
+  "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/quote/j/:code",
+      "destination": "/quote/j/index.html"
+    }
+  ]
 }
