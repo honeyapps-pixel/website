@@ -452,6 +452,19 @@ figure{margin:0}
 .store-badge.is-soon{background:transparent;color:var(--ink-mute);border:1px dashed var(--line);cursor:default}
 .store-badge.is-soon:hover{transform:none}
 
+/* --------------------------------------------------------------------------
+   Sprungmarken — die Symbolleiste im Kopf von /apps
+   Jedes Symbol fuehrt zu seiner Zeile weiter unten. `scroll-margin-top` haelt
+   die Ueberschrift frei von der Kopfleiste; ohne sie klebt das Ziel darunter.
+   Sanftes Springen steht hier ohne Vorbehalt: der Reduced-Motion-Block weiter
+   unten setzt `scroll-behavior:auto !important` und gewinnt.
+   -------------------------------------------------------------------------- */
+html{scroll-behavior:smooth}
+#route2bee,#recibee,#fantasy-manager,#quote,#diveo{scroll-margin-top:96px}
+.app-jump{display:inline-flex;transition:transform .2s var(--ease),opacity .2s}
+.app-jump:hover{transform:translateY(-3px)}
+.app-jump:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:14px}
+
 /* ==========================================================================
    ABLAUF / SCHRITTE (01–04 horizontal)
    ========================================================================== */
