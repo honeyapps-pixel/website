@@ -4,12 +4,15 @@ Statische Website (GitHub Pages, Repo `honeyapps-pixel/website`, CNAME `www.hone
 Kein Build-Schritt. Reines HTML/CSS/JS + geteilte Motion-Engine (GSAP + Lenis).
 
 ## Aufbau / Seiten
-- `index.html` — Startseite (Studio-Positionierung, 5 Säulen, eigene Apps, Story, Praxis-Band, Kontakt)
+- `index.html` — Startseite (Studio-Positionierung, 4 Säulen, eigene Apps, Story, Praxis-Band, Kontakt)
 - `apps/` — Apps (Route2Bee, ReciBee = live; Diveo = Beta). **App-Inhalte & Store-Links unverändert übernommen.**
 - `webdesign/` — Webdesign (Demo-first-Modell + Showcase mit **einer** Demo: InTroTech, Sanierung/Gifhorn)
 - `hausautomatisierung/` — Hausautomatisierung & Visualisierung (neuer Geschäftsbereich)
 - `software/` — Smarte Software-Lösungen (inkl. Praxisbeispiel Sanierungs-Betriebssoftware, verlinkt auf `saas/`)
-- `saas/` — **Betriebssoftware als SaaS** (5. Säule): Module, Referenz ITT Dashboard, Ablauf, Preis auf Anfrage.
+- `saas/` — **Betriebssoftware als SaaS**: Module, Referenz ITT Dashboard, Ablauf, Preis auf Anfrage.
+  **Kein eigener Nav-Reiter** (Nutzer-Entscheidung): SaaS haengt unter *Software*. Einstiege sind die
+  SaaS-Sektion auf `software/` (`#saas`) und der Footer; die Seite selbst markiert *Software* als aktiven
+  Bereich. Auf der Startseite nennt die Software-Saeule die Mietsoftware mit — keine eigene Saeule.
   Die Produktansicht im Hero ist **in HTML/CSS gebaut** (`.ui-shell` in `main.css`), kein Screenshot — die
   Sidebar-Beschriftungen und Board-Spalten entsprechen 1:1 der echten Software (`Projekte/ITT-Dashboard`,
   `frontend/src/components/layout/Sidebar.tsx`). Bei Änderungen an den Modulen dort hier nachziehen.
@@ -20,7 +23,8 @@ Kein Build-Schritt. Reines HTML/CSS/JS + geteilte Motion-Engine (GSAP + Lenis).
 
 ## Design-System
 - `assets/main.css` — „Hell & präzise · Swiss": weißer Hintergrund, Apple-Grautöne (Originalpalette), EIN blauer Akzent (#0071e3), Hairline-Raster, 01–05-Index.
-  Neu für `saas/`: `.ui-shell` (Produktansicht), `.mods` (Modul-Raster), `.chain` (Phasen-Kette), `.price-box`.
+  Neu für `saas/`: `.ui-shell` (Produktansicht, auch auf `software/#saas`), `.mods` (Modul-Raster),
+  `.chain` (Phasen-Kette), `.price-box`.
 - `assets/main.js` — Mobil-Menü Scroll-Lock/Escape + CDN-Failsafe.
 - `assets/motion.js` — Kopie der geteilten Motion-Engine (`_engine/motion.js` aus dem Webdesgin-Repo).
 - Schriften: Switzer (Display + Body) über Fontshare-CDN.
