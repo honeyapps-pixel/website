@@ -679,6 +679,100 @@ html{scroll-behavior:smooth}
 @media(max-width:480px){.consent-actions{justify-content:stretch}.consent .btn{flex:1;justify-content:center}}
 
 /* ==========================================================================
+   SaaS-Seite — Produktansicht, Modul-Raster, Phasen-Kette
+   Die Produktansicht ist in HTML/CSS gebaut (kein Screenshot, kein Stock):
+   Sidebar-Beschriftungen und Board-Spalten entsprechen der echten Software.
+   ========================================================================== */
+
+/* ---------- Produktansicht (App-Fenster) ---------- */
+.ui-shell{
+  background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:0 26px 55px -22px rgba(0,0,0,.28),0 6px 16px rgba(0,0,0,.06);
+}
+.ui-bar{display:flex;align-items:center;gap:5px;padding:9px 12px;border-bottom:1px solid var(--line-soft);background:var(--paper)}
+.ui-bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.ui-bar .url{margin-left:8px;background:var(--paper-2);border-radius:7px;font-size:.62rem;line-height:1.5;color:var(--ink-mute);font-weight:500;padding:2px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ui-body{display:grid;grid-template-columns:158px 1fr;min-height:340px}
+
+.ui-side{background:var(--paper-2);border-right:1px solid var(--line-soft);padding:.7rem .55rem;display:flex;flex-direction:column;gap:1px}
+.ui-side-head{display:flex;align-items:center;gap:.45rem;padding:.3rem .5rem .7rem;font-size:.62rem;font-weight:600;letter-spacing:.02em;color:var(--ink-soft)}
+.ui-side-head span{width:16px;height:16px;border-radius:4px;background:var(--amber);flex:none}
+.ui-nav-item{display:flex;align-items:center;gap:.5rem;padding:.36rem .5rem;border-radius:6px;font-size:.66rem;font-weight:500;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ui-nav-item svg{width:12px;height:12px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ui-nav-item.is-active{background:var(--amber-tint);color:var(--amber-deep);font-weight:600}
+.ui-nav-sep{height:1px;background:var(--line-soft);margin:.45rem .5rem}
+
+.ui-main{padding:.95rem 1rem 1.1rem;display:flex;flex-direction:column;gap:.85rem;min-width:0}
+.ui-main-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+.ui-main-head b{font-family:var(--font-display);font-size:.86rem;font-weight:600;letter-spacing:-.01em}
+.ui-main-head em{font-style:normal;font-size:.6rem;color:var(--ink-mute)}
+
+.ui-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem}
+.ui-kpi{background:var(--paper-2);border-radius:7px;padding:.5rem .55rem}
+.ui-kpi span{display:block;font-size:.53rem;color:var(--ink-mute);margin-bottom:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ui-kpi b{font-family:var(--font-display);font-weight:600;font-size:1rem;line-height:1;color:var(--ink)}
+.ui-kpi b.blue{color:#2f6df0}.ui-kpi b.green{color:#22a06b}
+
+.ui-board{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;min-width:0}
+.ui-col{background:var(--paper-2);border-radius:8px;padding:.45rem;display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.ui-col-head{display:flex;align-items:center;gap:.35rem;padding:.1rem .15rem .25rem;font-size:.55rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-mute)}
+.ui-col-head i{width:5px;height:5px;border-radius:50%;flex:none;background:var(--ink-mute)}
+.ui-col--todo .ui-col-head i{background:#9aa0a6}
+.ui-col--prog .ui-col-head i{background:#2f6df0}
+.ui-col--done .ui-col-head i{background:#22a06b}
+.ui-tk{background:#fff;border:1px solid var(--line-soft);border-radius:6px;padding:.4rem .45rem;min-width:0}
+.ui-tk b{display:block;font-size:.6rem;font-weight:600;line-height:1.3;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ui-tk span{display:block;margin-top:.2rem;font-size:.53rem;color:var(--ink-mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ui-tk-foot{display:flex;align-items:center;gap:.25rem;margin-top:.35rem}
+.ui-tag{font-size:.48rem;font-weight:600;letter-spacing:.02em;padding:.1rem .3rem;border-radius:3px;background:var(--paper-3);color:var(--ink-soft)}
+.ui-tag--hi{background:#fdecec;color:#b3261e}
+.ui-tag--mid{background:var(--amber-tint);color:var(--amber-deep)}
+
+@media(max-width:900px){
+  .ui-body{grid-template-columns:132px 1fr}
+  .ui-kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .ui-body{grid-template-columns:1fr}
+  .ui-side{flex-direction:row;flex-wrap:wrap;gap:.25rem;border-right:0;border-bottom:1px solid var(--line-soft);padding:.55rem}
+  .ui-side-head,.ui-nav-sep{display:none}
+  .ui-nav-item{font-size:.6rem;padding:.28rem .45rem}
+  .ui-nav-item svg{display:none}
+  .ui-board{grid-template-columns:1fr}
+  .ui-col--done{display:none}
+}
+
+/* ---------- Modul-Raster (Hairline statt Karten) ---------- */
+.mods{display:grid;grid-template-columns:repeat(3,1fr);column-gap:clamp(1.6rem,3vw,3rem);border-top:1px solid var(--line)}
+.mod{display:flex;gap:.85rem;padding:1.3rem .1rem;border-bottom:1px solid var(--line)}
+.mod-ic{flex:none;width:26px;height:26px;color:var(--amber-deep)}
+.mod-ic svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.mod h3{font-family:var(--font-display);font-size:1rem;font-weight:600;letter-spacing:var(--track-h3);line-height:1.25}
+.mod p{margin-top:.28rem;font-size:.9rem;line-height:1.5;color:var(--ink-soft)}
+@media(max-width:900px){.mods{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.mods{grid-template-columns:1fr}}
+
+/* ---------- Phasen-Kette (echter Auftragsweg im Referenzbetrieb) ---------- */
+.chain{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:2rem}
+.chain-step{position:relative;padding:1.4rem 1rem 0 0}
+.chain-step::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--line-dark)}
+.chain-step::after{content:"";position:absolute;top:-3.5px;left:0;width:8px;height:8px;border-radius:50%;background:var(--accent-on-dark)}
+.chain-step b{display:block;font-family:var(--font-display);font-size:.95rem;font-weight:600;letter-spacing:-.01em;color:var(--on-dark)}
+.chain-step span{display:block;margin-top:.25rem;font-size:.82rem;line-height:1.45;color:var(--on-dark-soft)}
+@media(max-width:860px){.chain{grid-template-columns:1fr 1fr}.chain-step{padding-bottom:1.6rem}}
+@media(max-width:460px){.chain{grid-template-columns:1fr}.chain-step{padding-right:0}}
+
+/* Zwei Fliesstext-Absaetze im Split standen bisher buendig aufeinander.
+   Nur klassenlose Absaetze — Utilities wie .mt-s bringen ihren Abstand selbst mit. */
+.split-text p:not([class]) + p:not([class]){margin-top:1em}
+
+/* ---------- Preis-Hinweis ---------- */
+.price-box{border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(1.6rem,3vw,2.4rem);display:grid;grid-template-columns:1fr auto;gap:1.6rem;align-items:center}
+.price-box h3{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:600;letter-spacing:var(--track-h3)}
+.price-box p{margin-top:.5rem;color:var(--ink-soft);max-width:56ch}
+@media(max-width:720px){.price-box{grid-template-columns:1fr}.price-box .btn{justify-content:center}}
+
+/* ==========================================================================
    MOBIL-OPTIMIERUNG
    ========================================================================== */
 .eyebrow{flex-wrap:wrap;row-gap:.4rem}
