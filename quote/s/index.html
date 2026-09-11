@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geteilter Wettschein – Quote</title>
+    <meta name="description" content="Jemand hat einen Quote-Wettschein mit dir geteilt. Quote ist ein Wettspiel mit reinem Spielgeld rund um Bundesliga, Premier League, DFB-Pokal und mehr.">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/png" href="/quote/icon.png">
+    <link rel="apple-touch-icon" href="/quote/icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ein Quote-Wettschein">
+    <meta property="og:description" content="Tipps, Quoten, Einsatz und Gewinn — mit reinem Spielgeld auf echte Spiele. Ohne Kauf, ohne Umtausch, ohne Auszahlung.">
+    <meta property="og:image" content="https://www.honeyapps.de/quote/icon.png">
+    <meta name="twitter:card" content="summary">
+
+    <style>
+        :root { --quote: #3C6343; --quote-dark: #2E4E34; --quote-soft: #D3ECDB; }
+
+        .inv { max-width: 560px; margin: 0 auto; padding: 100px 20px 60px; text-align: center; }
+        .inv-icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 24px; }
+        .inv h1 { font-size: clamp(28px, 5vw, 40px); letter-spacing: -0.02em; margin-bottom: 12px; }
+        .inv .lead { color: var(--text-secondary); font-size: 17px; line-height: 1.6; margin-bottom: 32px; }
+
+        /* Der Schein selbst — gefuellt aus shared_slip(), siehe unten. */
+        .schein { background: var(--quote-soft); border-radius: 16px; padding: 20px; margin-bottom: 24px; text-align: left; }
+        .schein-kopf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+        .schein-von { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--quote-dark); }
+        .schein-name { font-size: 18px; font-weight: 700; color: var(--quote-dark); }
+        .schein-stand { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--quote-dark); }
+        .bein { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(46, 78, 52, 0.18); }
+        .bein-tipp { font-weight: 600; color: var(--quote-dark); }
+        .bein-spiel { font-size: 13px; color: var(--text-secondary); }
+        .bein-quote { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--quote-dark); white-space: nowrap; }
+        .schein-summe { display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 2px solid rgba(46, 78, 52, 0.3); font-size: 14px; color: var(--quote-dark); }
+        .schein-summe strong { font-size: 18px; font-variant-numeric: tabular-nums; }
+        .schein-leer { color: var(--text-tertiary); font-size: 14px; text-align: center; padding: 8px 0; margin-bottom: 24px; }
+
+        .store-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .store-badge {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background: #1d1d1f; color: #fff; padding: 0.75rem 1.5rem; border-radius: 12px;
+            text-decoration: none; font-weight: 500; transition: transform 0.2s, background 0.2s;
+        }
+        .store-badge:hover { transform: translateY(-2px); }
+        .store-badge svg { width: 22px; height: 22px; }
+        .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
+        .store-badge-text strong { font-size: 1rem; font-weight: 600; }
+
+        .inv-playmoney { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; margin-top: 28px; }
+        .inv-playmoney a { color: var(--quote); }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 32px; color: var(--quote); font-weight: 600; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">honey<span>apps</span></a>
+        <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="/quote">Quote</a></li>
+            <li><a href="/quote/support">Support</a></li>
+            <li><a href="mailto:info@honeyapps.de">Kontakt</a></li>
+            <li><a href="/">Zurück</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="inv">
+    <img src="/quote/icon.png" alt="Quote App-Icon" class="inv-icon" width="84" height="84">
+    <h1>Ein Wettschein für dich</h1>
+    <p class="lead">
+        Jemand hat seinen <strong>Quote</strong>-Wettschein mit dir geteilt —
+        Tipps auf echte Spiele, aber mit reinem Spielgeld.
+    </p>
+
+    <!--
+      Der Schein wird aus der Datenbank geholt — ueber `shared_slip()`, die
+      Funktion, die auch die App ruft (M190). Sie ist fuer `anon` freigegeben
+      und entscheidet selbst, was sie zeigt: geteilte Scheine jedem, sonst
+      nichts. Der Schluessel darunter ist der oeffentliche (derselbe, der in
+      der App steckt); er kann nichts, was die Datenbank nicht ohnehin erlaubt.
+
+      Wer die App hat, sieht diese Seite nie: iOS und Android fangen den Link
+      ab und oeffnen den Schein direkt (`/quote/s/*` in der AASA und im
+      Intent-Filter).
+    -->
+    <div class="schein" id="schein" hidden>
+        <div class="schein-kopf">
+            <div>
+                <div class="schein-von">Getippt von</div>
+                <div class="schein-name" id="name">–</div>
+            </div>
+            <div class="schein-stand" id="stand"></div>
+        </div>
+        <div id="beine"></div>
+        <div class="schein-summe">
+            <span id="einsatz"></span>
+            <strong id="gewinn"></strong>
+        </div>
+    </div>
+    <p class="schein-leer" id="leer" hidden>Diesen Schein gibt es hier nicht — vielleicht wurde er nicht geteilt.</p>
+
+    <div class="store-badges">
+        <a class="store-badge" href="https://apps.apple.com/de/app/id6802586174"
+           rel="noopener" aria-label="Quote im App Store herunterladen">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.55-1.71-2.51-3.02-7.11-1.26-10.21.87-1.54 2.43-2.52 4.12-2.54 1.28-.02 2.5.87 3.28.87.78 0 2.25-1.07 3.79-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.85M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span class="store-badge-text"><small>Jetzt im</small><strong>App Store</strong></span>
+        </a>
+        <a class="store-badge" href="https://play.google.com/store/apps/details?id=app.tippduell"
+           rel="noopener" aria-label="Quote bei Google Play herunterladen">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35l13.69 9.85-4.28 4.28-10.25-1.78zm14.06-8.15l3.35 1.9c.5.29.83.83.83 1.44s-.33 1.15-.83 1.44l-3.35 1.9-4.3-4.3 4.3-4.38z"/></svg>
+            <span class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></span>
+        </a>
+    </div>
+
+    <p class="inv-playmoney">
+        <strong>Reines Spielgeld:</strong> Punkte haben keinen Geldwert. Es gibt keinen Kauf,
+        keinen Umtausch und keine Auszahlung. Ab 18 — Details in den
+        <a href="/quote/agb">Nutzungsbedingungen</a>.
+    </p>
+
+    <a href="/quote" class="back-link">← Mehr über Quote</a>
+</section>
+
+<script>
+(function () {
+    /*
+      Die Kennung kommt auf zwei Wegen herein:
+
+        /quote/s/<uuid>        der geteilte Link. GitHub Pages hat dort keine
+                               Datei und liefert 404.html; die schickt uns die
+                               Kennung als ?id= herueber.
+        /quote/s/?id=<uuid>    dieser Weg, und der Direktaufruf.
+    */
+    var ausPfad = (location.pathname.match(/\/quote\/s\/([0-9a-fA-F-]{36})/) || [])[1] || '';
+    var ausAbfrage = (location.search.match(/[?&]id=([0-9a-fA-F-]{36})/) || [])[1] || '';
+    var id = (ausAbfrage || ausPfad).toLowerCase();
+    var leer = document.getElementById('leer');
+    if (!id) { leer.hidden = false; return; }
+
+    var URL = 'https://jzuykqidncobitofwxkh.supabase.co';
+    var KEY = 'sb_publishable_dUKX7hhmro-tFL155eII4w_f6sHbF14';
+
+    function punkte(z) { return Number(z).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' P.'; }
+    function quote(z) { return Number(z).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    var STAND = { placed: 'Offen', won: 'Gewonnen', lost: 'Verloren', void: 'Annulliert', cashed_out: 'Verkauft', cancelled: 'Storniert' };
+    var MARKT = { '1x2': 'Spielausgang', btts: 'Beide treffen', ou25: 'Über/Unter 2,5', dc: 'Doppelte Chance' };
+    var WAHL = { '1': 'Heimsieg', X: 'Unentschieden', '2': 'Auswärtssieg', yes: 'Ja', no: 'Nein', over: 'Über', under: 'Unter' };
+
+    fetch(URL + '/rest/v1/rpc/shared_slip', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: KEY, Authorization: 'Bearer ' + KEY },
+        body: JSON.stringify({ p_slip_id: id })
+    }).then(function (r) { return r.json(); }).then(function (a) {
+        if (!a || !a.ok) { leer.hidden = false; return; }
+        var s = a.slip;
+        document.getElementById('name').textContent = s.owner.display_name || '–';
+        document.getElementById('stand').textContent = STAND[s.status] || '';
+        var beine = document.getElementById('beine');
+        (s.slip_legs || []).forEach(function (l) {
+            var el = document.createElement('div');
+            el.className = 'bein';
+            var links = document.createElement('div');
+            var tipp = document.createElement('div');
+            tipp.className = 'bein-tipp';
+            tipp.textContent = (MARKT[l.market] || l.market) + ' · ' + (WAHL[l.selection] || l.selection);
+            var spiel = document.createElement('div');
+            spiel.className = 'bein-spiel';
+            var d = new Date(l.kickoff_at);
+            spiel.textContent = d.toLocaleDateString('de-DE', { day: 'numeric', month: 'numeric' }) + ' ' + d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+            links.appendChild(tipp); links.appendChild(spiel);
+            var q = document.createElement('div');
+            q.className = 'bein-quote';
+            q.textContent = quote(l.price);
+            el.appendChild(links); el.appendChild(q);
+            beine.appendChild(el);
+        });
+        document.getElementById('einsatz').textContent = 'Einsatz ' + punkte(s.stake) + ' · Quote ' + quote(s.total_odds);
+        var gewinn = s.status === 'placed' ? 'möglich ' + punkte(s.potential_payout) : punkte(s.payout);
+        document.getElementById('gewinn').textContent = gewinn;
+        document.getElementById('schein').hidden = false;
+        document.title = 'Wettschein von ' + (s.owner.display_name || '–') + ' – Quote';
+    }).catch(function () { leer.hidden = false; });
+})();
+</script>
+
+</body>
+</html>

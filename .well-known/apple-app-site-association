@@ -7,6 +7,10 @@
           {
             "/": "/quote/j/*",
             "comment": "Einladungslinks in eine Gruppe"
+          },
+          {
+            "/": "/quote/s/*",
+            "comment": "Geteilte Wettscheine (M191)"
           }
         ]
       }
