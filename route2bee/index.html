@@ -1334,6 +1334,60 @@
 })();
 </script>
 
+<!-- UTM-Durchreichung in den Play-Store-Referrer
+     Kommt ein Besucher mit utm_*-Parametern (z. B. aus einer Meta-Anzeige), tragen alle
+     Play-Links bisher den hartkodierten referrer "utm_source=landing&utm_medium=organic" —
+     jeder Ad-Install taucht in der Play Console damit als "landing/organic" auf und ist
+     unsichtbar. Dieses Skript überschreibt den referrer mit den echten UTMs der Seiten-URL.
+     Die UTMs werden in sessionStorage gehalten, damit sie auch nach einem Klick auf
+     Datenschutz/Impressum und zurück noch greifen. App-Store-Links bleiben unverändert
+     (Apple nutzt ct=/pt=-Token, kein referrer). -->
+<script>
+(function() {
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var STORE_KEY = 'r2b_utm';
+
+  function readFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var out = {};
+    var found = false;
+    KEYS.forEach(function(k) {
+      var v = params.get(k);
+      if (v) { out[k] = v; found = true; }
+    });
+    return found ? out : null;
+  }
+
+  function readFromSession() {
+    try {
+      var raw = sessionStorage.getItem(STORE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  var utm = readFromUrl();
+  if (utm) {
+    try { sessionStorage.setItem(STORE_KEY, JSON.stringify(utm)); } catch (e) {}
+  } else {
+    utm = readFromSession();
+  }
+  if (!utm || !utm.utm_source) return;
+
+  // Play erwartet den referrer als EINEN URL-kodierten String: "utm_source=x&utm_medium=y"
+  var referrer = KEYS.filter(function(k) { return utm[k]; })
+    .map(function(k) { return k + '=' + utm[k]; })
+    .join('&');
+
+  document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a) {
+    try {
+      var u = new URL(a.href);
+      u.searchParams.set('referrer', referrer);
+      a.href = u.toString();
+    } catch (e) {}
+  });
+})();
+</script>
+
 <!-- Conversion-Wiring — Klick auf externen Link (App Store / Play Store)
      Google Ads Conversion ID: AW-18145804367, Label: zJvGCLnjhakcEM-AzMxD ("Klick auf externen Link").
      Aktuell wird derselbe Label-Wert für App Store und Play Store gefeuert.
