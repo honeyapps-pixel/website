@@ -95,226 +95,156 @@
 </section>
 
 <section class="legal-body">
+
     <h2>1. Who We Are</h2>
-
-        <p>Route2Bee is provided by:</p>
-
-        <p>Lukas Schachtmaier &amp; Johann Warkentin GbR<br>honeyapps<br>Rosenstra&szlig;e 19<br>38550 Isenb&uuml;ttel<br>Germany<br>Phone: +49 174 9783003<br>Email: info@honeyapps.de</p>
-
-        <p>We are the &ldquo;controller&rdquo; of your personal data under the EU General Data Protection Regulation (GDPR) and the &ldquo;business&rdquo; with respect to your personal information under the California Consumer Privacy Act as amended by the CPRA. Because we are established in the European Union, the GDPR applies to our processing regardless of where you live &mdash; so the protections described in Section 11 apply to you as well.</p>
-
-    
+    <p>Route2Bee is provided by:</p>
+    <p>Lukas Schachtmaier &amp; Johann Warkentin GbR<br>honeyapps<br>Rosenstraße 19<br>38550 Isenbüttel<br>Germany<br>Phone: +49 174 9783003<br>Email: <a href="mailto:info@honeyapps.de">info@honeyapps.de</a></p>
+    <p>We are the “controller” of your personal data under the EU General Data Protection Regulation (GDPR) and the “business” with respect to your personal information under the California Consumer Privacy Act as amended by the CPRA. Because we are established in the European Union, the GDPR applies to our processing regardless of where you live — so the protections described in Section 13 apply to you as well.</p>
+    <p>This policy explains what we collect, why, who we share it with, and the rights you have.</p>
 
     <h2>2. Information We Collect</h2>
-
-            <ul>
-
-          <li>Email address and display name when you register</li>
-
-          <li>Precise location data (latitude, longitude, speed, GPS accuracy) while trips are being recorded</li>
-
-          <li>Trip data: start and end address, distance, duration, start time, end time</li>
-
-          <li>Categories (tags) and cost rates you create</li>
-
-          <li>Known locations you save in the App</li>
-
-          <li>Trip purpose (business, personal, commute) and odometer reading per trip</li>
-
-          <li>Notes and vehicle information (license plate, make) that you choose to enter</li>
-
-          <li>Technical device data: operating system, app version &mdash; used only for crash and error analysis</li>
-          <li>Install source: on Android, the campaign tag that Google Play hands to the App at install time (the &ldquo;install referrer&rdquo;, e.g. &ldquo;Instagram ad&rdquo; or &ldquo;Play Store search&rdquo;), and on both platforms your optional answer to &ldquo;How did you find Route2Bee?&rdquo; during setup. We use this internally only, to understand how people discover us; it is never sent to ad networks and never linked to your activity on other sites or apps.</li>
-
-          <li>Audit log: timestamp, type of change, and prior and new values when trip data is edited or deleted</li>
-
-          <li>Subscription status (active/inactive, purchase date, expiry) &mdash; we never receive your payment card details</li>
-
-        </ul>
-
-        <p>We collect this information directly from you and automatically from your device when you use the App. We do not buy personal information from data brokers, and we do not use advertising trackers or third-party analytics SDKs in the App.</p>
-
-    
+    <ul>
+      <li>Email address and display name when you register</li>
+      <li>Precise location data (latitude, longitude, speed, GPS accuracy) while trips are being recorded</li>
+      <li>Trip data: start and end address, distance, duration, start time, end time</li>
+      <li>Categories (tags) and cost rates you create</li>
+      <li>Known locations, route templates for recurring trips, and app settings you save in the App</li>
+      <li>Trip purpose (business, personal, commute, special trip incl. reason) and odometer reading per trip</li>
+      <li>Notes and vehicle information (license plate, make) that you choose to enter</li>
+      <li>Technical device data: operating system, app version — used only for crash and error analysis</li>
+      <li>Trip-detection diagnostics: state changes of the automatic detection (e.g. “trip detected”, “GPS signal stale”), error codes, timestamps and device settings such as battery-optimization status — without coordinates (see Section 3)</li>
+      <li>Install source: on Android, the campaign tag Google Play hands to the App at install time (the "install referrer", e.g. "Instagram ad" or "Play Store search"), and on both platforms your optional answer to "How did you find Route2Bee?" during setup. Used internally only, never sent to ad networks, never linked to your activity on other sites or apps.</li>
+      <li>Referral program: your personal invite code, codes you redeem, and the status of the resulting rewards (see Section 10)</li>
+      <li>Email log: which service or product email we sent you and when, and any opt-out from product emails you declared (see Section 9)</li>
+      <li>Subscription status (active/inactive, purchase date, expiry) — we never receive your payment card details</li>
+      <li>Record of your acceptance of the Terms of Service: version, time, platform and app version</li>
+      <li>Audit log: timestamp, type of change, and prior and new values when trip data is edited or deleted (see Section 7)</li>
+    </ul>
+    <p>We collect this information directly from you and automatically from your device when you use the App. We do not buy personal information from data brokers, and we do not use advertising trackers or third-party analytics SDKs in the App.</p>
 
     <h2>3. Location Data and Background Tracking</h2>
+    <p>Route2Bee uses continuous background GPS to detect and record your drives automatically. This requires access to your location even when the App is not in the foreground.</p>
+    <p><strong>Why background access is required:</strong> automatic trip detection only works if the App can read GPS while your screen is locked or while you use other apps. Without this permission the core function of the App does not work. You may instead use the App to enter trips manually.</p>
+    <p><strong>What happens to raw GPS data:</strong> individual GPS waypoints (coordinates, speed, accuracy, timestamp) are recorded locally on your device first. They are not deleted automatically, because they form part of the record supporting your mileage log.</p>
+    <p><strong>What is synchronized to the cloud:</strong> once your device is online, both the summarized trip data (start/end address, distance, duration, tag, note) <strong>and the individual GPS waypoints of your trips</strong> are synchronized to your account. The waypoints make up the route of each trip, let the map view work across your devices, and are part of the evidence supporting your mileage log. They are stored exclusively on servers in the European Union (Frankfurt), and database-level access rules restrict them to your own account. When you delete your account, all waypoints are permanently and irreversibly deleted (see Section 14).</p>
+    <p><strong>Low-power monitoring while idle:</strong> even when no trip is being recorded, the App uses low-power, reduced-accuracy location monitoring (roughly every 30 seconds, without activating the GPS chip) to detect the start of a new drive. These positions are evaluated on your device only; the App caches just a few anchor positions (such as the last known position). They are not added to your mileage log and not transmitted to our servers. You can turn this off at any time using the auto-tracking switch in the App settings.</p>
+    <p><strong>Trip-detection diagnostics:</strong> so that we can investigate missed or interrupted trips, the App logs state changes of the automatic detection (such as “geofence triggered”, “recording recovered”, “GPS signal stale”), error codes, timestamps and whether battery optimization is active on your device, and uploads these entries to your account. They contain no coordinates. Legal basis: our legitimate interest in reliable trip detection, Art. 6(1)(f) GDPR.</p>
+    <p><strong>Your control:</strong> you can revoke location permission at any time in your device settings. Doing so stops automatic trip detection.</p>
+    <p><strong>Legal basis (GDPR):</strong> your explicit consent, Art. 6(1)(a) GDPR, given by granting the location permission on your device.</p>
 
-        <p>Route2Bee uses continuous background GPS to detect and record your drives automatically. This requires access to your location even when the App is not in the foreground.</p>
-
-        <p><strong>Why background access is required:</strong> automatic trip detection only works if the App can read GPS while your screen is locked or while you use other apps. Without this permission the core function of the App does not work. You may instead use the App to enter trips manually.</p>
-
-        <p><strong>What happens to raw GPS data:</strong> individual GPS waypoints (coordinates, speed, accuracy, timestamp) are recorded locally on your device first. They are not deleted automatically, because they form part of the record supporting your mileage log.</p>
-
-        <p><strong>What is synchronized to the cloud:</strong> once your device is online, both the summarized trip data (start/end address, distance, duration, tag, note) <strong>and the individual GPS waypoints of your trips</strong> are synchronized to your account. The waypoints make up the route of each trip, let the map view work across your devices, and are part of the evidence supporting your mileage log. They are stored exclusively on servers in the European Union (Frankfurt), and database-level access rules restrict them to your own account. When you delete your account, all waypoints are permanently and irreversibly deleted (see Section 12).</p>
-
-        <p><strong>Low-power monitoring while idle:</strong> even when no trip is being recorded, the App uses low-power, reduced-accuracy location monitoring (roughly every 30 seconds, without activating the GPS chip) to detect the start of a new drive. This data is used only for trip-detection logic and is not stored. You can turn this off at any time using the auto-tracking switch in the App settings.</p>
-
-        <p><strong>Your control:</strong> you can revoke location permission at any time in your device settings. Doing so stops automatic trip detection.</p>
-
-        <p><strong>Legal basis (GDPR):</strong> your explicit consent, Art. 6(1)(a) GDPR, given by granting the location permission on your device.</p>
-
-    
-
-    <h2>4. Children&rsquo;s Privacy</h2>
-
-        <p>Route2Bee is not directed to children. We do not knowingly collect personal information from children under 13 years of age, and the App is not intended for their use. If you are a parent or guardian and believe a child under 13 has provided us with personal information, contact us at info@honeyapps.de and we will delete it promptly.</p>
-
-        <p>Users in the European Economic Area must have reached the age at which they can validly consent to processing under Art. 8 GDPR in their country (16 in Germany). We do not sell or share the personal information of consumers under 16 years of age.</p>
-
-    
+    <h2>4. Children’s Privacy</h2>
+    <p>Route2Bee is not directed to children. We do not knowingly collect personal information from children under 13 years of age, and the App is not intended for their use. If you are a parent or guardian and believe a child under 13 has provided us with personal information, contact us at <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> and we will delete it promptly.</p>
+    <p>Users in the European Economic Area must have reached the age at which they can validly consent to processing under Art. 8 GDPR in their country (16 in Germany). We do not sell or share the personal information of consumers under 16 years of age.</p>
 
     <h2>5. How We Use Your Information</h2>
-
-        <p><strong>To provide the App</strong> (GDPR Art. 6(1)(b) &mdash; performance of a contract): automatic trip detection and recording; generating mileage reports and PDF/CSV exports; synchronizing your trips across your devices; managing your subscription and account.</p>
-
-        <p><strong>With your consent</strong> (GDPR Art. 6(1)(a)): background GPS tracking for automatic trip detection.</p>
-
-        <p><strong>Legitimate interests</strong> (GDPR Art. 6(1)(f)): improving app functionality, diagnosing errors and crashes, security and fraud prevention, and understanding how people discover Route2Bee (install source, see Section 2) without disclosing it to third parties.</p>
-
-        <p><strong>Legal obligation</strong> (GDPR Art. 6(1)(c)): retention of finalized records as described in Section 7.</p>
-
-        <p>We do not use your personal information for advertising, profiling, automated decision-making, or cross-context behavioral advertising.</p>
-
-    
+    <p><strong>To provide the App</strong> (GDPR Art. 6(1)(b) — performance of a contract):</p>
+    <ul>
+      <li>Automatic trip detection and recording</li>
+      <li>Generating mileage reports and PDF/CSV exports</li>
+      <li>Synchronizing your trips across your devices</li>
+      <li>Managing your subscription, your account and the referral program</li>
+      <li>Service emails about your account (Section 9)</li>
+    </ul>
+    <p><strong>With your consent</strong> (GDPR Art. 6(1)(a)):</p>
+    <ul>
+      <li>Background GPS tracking for automatic trip detection</li>
+    </ul>
+    <p><strong>Legitimate interests</strong> (GDPR Art. 6(1)(f)):</p>
+    <ul>
+      <li>Improving app functionality, diagnosing errors and crashes, and trip-detection diagnostics</li>
+      <li>Security and fraud prevention, including abuse checks in the referral program</li>
+      <li>Understanding how people discover Route2Bee (install source, see Section 2) — without disclosing it to third parties</li>
+      <li>Product emails about Route2Bee to registered users (Section 9), which you can opt out of at any time</li>
+    </ul>
+    <p><strong>Legal obligation</strong> (GDPR Art. 6(1)(c)): keeping a record of your acceptance of the Terms and of email opt-outs.</p>
+    <p>We do not use your personal information for third-party advertising, profiling, automated decision-making, or cross-context behavioral advertising.</p>
 
     <h2>6. We Do Not Sell or Share Your Personal Information</h2>
-
-        <p><strong>We have not sold or shared personal information in the preceding 12 months, and we do not do so today.</strong> &ldquo;Sale&rdquo; and &ldquo;sharing&rdquo; are used here as defined by the CCPA/CPRA, where &ldquo;sharing&rdquo; means disclosure for cross-context behavioral advertising. We do not disclose personal information to third parties for their own direct marketing purposes (California Civil Code &sect; 1798.83, &ldquo;Shine the Light&rdquo;).</p>
-
-        <p><strong>Sensitive personal information:</strong> precise geolocation is treated as sensitive personal information under the CPRA. We collect and use it solely to perform the service you requested &mdash; detecting and recording your drives &mdash; and for related security and error-diagnosis purposes. We do not use or disclose sensitive personal information for purposes that would give rise to a right to limit its use under Cal. Civ. Code &sect; 1798.121. For that reason, we do not offer a separate &ldquo;Limit the Use of My Sensitive Personal Information&rdquo; control.</p>
-
-        <p>We disclose personal information to service providers only for the business purposes described in Section 8, under contracts that prohibit them from retaining, using or disclosing it for any other purpose.</p>
-
-    
+    <p><strong>We have not sold or shared personal information in the preceding 12 months, and we do not do so today.</strong> “Sale” and “sharing” are used here as defined by the CCPA/CPRA, where “sharing” means disclosure for cross-context behavioral advertising. We do not disclose personal information to third parties for their own direct marketing purposes (California Civil Code § 1798.83, “Shine the Light”).</p>
+    <p><strong>Sensitive personal information:</strong> precise geolocation is treated as sensitive personal information under the CPRA. We collect and use it solely to perform the service you requested — detecting and recording your drives — and for related security and error-diagnosis purposes. We do not use or disclose sensitive personal information for purposes that would give rise to a right to limit its use under Cal. Civ. Code § 1798.121. For that reason, we do not offer a separate “Limit the Use of My Sensitive Personal Information” control.</p>
+    <p>We disclose personal information to service providers only for the business purposes described in Section 8, under contracts that prohibit them from retaining, using or disclosing it for any other purpose.</p>
 
     <h2>7. Recordkeeping, Audit Log and Retention</h2>
-
-        <p><strong>Audit log:</strong> each creation, edit, correction, deletion or finalization of a trip is logged with a timestamp, the type of action, the affected fields with prior and new values, and your user ID. The audit log is stored on your device and synchronized to the cloud.</p>
-
-        <p><strong>Finalization:</strong> when you mark a trip as reviewed, it is finalized with a timestamp. Finalized trips can still be edited, but the change is recorded as a correction in the audit log; finalized trips are not permanently deleted, only flagged as deleted.</p>
-
-        <p><strong>Retention periods:</strong></p>
-
-            <ul>
-
-          <li>Account data: until you delete your account</li>
-
-          <li>Trip data in the cloud, not finalized: until you delete it or delete your account</li>
-
-          <li>Trip data in the cloud, finalized: 10 years after the last entry, in line with the statutory retention obligation applicable to us as a German business. On account deletion, personal data is anonymized and only the tax-relevant trip skeleton is retained.</li>
-
-          <li>Audit log: 10 years after the last entry</li>
-
-          <li>GPS waypoints on your device: until you uninstall the App</li>
-
-          <li>GPS waypoints in the cloud: until you delete your account &mdash; then permanently and irreversibly deleted</li>
-
-          <li>Trip data on your device: until you uninstall the App or sign out</li>
-
-        </ul>
-
-        <p>You may keep your own records for the period required by the IRS or your state tax authority; we recommend exporting your data periodically rather than relying on the App as your sole archive.</p>
-
-    
+    <p>To support the integrity of your mileage records, the App keeps additional data:</p>
+    <p><strong>Audit log:</strong> each creation, edit, correction, deletion or finalization of a trip is logged with a timestamp, the type of action, the affected fields with prior and new values, and your user ID. The audit log is stored on your device and synchronized to the cloud.</p>
+    <p><strong>Finalization:</strong> when you mark a trip as reviewed, it is finalized with a timestamp. Finalized trips can still be edited, but the change is recorded as a correction in the audit log; within your account, finalized trips are not permanently deleted individually, only flagged as deleted, so that your log remains traceable.</p>
+    <p><strong>Retention periods:</strong></p>
+    <ul>
+      <li>Account data (email, display name, vehicles, companies, settings): until you delete your account</li>
+      <li>Trip data, GPS waypoints and audit log in the cloud: until you delete your account — finalized trips can only be flagged as deleted while the account exists, and are permanently deleted together with the account</li>
+      <li>Trip data and GPS waypoints on your device: until you uninstall the App or sign out</li>
+      <li>Trip-detection diagnostics, email log, install source, referral data and Terms-acceptance record: until you delete your account</li>
+      <li>Email opt-out: for as long as your account exists, so that it is honored</li>
+      <li>Crash reports at Sentry: 90 days</li>
+    </ul>
+    <p><strong>We retain nothing after account deletion.</strong> Any recordkeeping obligation for your mileage log (for example under IRS rules or your state tax authority) rests with you, not with us. Export your data before deleting your account, and export it periodically rather than relying on the App as your sole archive.</p>
 
     <h2>8. Third-Party Services</h2>
+    <p>We use the following service providers. Each receives only what it needs for the stated purpose.</p>
+    <p><strong>Supabase (database &amp; authentication)</strong><br>Supabase Inc., 970 Mission Street, San Francisco, CA 94103, USA<br>Server location: EU Central (Frankfurt, Germany)<br>Privacy: <a href="https://supabase.com/privacy">https://supabase.com/privacy</a><br>Purpose: storing trip data, user authentication</p>
+    <p><strong>Brevo (email delivery)</strong><br>Sendinblue SAS (“Brevo”), 7 rue de Madrid, 75008 Paris, France<br>Privacy: <a href="https://www.brevo.com/legal/privacypolicy/">https://www.brevo.com/legal/privacypolicy/</a><br>Purpose: delivering every email we send you — sign-up confirmation, password reset, service and product emails (Section 9). Brevo receives your email address, display name and the content of the respective email, and produces delivery and open statistics that we use only to monitor delivery and troubleshoot problems. Servers located in the European Union.</p>
+    <p><strong>RevenueCat (in-app purchases)</strong><br>RevenueCat Inc., San Francisco, USA<br>Privacy: <a href="https://www.revenuecat.com/privacy">https://www.revenuecat.com/privacy</a><br>Purpose: managing subscriptions and crediting referral rewards. RevenueCat receives an anonymized user ID and subscription status (active/inactive, purchase date, expiry). No payment data is transmitted to RevenueCat.</p>
+    <p><strong>Apple App Store / Google Play Store</strong><br>All in-app purchase payments are processed exclusively by Apple or Google. We never receive your payment details.</p>
+    <p><strong>Google Maps SDK (Android)</strong><br>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland<br>Purpose: map display in the App. Google’s privacy policy applies.</p>
+    <p><strong>Apple Maps (iOS)</strong><br>Apple Inc., One Apple Park Way, Cupertino, CA 95014, USA<br>Privacy: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a><br>Purpose: map view of an individual trip on iOS devices, rendered through the operating system’s map component. Apple’s privacy policy applies.</p>
+    <p><strong>MapTiler (map tiles in the trip list)</strong><br>MapTiler AG, Zugerstrasse 22, 6314 Unterägeri, Switzerland (UID CHE-345.466.193)<br>Privacy: <a href="https://www.maptiler.com/privacy-policy/">https://www.maptiler.com/privacy-policy/</a><br>Purpose: loading the map tiles behind the route previews in your trip list. Requesting a tile transmits your device’s IP address and the coordinates of the requested tile. What is transmitted is the map section, not your route: a tile is coarse and covers several kilometers depending on zoom level. Your trip data, your GPS waypoints and your account are never transmitted to MapTiler. MapTiler states it retains IP addresses for up to two months for security purposes. If the service is not configured or unreachable, the App draws the route without a map background and nothing is sent to MapTiler.</p>
+    <p><strong>Sentry (error and crash reports)</strong><br>Functional Software Inc. (Sentry), 45 Fremont Street, 8th Floor, San Francisco, CA 94105, USA<br>Privacy: <a href="https://sentry.io/privacy/">https://sentry.io/privacy/</a><br>Purpose: automatic capture of crashes and technical errors. Sentry receives technical error data only (error message, device type, operating system, app version) plus a pseudonymous user identifier. Email address, IP address and user name are stripped before transmission. Data is ingested and stored in Sentry’s EU region.</p>
+    <p><strong>OpenStreetMap / Nominatim (address search)</strong><br>OpenStreetMap Foundation, 132 Maney Hill Road, Sutton Coldfield, B72 1JU, United Kingdom<br>Privacy: <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy">https://wiki.osmfoundation.org/wiki/Privacy_Policy</a><br>Purpose: searching and geocoding addresses during manual trip entry. The address text you type and, technically unavoidable, your device’s IP address are transmitted; your account, trips and waypoints are not.</p>
+    <p><strong>Sign in with Apple</strong><br>Apple Inc., One Apple Park Way, Cupertino, CA 95014, USA<br>Privacy: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a><br>Purpose: optional sign-in. Apple sends us a pseudonymous user ID and, if you allow it, your email address (possibly an Apple relay address).</p>
+    <p><strong>Google Sign-In</strong><br>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland<br>Privacy: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a><br>Purpose: optional sign-in. Google sends us a pseudonymous account ID, your email address and, if available, your display name.</p>
+    <p><strong>GitHub Pages (website hosting)</strong><br>GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA<br>Purpose: hosting the public version of this policy and the marketing website (honeyapps.de/route2bee). Standard server logs (IP address, user agent, timestamp) are processed on access.</p>
+    <p>We have data processing agreements in place with the providers that process data on our behalf (Supabase, Brevo, RevenueCat, Sentry, MapTiler, GitHub), as required by Art. 28 GDPR, and service provider contracts as required by the CCPA/CPRA. Apple, Google and the OpenStreetMap Foundation process the data arising from the use of their services as independent controllers under their own privacy policies.</p>
+    <p><strong>International transfers:</strong> your trip data is stored in the European Union. Where a provider processes data in the United States, transfers are made under the EU-US Data Privacy Framework or under Standard Contractual Clauses.</p>
+    <p>We may also disclose personal information where required by law, valid legal process, or to protect our rights, safety or property, or those of our users.</p>
 
-        <p>We use the following service providers. Each receives only what it needs for the stated purpose.</p>
+    <h2>9. Email Communications</h2>
+    <p><strong>Service emails:</strong> to perform our contract with you we send emails about your account — sign-up confirmation, password reset, notices when you reach the free trip limit or when trips could not be saved, and notices about changes to this policy or the Terms (Art. 6(1)(b) GDPR). You cannot opt out of these while your account exists.</p>
+    <p><strong>Product emails about Route2Bee:</strong> from time to time we email registered users about Route2Bee features and offers — for example a reminder to record your first trip, a Premium offer, or the referral program. Legal basis under the GDPR is our legitimate interest in informing our users about our own product (Art. 6(1)(f)); we point this out when you register. <strong>You can opt out at any time</strong> using the unsubscribe link in every such email or by emailing <a href="mailto:info@honeyapps.de">info@honeyapps.de</a>; we honor opt-outs promptly, and every product email identifies us as the sender and includes a valid postal address, as required by the CAN-SPAM Act. After you opt out you will only receive service emails. We keep your opt-out on file so that it is honored permanently.</p>
+    <p>We log which email we sent you and when, to avoid sending the same message twice. Delivery runs through Brevo (Section 8). We never give your email address to third parties for their marketing and do not build a profile from your reading behavior.</p>
 
-        <p><strong>Supabase (database &amp; authentication)</strong><br>Supabase Inc., 970 Mission Street, San Francisco, CA 94103, USA<br>Server location: EU Central (Frankfurt, Germany)<br>Privacy: https://supabase.com/privacy<br>Purpose: storing trip data, user authentication</p>
+    <h2>10. Referral Program</h2>
+    <p>Route2Bee offers a referral program (“invite a friend”). Participation is voluntary; the conditions are set out in the Terms of Service.</p>
+    <p><strong>If you share your code:</strong> we store your personal invite code and, for each redemption, when it happened, whether and when the reward became due, and how it was credited. To decide that, we check the subscription status of the person you referred, because the reward depends on it.</p>
+    <p><strong>What the referrer sees about you if you redeem a code:</strong> the person whose code you enter sees, in their invitation list, your first name (taken from your display name) and the reward status — that is, whether you already use Premium, whether the subscription is still running, or whether the reward has been credited. No other data (email address, trips, locations) is shown. We point this out when you enter a code.</p>
+    <p><strong>Legal basis:</strong> operating the referral program as part of our contract with you (Art. 6(1)(b) GDPR) and our legitimate interest in preventing abuse (Art. 6(1)(f) GDPR). Rewards are credited through RevenueCat (Section 8).</p>
+    <p>If you delete your account, your referral data is deleted. A reward another person has already earned through your redemption remains with them, without any reference to you.</p>
 
-        <p><strong>RevenueCat (in-app purchases)</strong><br>RevenueCat Inc., San Francisco, USA<br>Privacy: https://www.revenuecat.com/privacy<br>Purpose: managing subscriptions. RevenueCat receives an anonymized user ID and subscription status. No payment data is transmitted to RevenueCat.</p>
+    <h2>11. Where Your Data Is Stored and How It Is Secured</h2>
+    <p>Your trips are stored primarily in a local SQLite database on your device. On iOS this data is additionally protected by the operating system’s Data Protection API. Cloud synchronization — covering your trips, the GPS waypoints that make up their routes, your companies, vehicles, known locations, route templates, settings and the audit log — runs through <strong>Supabase</strong>, whose servers for this project are operated in the EU Central region (Frankfurt, Germany). All data transfers are TLS-encrypted, and row-level security restricts every record to the account that created it.</p>
+    <p>Your account is secured by Supabase Auth (email/password, Sign in with Apple or Google Sign-In). We never have access to your password. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
 
-        <p><strong>Apple App Store / Google Play Store</strong><br>All in-app purchase payments are processed exclusively by Apple or Google. We never receive your payment details.</p>
+    <h2>12. Your California Privacy Rights (CCPA/CPRA)</h2>
+    <p>If you are a California resident, you have the following rights:</p>
+    <ul>
+      <li><strong>Right to know / access:</strong> the categories and specific pieces of personal information we have collected, the sources, the purposes, and the categories of third parties to whom we disclose it.</li>
+      <li><strong>Right to delete:</strong> request deletion of personal information we collected from you. Deleting your account in the App deletes everything (see Section 14).</li>
+      <li><strong>Right to correct:</strong> request correction of inaccurate personal information. Most of your data can be corrected directly in the App.</li>
+      <li><strong>Right to opt out of sale or sharing:</strong> we do not sell or share personal information, so there is nothing to opt out of. We provide no “Do Not Sell or Share My Personal Information” link for that reason.</li>
+      <li><strong>Right to limit use of sensitive personal information:</strong> we use precise geolocation only to provide the service you requested, which is exempt from this right (see Section 6).</li>
+      <li><strong>Right to data portability:</strong> download a complete machine-readable export (JSON) of your data in the App under Settings → “Export data”.</li>
+      <li><strong>Right to non-discrimination:</strong> we will not deny you service, charge you a different price, or provide a different quality of service because you exercised a privacy right.</li>
+    </ul>
+    <p><strong>Categories of personal information collected in the preceding 12 months:</strong> identifiers (email address, display name, user ID, invite code); commercial information (subscription status and history, referral rewards); geolocation data, including precise geolocation; internet or other electronic network activity information (device type, operating system, app version, crash data, trip-detection diagnostics, email log); and other information you voluntarily provide (notes, vehicle details, install source). Sources: directly from you, and automatically from your device. Business purposes: as described in Section 5. Disclosures for a business purpose: to the service providers listed in Section 8.</p>
+    <p><strong>How to exercise your rights:</strong> use the in-app controls (Settings → “Export data” and Settings → “Delete account &amp; data”), or email <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> from the address associated with your account. We verify requests by confirming control of that email address; for data-export and deletion requests made in the App, you are already authenticated. An authorized agent may submit a request on your behalf with written permission signed by you, and we may still ask you to verify your identity directly.</p>
+    <p>We respond to verifiable requests within 45 days, extendable once by a further 45 days where reasonably necessary, and we will inform you of any extension.</p>
 
-        <p><strong>Google Maps SDK (Android)</strong><br>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland<br>Purpose: map display in the App.</p>
+    <h2>13. Your Rights in Other U.S. States and Under the GDPR</h2>
+    <p>If you live in a U.S. state with a comprehensive privacy law (including Virginia, Colorado, Connecticut, Utah, Texas, Oregon and Montana), you have rights comparable to those in Section 12 — to confirm processing and access your data, to correct it, to delete it, to obtain a portable copy, and to opt out of targeted advertising, sale, and certain profiling (none of which we do). If we decline your request, you may appeal by replying to our decision at <a href="mailto:info@honeyapps.de">info@honeyapps.de</a>; if we deny the appeal you may contact your state Attorney General.</p>
+    <p>Because we are established in the EU, the GDPR applies to our processing of your data regardless of where you live. Under it you have the right of access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), objection (Art. 21) — in particular to product emails, see Section 9 — and withdrawal of consent at any time (Art. 7(3)), for example by revoking location permission in your device settings.</p>
+    <p>To exercise any of these rights, contact <a href="mailto:info@honeyapps.de">info@honeyapps.de</a>. You also have the right to lodge a complaint with a supervisory authority. Ours is: Die Landesbeauftragte für den Datenschutz Niedersachsen, Prinzenstraße 5, 30159 Hannover, Germany — poststelle@lfd.niedersachsen.de.</p>
 
-        <p><strong>Apple Maps (iOS)</strong><br>Apple Inc., One Apple Park Way, Cupertino, CA 95014, USA<br>Privacy: https://www.apple.com/legal/privacy/<br>Purpose: map view of an individual trip on iOS devices, rendered through the operating system&rsquo;s map component.</p>
+    <h2>14. Deleting Your Account</h2>
+    <p>You can delete your account in the App under Settings → “Delete account &amp; data”, or by emailing <a href="mailto:info@honeyapps.de">info@honeyapps.de</a>.</p>
+    <p><strong>What is deleted:</strong> everything — account data, trips (including finalized ones), GPS waypoints, audit log, vehicles, companies, known locations, templates, settings, diagnostics and email logs, install source, referral data and Terms-acceptance records. Deletion takes effect immediately and is irreversible; we keep no copy.</p>
+    <p><strong>Export first:</strong> a mileage log is typically subject to recordkeeping obligations that rest with you as the taxpayer (for example under IRS rules, generally at least three years, or longer under your state’s rules). Export your trips before deleting your account (PDF, CSV or JSON). After deletion we cannot restore anything.</p>
+    <p><strong>Subscription:</strong> deleting your account does not cancel an active subscription — cancel that in your App Store or Google Play account settings.</p>
 
-        <p><strong>MapTiler (map tiles in the trip list)</strong><br>MapTiler AG, Zugerstrasse 22, 6314 Unterägeri, Switzerland (UID CHE-345.466.193)<br>Privacy: https://www.maptiler.com/privacy-policy/<br>Purpose: loading the map tiles behind the route previews in your trip list. Requesting a tile transmits your device&rsquo;s IP address and the coordinates of the requested tile. What is transmitted is the map section, not your route: a tile is coarse and covers several kilometers depending on zoom level. Your trip data, your GPS waypoints and your account are never transmitted to MapTiler. MapTiler states it retains IP addresses for up to two months for security purposes. If the service is not configured or unreachable, the App draws the route without a map background and nothing is sent to MapTiler.</p>
+    <h2>15. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy, for example when we add features or service providers. The current version is always available in the App and at honeyapps.de/route2bee/en/privacy. We will notify you of material changes by email or in-app notification, and will update the “Last updated” date above.</p>
 
-        <p><strong>Sentry (error and crash reports)</strong><br>Functional Software Inc. (Sentry), 45 Fremont Street, 8th Floor, San Francisco, CA 94105, USA<br>Privacy: https://sentry.io/privacy/<br>Purpose: automatic capture of crashes and technical errors. Sentry receives technical error data only (error message, device type, operating system, app version) plus a pseudonymous user identifier. Email address, IP address and user name are stripped before transmission. Data is ingested and stored in Sentry&rsquo;s EU region.</p>
+    <h2>16. Contact</h2>
+    <p>Questions about privacy:<br>Lukas Schachtmaier &amp; Johann Warkentin GbR<br>honeyapps<br>Rosenstraße 19<br>38550 Isenbüttel<br>Germany<br>Phone: +49 174 9783003<br>Email: <a href="mailto:info@honeyapps.de">info@honeyapps.de</a></p>
 
-        <p><strong>OpenStreetMap / Nominatim (address search)</strong><br>OpenStreetMap Foundation, 132 Maney Hill Road, Sutton Coldfield, B72 1JU, United Kingdom<br>Purpose: searching and geocoding addresses during manual trip entry. Only the address text you type is transmitted.</p>
-
-        <p><strong>Sign in with Apple</strong><br>Apple Inc., One Apple Park Way, Cupertino, CA 95014, USA<br>Purpose: optional sign-in. Apple sends us a pseudonymous user ID and, if you allow it, your email address (possibly an Apple relay address).</p>
-
-        <p><strong>Google Sign-In</strong><br>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland<br>Purpose: optional sign-in. Google sends us a pseudonymous account ID, your email address and, if available, your display name.</p>
-
-        <p><strong>Brevo (transactional email)</strong><br>Sendinblue GmbH / Brevo, Germany<br>Purpose: delivery of account emails such as address confirmation and password reset. Brevo receives your email address and the message content.</p>
-
-        <p>We have data processing agreements in place with these providers as required by Art. 28 GDPR, and service provider contracts as required by the CCPA/CPRA.</p>
-
-        <p><strong>International transfers:</strong> your trip data is stored in the European Union. Where a provider processes data in the United States, transfers are made under the EU-US Data Privacy Framework or under Standard Contractual Clauses.</p>
-
-        <p>We may also disclose personal information where required by law, valid legal process, or to protect our rights, safety or property, or those of our users.</p>
-
-    
-
-    <h2>9. Where Your Data Is Stored and How It Is Secured</h2>
-
-        <p>Your trips are stored primarily in a local SQLite database on your device. On iOS this data is additionally protected by the operating system&rsquo;s Data Protection API. Cloud synchronization &mdash; covering your trips, the GPS waypoints that make up their routes, your companies, vehicles, known locations and the audit log &mdash; runs through <strong>Supabase</strong>, whose servers for this project are operated in the EU Central region (Frankfurt, Germany). All data transfers are TLS-encrypted, and row-level security restricts every record to the account that created it.</p>
-
-        <p>Your account is secured by Supabase Auth. We never have access to your password. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
-
-    
-
-    <h2>10. Your California Privacy Rights (CCPA/CPRA)</h2>
-
-        <p>If you are a California resident, you have the following rights:</p>
-
-            <ul>
-
-          <li><strong>Right to know / access:</strong> the categories and specific pieces of personal information we have collected, the sources, the purposes, and the categories of third parties to whom we disclose it.</li>
-
-          <li><strong>Right to delete:</strong> request deletion of personal information we collected from you, subject to legal retention exceptions (see Section 7).</li>
-
-          <li><strong>Right to correct:</strong> request correction of inaccurate personal information. Most of your data can be corrected directly in the App.</li>
-
-          <li><strong>Right to opt out of sale or sharing:</strong> we do not sell or share personal information, so there is nothing to opt out of.</li>
-
-          <li><strong>Right to limit use of sensitive personal information:</strong> we use precise geolocation only to provide the service you requested, which is exempt from this right (see Section 6).</li>
-
-          <li><strong>Right to data portability:</strong> download a complete machine-readable export (JSON) of your data in the App under Settings &rarr; &ldquo;Export data&rdquo;.</li>
-
-          <li><strong>Right to non-discrimination:</strong> we will not deny you service, charge you a different price, or provide a different quality of service because you exercised a privacy right.</li>
-
-        </ul>
-
-        <p><strong>Categories of personal information collected in the preceding 12 months:</strong> identifiers (email address, display name, user ID); commercial information (subscription status and history); geolocation data, including precise geolocation; internet or other electronic network activity information (device type, operating system, app version, crash data); and other information you voluntarily provide (notes, vehicle details). Sources: directly from you, and automatically from your device. Business purposes: as described in Section 5. Disclosures for a business purpose: to the service providers listed in Section 8.</p>
-
-        <p><strong>How to exercise your rights:</strong> use the in-app controls (Settings &rarr; &ldquo;Export data&rdquo; and Settings &rarr; &ldquo;Delete account &amp; data&rdquo;), or email info@honeyapps.de from the address associated with your account. We verify requests by confirming control of that email address. An authorized agent may submit a request on your behalf with written permission signed by you, and we may still ask you to verify your identity directly.</p>
-
-        <p>We respond to verifiable requests within 45 days, extendable once by a further 45 days where reasonably necessary, and we will inform you of any extension.</p>
-
-    
-
-    <h2>11. Your Rights in Other U.S. States and Under the GDPR</h2>
-
-        <p>If you live in a U.S. state with a comprehensive privacy law (including Virginia, Colorado, Connecticut, Utah, Texas, Oregon and Montana), you have rights comparable to those in Section 10 &mdash; to confirm processing and access your data, to correct it, to delete it, to obtain a portable copy, and to opt out of targeted advertising, sale, and certain profiling (none of which we do). If we decline your request, you may appeal by replying to our decision at info@honeyapps.de; if we deny the appeal you may contact your state Attorney General.</p>
-
-        <p>Because we are established in the EU, the GDPR applies to our processing of your data regardless of where you live. Under it you have the right of access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), objection (Art. 21), and withdrawal of consent at any time (Art. 7(3)).</p>
-
-        <p>To exercise any of these rights, contact info@honeyapps.de. You also have the right to lodge a complaint with a supervisory authority. Ours is: Die Landesbeauftragte f&uuml;r den Datenschutz Niedersachsen, Prinzenstra&szlig;e 5, 30159 Hannover, Germany &mdash; poststelle@lfd.niedersachsen.de.</p>
-
-    
-
-    <h2>12. Deleting Your Account</h2>
-
-        <p>You can delete your account in the App under Settings &rarr; &ldquo;Delete account &amp; data&rdquo;, or by emailing info@honeyapps.de. Deleting your account does not cancel an active subscription &mdash; cancel that in your App Store or Google Play account settings.</p>
-
-        <p><strong>What happens on deletion:</strong> personal data in finalized trips (addresses, GPS coordinates, notes) is anonymized. The tax-relevant trip skeleton (date, distance, purpose, odometer) and the audit log are retained for the statutory retention period that applies to us, then deleted automatically. All GPS waypoints, non-finalized trips and all other data are deleted immediately and irreversibly. This retention is a recognized exception to the right of deletion under both the CCPA (Cal. Civ. Code &sect; 1798.105(d)) and the GDPR (Art. 17(3)(b)).</p>
-
-    
-
-    <h2>13. Changes to This Policy</h2>
-
-        <p>We may update this Privacy Policy. The current version is always available in the App. We will notify you of material changes by email or in-app notification, and will update the &ldquo;Last updated&rdquo; date above.</p>
-
-    
-
-    <h2>14. Contact</h2>
-
-        <p>Questions about privacy:<br>Lukas Schachtmaier &amp; Johann Warkentin GbR<br>honeyapps<br>Rosenstra&szlig;e 19<br>38550 Isenb&uuml;ttel<br>Germany<br>Phone: +49 174 9783003<br>Email: info@honeyapps.de</p>
 </section>
 
 <footer>
