@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liga-Einladung – Quote</title>
-    <meta name="description" content="Du wurdest zu einer Quote-Liga eingeladen. Quote ist ein Wettspiel mit reinem Spielgeld rund um Bundesliga, 2. Bundesliga, Premier League, DFB-Pokal, Champions League und Europa League.">
+    <meta name="description" content="Du wurdest zu einer Quote-Liga eingeladen. Quote ist ein Tippspiel mit reinem Spielgeld rund um Bundesliga, Premier League, La Liga, Champions League und mehr.">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="../../style.css">
     <link rel="icon" type="image/png" href="/quote/icon.png">
@@ -12,7 +12,7 @@
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Einladung zu einer Quote-Liga">
-    <meta property="og:description" content="Tritt einer Liga bei und wette mit reinem Spielgeld auf echte Spiele. Ohne Kauf, ohne Umtausch, ohne Auszahlung.">
+    <meta property="og:description" content="Tritt einer Liga bei und setz Spielgeld auf echte Spiele. Ohne Kauf, ohne Umtausch, ohne Auszahlung.">
     <meta property="og:image" content="https://www.honeyapps.de/quote/icon.png">
     <meta name="twitter:card" content="summary">
 
@@ -22,10 +22,30 @@
         .inv { max-width: 560px; margin: 0 auto; padding: 100px 20px 60px; text-align: center; }
         .inv-icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 24px; }
         .inv h1 { font-size: clamp(28px, 5vw, 40px); letter-spacing: -0.02em; margin-bottom: 12px; }
-        .inv .lead { color: var(--text-secondary); font-size: 17px; line-height: 1.6; margin-bottom: 32px; }
+        .inv .lead { color: var(--text-secondary); font-size: 17px; line-height: 1.6; margin-bottom: 28px; }
 
-        /* Der Code ist der eigentliche Inhalt dieser Seite — siehe Kommentar unten. */
-        .inv-code-box { background: var(--quote-soft); border-radius: 16px; padding: 24px; margin-bottom: 12px; }
+        /*
+          Der EINE Knopf fuer die Plattform des Empfaengers steht zuerst und
+          gross — siehe Kommentar im Skript. Der andere Store folgt klein.
+        */
+        .store-main { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 28px; }
+        .store-badge {
+            display: inline-flex; align-items: center; gap: 0.625rem;
+            background: #1d1d1f; color: #fff; padding: 0.875rem 1.75rem; border-radius: 14px;
+            text-decoration: none; font-weight: 500; transition: transform 0.2s, background 0.2s;
+        }
+        .store-badge:hover { transform: translateY(-2px); }
+        .store-badge svg { width: 24px; height: 24px; }
+        .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
+        .store-badge-text strong { font-size: 1.05rem; font-weight: 600; }
+        .store-free { font-size: 13px; color: var(--text-tertiary); }
+        .store-other { font-size: 14px; color: var(--text-secondary); }
+        .store-other a { color: var(--quote); font-weight: 600; text-decoration: none; }
+        .store-both { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        /* Der Code ist der Rueckfall dieser Seite — siehe Kommentar unten. */
+        .inv-code-box { background: var(--quote-soft); border-radius: 16px; padding: 22px 24px; margin-bottom: 10px; }
         .inv-code-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--quote-dark); margin-bottom: 10px; }
         .inv-code {
             font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -38,24 +58,10 @@
             font-family: inherit; transition: background 0.15s ease;
         }
         .inv-copy:hover { background: rgba(60, 99, 67, 0.08); }
-        .inv-hint { font-size: 14px; color: var(--text-tertiary); margin-bottom: 32px; }
+        .inv-hint { font-size: 14px; color: var(--text-tertiary); margin-bottom: 32px; line-height: 1.5; }
 
-        .inv-steps { text-align: left; margin: 0 auto 32px; max-width: 420px; }
+        .inv-steps { text-align: left; margin: 0 auto 32px; max-width: 420px; padding-left: 1.25rem; }
         .inv-steps li { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 10px; }
-
-        .store-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-        .store-badge {
-            display: inline-flex; align-items: center; gap: 0.625rem;
-            background: #1d1d1f; color: #fff; padding: 0.75rem 1.5rem; border-radius: 12px;
-            text-decoration: none; font-weight: 500; transition: transform 0.2s, background 0.2s;
-        }
-        .store-badge:hover { transform: translateY(-2px); }
-        .store-badge.is-soon { opacity: 0.55; cursor: default; }
-        .store-badge.is-soon:hover { transform: none; }
-        .store-badge svg { width: 22px; height: 22px; }
-        .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
-        .store-badge-text small { font-size: 0.625rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.04em; }
-        .store-badge-text strong { font-size: 1rem; font-weight: 600; }
 
         .inv-playmoney { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; margin-top: 28px; }
         .inv-playmoney a { color: var(--quote); }
@@ -74,81 +80,182 @@
             <li><a href="/quote">Quote</a></li>
             <li><a href="/quote/support">Support</a></li>
             <li><a href="mailto:info@honeyapps.de">Kontakt</a></li>
-            <li><a href="/">Zurück</a></li>
+            <li><a href="/" data-t="back">Zurück</a></li>
         </ul>
     </div>
 </nav>
 
 <section class="inv">
     <img src="/quote/icon.png" alt="Quote App-Icon" class="inv-icon" width="84" height="84">
-    <h1>Du bist eingeladen</h1>
-    <p class="lead">
-        Jemand möchte mit dir in einer <strong>Quote</strong>-Liga spielen —
-        Wetten auf echte Spiele, aber mit reinem Spielgeld.
+    <h1 data-t="title">Du bist eingeladen</h1>
+    <p class="lead" data-t="lead">
+        Jemand möchte mit dir in einer Quote-Liga spielen: Spielgeld auf echte Spiele setzen und sehen, wer die Quoten am besten liest.
     </p>
 
     <!--
-      Der Code steht hier gross und zum Kopieren, und das ist der Kern dieser
-      Seite.
+      ═══════════ Ein Knopf, nicht zwei (M213) ═══════════
 
-      Grund: es gibt KEIN verzoegertes Deep Linking. Wer die App noch nicht hat,
-      springt von hier in den Store — und danach ist der Link fort. Was bleibt,
-      muss der Code sein, den man von Hand eingibt. (Dieselbe Entscheidung wie
-      in `docs/DEEPLINKS.md` der App.)
+      Wer diese Seite sieht, hat die App nicht — sonst haette iOS oder Android
+      den Link abgefangen und die App geoeffnet. Die Seite hat damit genau eine
+      Aufgabe: den Weg in den Store so kurz wie moeglich machen. Bis M212
+      standen zwei gleich grosse Knoepfe nebeneinander, und der Empfaenger
+      musste seinen erst suchen. Jetzt entscheidet das Skript anhand des
+      Geraets und stellt EINEN Knopf gross voran; der andere Store bleibt als
+      Zeile darunter fuer den, der die Seite auf dem Rechner liest.
 
-      Wer die App schon hat, sieht diese Seite ohnehin nie: iOS und Android
-      fangen den Link vorher ab und oeffnen die App direkt.
+      ═══════════ Was die Knoepfe mitgeben ═══════════
+
+      Play:      `&referrer=utm_source=invite&code=<CODE>` — Google bewahrt
+                 ihn 90 Tage und gibt ihn der installierten App heraus
+                 (Install-Referrer). Die App liest ihn beim ersten Start und
+                 zeigt die Liga von selbst (M214).
+      App Store: Es gibt keinen Referrer. Beim Tipp legt das Skript den
+                 Einladungslink als URL in die Zwischenablage; die App fragt
+                 beim ersten Start prompt-frei, ob eine URL drinliegt, und
+                 holt sie dann (M215). Als `text/uri-list` UND `text/plain`,
+                 weil iOS nur die erste Form als URL fuehrt und `hasURLs`
+                 sonst Nein sagt.
+    -->
+    <div class="store-main" id="storeMain"></div>
+
+    <!--
+      Der Code steht trotzdem gross und zum Kopieren da. Beide Wege oben sind
+      Abkuerzungen, keine Zusicherung: eine geladene APK hat keinen Referrer,
+      und wer die Systemfrage „aus Safari einsetzen?" ablehnt, hat keine
+      Zwischenablage. Dann bleibt der Code, den man von Hand eingibt —
+      dieselbe Entscheidung wie in `docs/DEEPLINKS.md` der App.
     -->
     <div class="inv-code-box" id="codeBox" hidden>
-        <div class="inv-code-label">Einladungscode</div>
+        <div class="inv-code-label" data-t="codeLabel">Dein Einladungscode</div>
         <div class="inv-code" id="code">–</div>
-        <button class="inv-copy" id="copy" type="button">Code kopieren</button>
+        <button class="inv-copy" id="copy" type="button" data-t="copy">Code kopieren</button>
     </div>
-    <p class="inv-hint" id="hint" hidden>Notier ihn dir — nach der Installation gibst du ihn in der App ein.</p>
+    <p class="inv-hint" id="hint" hidden data-t="hint">Falls die App nach der Installation danach fragt: hier steht er.</p>
 
     <ol class="inv-steps">
-        <li><strong>Quote installieren</strong> — kostenlos, unten im Store.</li>
-        <li><strong>Konto anlegen</strong> und einen Wettbewerb wählen.</li>
-        <li>Unter <strong>Tabelle → Liga erstellen oder beitreten</strong> den Code eingeben.</li>
+        <li data-t="step1"><strong>Quote installieren</strong> — kostenlos, Knopf oben.</li>
+        <li data-t="step2"><strong>Konto anlegen</strong> — dauert eine Minute.</li>
+        <li data-t="step3"><strong>Beitreten</strong> — Code eingeben, falls die App ihn nicht schon kennt.</li>
     </ol>
 
-    <div class="store-badges">
-        <a class="store-badge" href="https://apps.apple.com/de/app/id6802586174"
-           rel="noopener" aria-label="Quote im App Store herunterladen">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.55-1.71-2.51-3.02-7.11-1.26-10.21.87-1.54 2.43-2.52 4.12-2.54 1.28-.02 2.5.87 3.28.87.78 0 2.25-1.07 3.79-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.85M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <span class="store-badge-text"><small>Jetzt im</small><strong>App Store</strong></span>
-        </a>
-        <a class="store-badge" href="https://play.google.com/store/apps/details?id=app.tippduell"
-           rel="noopener" aria-label="Quote bei Google Play herunterladen">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35l13.69 9.85-4.28 4.28-10.25-1.78zm14.06-8.15l3.35 1.9c.5.29.83.83.83 1.44s-.33 1.15-.83 1.44l-3.35 1.9-4.3-4.3 4.3-4.38z"/></svg>
-            <span class="store-badge-text"><small>Jetzt bei</small><strong>Google Play</strong></span>
-        </a>
-    </div>
-
-    <p class="inv-playmoney">
+    <p class="inv-playmoney" data-t="playmoney">
         <strong>Reines Spielgeld:</strong> Punkte haben keinen Geldwert. Es gibt keinen Kauf,
         keinen Umtausch und keine Auszahlung. Ab 18 — Details in den
         <a href="/quote/agb">Nutzungsbedingungen</a>.
     </p>
 
-    <a href="/quote" class="back-link">← Mehr über Quote</a>
+    <a href="/quote" class="back-link" data-t="more">← Mehr über Quote</a>
 </section>
 
 <script>
 (function () {
-    /*
-      Der Code kommt auf zwei Wegen herein:
+    var APP_STORE = 'https://apps.apple.com/app/id6802586174';
+    var PLAY = 'https://play.google.com/store/apps/details?id=app.tippduell';
+    var INVITE_BASE = 'https://www.honeyapps.de/quote/j/';
 
+    /*
+      ═══════════ Fuenf Sprachen (M213) ═══════════
+
+      Die Nachricht geht in der Sprache des ABSENDERS hinaus (die App spricht
+      seit M210 fuenf); diese Seite spricht die des EMPFAENGERS — das ist der
+      Unterschied zwischen dem, der schreibt, und dem, der liest. Erkannt an
+      `navigator.languages`, Rueckfall Englisch wie in der App. Deutsch ist
+      der Text im HTML, damit die Seite auch ohne Skript etwas sagt.
+    */
+    var T = {
+        de: {
+            title: 'Du bist eingeladen',
+            lead: 'Jemand möchte mit dir in einer Quote-Liga spielen: Spielgeld auf echte Spiele setzen und sehen, wer die Quoten am besten liest.',
+            appStore: 'Jetzt im', appStoreName: 'App Store', play: 'Jetzt bei', playName: 'Google Play',
+            free: 'Kostenlos – reines Spielgeld.',
+            other: { ios: 'Android-Handy? <a href="{play}">Bei Google Play laden</a>', android: 'iPhone? <a href="{ios}">Im App Store laden</a>' },
+            codeLabel: 'Dein Einladungscode', copy: 'Code kopieren', copied: 'Kopiert ✓',
+            hint: 'Falls die App nach der Installation danach fragt: hier steht er.',
+            step1: '<strong>Quote installieren</strong> — kostenlos, Knopf oben.',
+            step2: '<strong>Konto anlegen</strong> — dauert eine Minute.',
+            step3: '<strong>Beitreten</strong> — Code eingeben, falls die App ihn nicht schon kennt.',
+            playmoney: '<strong>Reines Spielgeld:</strong> Punkte haben keinen Geldwert. Es gibt keinen Kauf, keinen Umtausch und keine Auszahlung. Ab 18 — Details in den <a href="/quote/agb">Nutzungsbedingungen</a>.',
+            more: '← Mehr über Quote', back: 'Zurück', docTitle: 'Liga-Einladung – Quote'
+        },
+        en: {
+            title: 'You’re invited',
+            lead: 'Someone wants to play with you in a Quote league: put play money on real matches and see who reads the odds best.',
+            appStore: 'Download on the', appStoreName: 'App Store', play: 'Get it on', playName: 'Google Play',
+            free: 'Free – play money only.',
+            other: { ios: 'Android phone? <a href="{play}">Get it on Google Play</a>', android: 'iPhone? <a href="{ios}">Download on the App Store</a>' },
+            codeLabel: 'Your invite code', copy: 'Copy code', copied: 'Copied ✓',
+            hint: 'If the app asks for it after installing: here it is.',
+            step1: '<strong>Install Quote</strong> — free, button above.',
+            step2: '<strong>Create an account</strong> — takes a minute.',
+            step3: '<strong>Join</strong> — enter the code, unless the app already knows it.',
+            playmoney: '<strong>Play money only:</strong> points have no cash value. There is no purchase, no exchange and no payout. 18+ — details in the <a href="/quote/agb">Terms of Use</a>.',
+            more: '← More about Quote', back: 'Back', docTitle: 'League invitation – Quote'
+        },
+        tr: {
+            title: 'Davet edildin',
+            lead: 'Biri seninle bir Quote liginde oynamak istiyor: gerçek maçlara sanal parayla oyna ve oranları en iyi kimin okuduğunu gör.',
+            appStore: 'Şimdi', appStoreName: 'App Store’da', play: 'Şimdi', playName: 'Google Play’de',
+            free: 'Ücretsiz – yalnızca sanal para.',
+            other: { ios: 'Android telefon mu? <a href="{play}">Google Play’den indir</a>', android: 'iPhone mu? <a href="{ios}">App Store’dan indir</a>' },
+            codeLabel: 'Davet kodun', copy: 'Kodu kopyala', copied: 'Kopyalandı ✓',
+            hint: 'Kurulumdan sonra uygulama sorarsa: kod burada.',
+            step1: '<strong>Quote’u yükle</strong> — ücretsiz, yukarıdaki düğme.',
+            step2: '<strong>Hesap oluştur</strong> — bir dakika sürer.',
+            step3: '<strong>Katıl</strong> — uygulama kodu zaten bilmiyorsa, kodu gir.',
+            playmoney: '<strong>Yalnızca sanal para:</strong> puanların parasal değeri yoktur. Satın alma, takas ve ödeme yoktur. 18+ — ayrıntılar <a href="/quote/agb">Kullanım Koşulları</a>’nda.',
+            more: '← Quote hakkında daha fazla', back: 'Geri', docTitle: 'Lig daveti – Quote'
+        },
+        es: {
+            title: 'Estás invitado',
+            lead: 'Alguien quiere jugar contigo en una liga de Quote: apostar dinero ficticio a partidos reales y ver quién lee mejor las cuotas.',
+            appStore: 'Descargar en el', appStoreName: 'App Store', play: 'Disponible en', playName: 'Google Play',
+            free: 'Gratis – solo dinero ficticio.',
+            other: { ios: '¿Móvil Android? <a href="{play}">Descargar en Google Play</a>', android: '¿iPhone? <a href="{ios}">Descargar en el App Store</a>' },
+            codeLabel: 'Tu código de invitación', copy: 'Copiar código', copied: 'Copiado ✓',
+            hint: 'Si la app te lo pide después de instalarla: aquí lo tienes.',
+            step1: '<strong>Instala Quote</strong> — gratis, botón de arriba.',
+            step2: '<strong>Crea una cuenta</strong> — tarda un minuto.',
+            step3: '<strong>Únete</strong> — introduce el código, salvo que la app ya lo conozca.',
+            playmoney: '<strong>Solo dinero ficticio:</strong> los puntos no tienen valor monetario. No hay compra, ni canje, ni pago. Mayores de 18 — detalles en las <a href="/quote/agb">Condiciones de uso</a>.',
+            more: '← Más sobre Quote', back: 'Volver', docTitle: 'Invitación a una liga – Quote'
+        },
+        fr: {
+            title: 'Tu es invité',
+            lead: 'Quelqu’un veut jouer avec toi dans une ligue Quote : miser de l’argent fictif sur de vrais matchs et voir qui lit le mieux les cotes.',
+            appStore: 'Télécharger dans l’', appStoreName: 'App Store', play: 'Disponible sur', playName: 'Google Play',
+            free: 'Gratuit – argent fictif uniquement.',
+            other: { ios: 'Téléphone Android ? <a href="{play}">Télécharger sur Google Play</a>', android: 'iPhone ? <a href="{ios}">Télécharger dans l’App Store</a>' },
+            codeLabel: 'Ton code d’invitation', copy: 'Copier le code', copied: 'Copié ✓',
+            hint: 'Si l’app te le demande après l’installation : le voici.',
+            step1: '<strong>Installe Quote</strong> — gratuit, bouton ci-dessus.',
+            step2: '<strong>Crée un compte</strong> — une minute suffit.',
+            step3: '<strong>Rejoins</strong> — saisis le code, sauf si l’app le connaît déjà.',
+            playmoney: '<strong>Argent fictif uniquement :</strong> les points n’ont aucune valeur monétaire. Pas d’achat, pas d’échange, pas de versement. 18 ans et plus — détails dans les <a href="/quote/agb">Conditions d’utilisation</a>.',
+            more: '← En savoir plus sur Quote', back: 'Retour', docTitle: 'Invitation à une ligue – Quote'
+        }
+    };
+
+    function sprache() {
+        var liste = navigator.languages || [navigator.language || 'en'];
+        for (var i = 0; i < liste.length; i++) {
+            var k = String(liste[i] || '').slice(0, 2).toLowerCase();
+            if (T[k]) return k;
+        }
+        return 'en';
+    }
+
+    /*
+      Gelesen wird grosszuegig — GENAU SO wie `normalisiereCode()` in der App
+      (`src/features/leagues/einladungCode.ts`). Das Alphabet kennt kein I, L,
+      O und U; wer sie vom Bildschirm abliest, meinte die Ziffern. Weichen die
+      beiden Normalisierungen voneinander ab, zeigt diese Seite einen anderen
+      Code an, als die App danach annimmt.
+
+      Der Code kommt auf zwei Wegen herein:
         /quote/j/ABCD1234        der geteilte Link. GitHub Pages hat dort keine
                                  Datei und liefert `404.html`; die schickt uns
                                  den Code als `?code=` herueber.
         /quote/j/?code=ABCD1234  dieser Weg, und der Direktaufruf.
-
-      Gelesen wird grosszuegig — GENAU SO wie `normalisiereCode()` in der App
-      (`src/features/leagues/pendingInvite.ts`). Das Alphabet kennt kein I, L,
-      O und U; wer sie vom Bildschirm abliest, meinte die Ziffern. Weichen die
-      beiden Normalisierungen voneinander ab, zeigt diese Seite einen anderen
-      Code an, als die App danach annimmt.
     */
     function normalisiere(roh) {
         var sauber = (roh || '')
@@ -163,15 +270,117 @@
     var ausAbfrage = (location.search.match(/[?&]code=([^&]+)/) || [])[1] || '';
     var code = normalisiere(decodeURIComponent(ausAbfrage) || decodeURIComponent(ausPfad));
 
-    if (code) {
-        document.getElementById('code').textContent = code;
-        document.getElementById('codeBox').hidden = false;
-        document.getElementById('hint').hidden = false;
-        document.title = 'Liga-Einladung ' + code + ' – Quote';
+    /*
+      Die Plattform des Lesers. iPadOS meldet sich seit 13 als Macintosh —
+      der Tastsinn (`maxTouchPoints`) verraet es. Alles, was weder iOS noch
+      Android ist, ist ein Rechner: dort stehen beide Knoepfe nebeneinander,
+      denn der Leser wird die Adresse an sein Handy weitergeben, und wir
+      wissen nicht, an welches.
+    */
+    var ua = navigator.userAgent || '';
+    var istIOS = /iPhone|iPad|iPod/.test(ua)
+        || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var istAndroid = /Android/.test(ua);
+
+    var k = sprache();
+    var t = T[k];
+    document.documentElement.lang = k;
+    document.title = code ? t.docTitle.replace(' – ', ' ' + code + ' – ') : t.docTitle;
+
+    var knoten = document.querySelectorAll('[data-t]');
+    for (var i = 0; i < knoten.length; i++) {
+        var schluessel = knoten[i].getAttribute('data-t');
+        if (t[schluessel]) knoten[i].innerHTML = t[schluessel];
     }
 
-    var knopf = document.getElementById('copy');
-    knopf.addEventListener('click', function () {
+    /*
+      Der Play-Link traegt den Referrer nur, wenn es einen Code gibt — ohne
+      Code ist die Seite eine allgemeine Ladeseite, und ein leerer `code=`
+      im Referrer waere eine Zusicherung ohne Inhalt.
+    */
+    var playLink = code
+        ? PLAY + '&referrer=' + encodeURIComponent('utm_source=invite&utm_medium=share&code=' + code)
+        : PLAY;
+    var inviteLink = INVITE_BASE + code;
+
+    var APPLE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.55-1.71-2.51-3.02-7.11-1.26-10.21.87-1.54 2.43-2.52 4.12-2.54 1.28-.02 2.5.87 3.28.87.78 0 2.25-1.07 3.79-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.85M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>';
+    var GOOGLE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35l13.69 9.85-4.28 4.28-10.25-1.78zm14.06-8.15l3.35 1.9c.5.29.83.83.83 1.44s-.33 1.15-.83 1.44l-3.35 1.9-4.3-4.3 4.3-4.38z"/></svg>';
+
+    function knopf(id, href, svg, klein, gross) {
+        return '<a class="store-badge" id="' + id + '" href="' + href + '" rel="noopener">'
+            + svg + '<span class="store-badge-text"><small>' + klein + '</small><strong>' + gross + '</strong></span></a>';
+    }
+    var appleKnopf = knopf('storeIos', APP_STORE, APPLE, t.appStore, t.appStoreName);
+    var playKnopf = knopf('storePlay', playLink, GOOGLE, t.play, t.playName);
+    var andere = t.other[istIOS ? 'ios' : 'android'].replace('{play}', playLink).replace('{ios}', APP_STORE);
+
+    var main = document.getElementById('storeMain');
+    if (istIOS) {
+        main.innerHTML = appleKnopf + '<span class="store-free">' + t.free + '</span><span class="store-other">' + andere + '</span>';
+    } else if (istAndroid) {
+        main.innerHTML = playKnopf + '<span class="store-free">' + t.free + '</span><span class="store-other">' + andere + '</span>';
+    } else {
+        main.innerHTML = '<div class="store-both">' + appleKnopf + playKnopf + '</div><span class="store-free">' + t.free + '</span>';
+    }
+
+    if (code) {
+        document.getElementById('code').textContent = code.slice(0, 4) + ' ' + code.slice(4);
+        document.getElementById('codeBox').hidden = false;
+        document.getElementById('hint').hidden = false;
+    }
+
+    /*
+      ═══════════ Der Link in die Zwischenablage (M215) ═══════════
+
+      Beim Tipp auf den Store-Knopf — im Klick, denn nur eine Nutzergeste
+      darf schreiben. `ClipboardItem` mit `text/uri-list`: WebKit legt das
+      als `public.url` ab, und nur das sieht die App mit `hasUrlAsync()` OHNE
+      Systemfrage. `text/plain` daneben, damit ein Einfuegen von Hand den
+      Link ergibt und nicht nichts.
+
+      Die Navigation wird kurz angehalten und danach von Hand ausgeloest:
+      `clipboard.write` ist asynchron, und ein Seitenwechsel mitten im
+      Schreiben bricht es in manchen In-App-Browsern ab. Scheitert das
+      Schreiben (alter Browser, kein sicherer Kontext), geht es trotzdem in
+      den Store — der Code steht ja unten. Spaetestens nach 400 ms geht es
+      in jedem Fall weiter.
+
+      Auch beim Play-Knopf, obwohl dort der Referrer traegt: eine geladene
+      APK hat keinen, und die Zwischenablage kostet nichts.
+    */
+    function inDenStore(e) {
+        if (!code) return;
+        var ziel = this.href;
+        e.preventDefault();
+        var fertig = false;
+        var los = function () { if (!fertig) { fertig = true; location.href = ziel; } };
+        setTimeout(los, 400);
+        try {
+            if (navigator.clipboard && navigator.clipboard.write && window.ClipboardItem) {
+                var eintrag = new ClipboardItem({
+                    'text/uri-list': new Blob([inviteLink], { type: 'text/uri-list' }),
+                    'text/plain': new Blob([inviteLink], { type: 'text/plain' })
+                });
+                navigator.clipboard.write([eintrag]).then(los, function () {
+                    if (navigator.clipboard.writeText) navigator.clipboard.writeText(inviteLink).then(los, los);
+                    else los();
+                });
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(inviteLink).then(los, los);
+            } else {
+                los();
+            }
+        } catch (err) {
+            los();
+        }
+    }
+    var ios = document.getElementById('storeIos');
+    var play = document.getElementById('storePlay');
+    if (ios) ios.addEventListener('click', inDenStore);
+    if (play) play.addEventListener('click', inDenStore);
+
+    var kopieren = document.getElementById('copy');
+    kopieren.addEventListener('click', function () {
         /*
           `navigator.clipboard` gibt es nur in sicheren Kontexten und nicht in
           jedem In-App-Browser (WhatsApp, Instagram). Der Rueckfall ueber ein
@@ -179,8 +388,8 @@
           Links an.
         */
         var fertig = function () {
-            knopf.textContent = 'Kopiert ✓';
-            setTimeout(function () { knopf.textContent = 'Code kopieren'; }, 2000);
+            kopieren.textContent = t.copied;
+            setTimeout(function () { kopieren.textContent = t.copy; }, 2000);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(code).then(fertig, ersatz);
