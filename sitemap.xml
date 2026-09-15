@@ -26,6 +26,10 @@
   <url><loc>https://www.honeyapps.de/quote/support</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.honeyapps.de/quote/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://www.honeyapps.de/quote/agb</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.honeyapps.de/nflquote/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.honeyapps.de/nflquote/support</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://www.honeyapps.de/nflquote/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.honeyapps.de/nflquote/agb</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://www.honeyapps.de/impressum.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://www.honeyapps.de/datenschutz.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://www.honeyapps.de/agb.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
