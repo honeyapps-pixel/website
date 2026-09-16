@@ -31,7 +31,10 @@
       // TODO: Platzhalter durch die echte numerische Pixel-ID ersetzen.
       var R2B_META_PIXEL_ID = 'REPLACE_WITH_PIXEL_ID';
 
+      var r2bMarketingTagsLoaded = false;
       function r2bLoadMarketingTags() {
+        if (r2bMarketingTagsLoaded) return;
+        r2bMarketingTagsLoaded = true;
         // Google Ads (Conversion ID AW-18145804367)
         var gtagScript = document.createElement('script');
         gtagScript.async = true;
@@ -1320,6 +1323,7 @@
       declineBtn.addEventListener('click', function() {
         setConsent('denied');
         hideBanner();
+        if (r2bMarketingTagsLoaded) window.location.reload();
       });
     }
 
@@ -1374,7 +1378,7 @@
 
   // Play erwartet den referrer als EINEN URL-kodierten String: "utm_source=x&utm_medium=y"
   var referrer = KEYS.filter(function(k) { return utm[k]; })
-    .map(function(k) { return k + '=' + utm[k]; })
+    .map(function(k) { return k + '=' + encodeURIComponent(utm[k]); })
     .join('&');
 
   document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a) {
@@ -1393,7 +1397,7 @@
      Falls später separate Conversions gewünscht: zweite Conversion-Action in Google Ads anlegen
      und PLAY_STORE_LABEL hier durch deren Label ersetzen.
      Meta Pixel: feuert daneben ein Custom Event "AppStoreClick"/"PlayStoreClick" (analoges Signal).
-     Beide Aufrufe sind No-Ops, solange kein Consent erteilt wurde (gtag/fbq dann nicht geladen).
+     Store-Klicks sind Mikro-Conversions, kein Umsatz. Ohne aktuelle Einwilligung wird kein Event eingereiht.
 -->
 <script>
 (function() {
@@ -1401,13 +1405,13 @@
   var PLAYSTORE_LABEL = 'zJvGCLnjhakcEM-AzMxD';
   document.querySelectorAll('[data-conversion]').forEach(function(el) {
     el.addEventListener('click', function() {
+      // A pre-consent click must not be queued and sent after later acceptance.
+      try { if (localStorage.getItem('r2b_consent') !== 'granted') return; } catch (e) { return; }
       var type = el.getAttribute('data-conversion');
       var label = type === 'app-store' ? APPSTORE_LABEL : PLAYSTORE_LABEL;
       if (typeof gtag === 'function') {
         gtag('event', 'conversion', {
-          'send_to': 'AW-18145804367/' + label,
-          'value': 1.0,
-          'currency': 'EUR'
+          'send_to': 'AW-18145804367/' + label
         });
       }
       if (typeof fbq === 'function') {
