@@ -130,6 +130,7 @@
 
 <section id="faq" class="faq-section">
     <h2>Häufige Fragen</h2>
+    <p>Neu dabei? <a href="/route2bee/ratgeber/erste-automatische-fahrt">Hier richtest du deine erste automatische Fahrt ein.</a></p>
 
     <div class="faq-item">
         <h3>Die App erkennt meine Fahrten nicht automatisch</h3>
@@ -141,7 +142,7 @@
             <li>Stromspar-/Energiemodus: deaktiviert</li>
             <li>Auto-Tracking-Schalter in der App: aktiv (Einstellungen → Auto-Tracking)</li>
         </ul>
-        <p>Force-Close der App (Wischen im App-Switcher) stoppt die Fahrterkennung. Lass die App einfach im Hintergrund.</p>
+        <p>Nach einem erzwungenen Beenden kann die Fahrterkennung aussetzen. Öffne die App wieder und kontrolliere den Auto-Tracking-Status. Prüfe unter Android außerdem, ob die Akku-Einstellungen die Hintergrundaktivität einschränken.</p>
     </div>
 
     <div class="faq-item">
@@ -150,30 +151,31 @@
         <ul>
             <li>Mehr-Tab → Abonnement → <strong>„Käufe wiederherstellen"</strong> tippen</li>
             <li>App komplett beenden (App-Switcher → hochwischen) und neu öffnen</li>
-            <li>Mit der gleichen Apple-ID eingeloggt sein, mit der du gekauft hast</li>
+            <li>Im App Store bzw. Google Play mit demselben Store-Konto angemeldet sein, mit dem du gekauft hast</li>
         </ul>
         <p>Wenn das nicht hilft, melde dich per E-Mail mit deiner Kaufbestätigung.</p>
     </div>
 
     <div class="faq-item">
         <h3>Wie kann ich mein Abo kündigen?</h3>
-        <p>Abos werden ausschließlich über Apple verwaltet:</p>
+        <p>Dein Abo wird über den Store verwaltet, in dem du es gekauft hast:</p>
         <ul>
             <li>In der App: Mehr-Tab → Abonnement → <strong>„Abo verwalten"</strong></li>
-            <li>Oder direkt auf dem iPhone: Einstellungen → (dein Name) → Abonnements → Route2Bee</li>
+            <li>iPhone: <a href="https://apps.apple.com/account/subscriptions">Apple-Abonnements öffnen</a> → Route2Bee</li>
+            <li>Android: <a href="https://play.google.com/store/account/subscriptions">Google-Play-Abonnements öffnen</a> → Route2Bee</li>
         </ul>
         <p>Die Kündigung greift zum Ende des bezahlten Zeitraums – dein Abo bleibt bis dahin aktiv.</p>
     </div>
 
     <div class="faq-item">
         <h3>Ist das Fahrtenbuch GoBD-konform?</h3>
-        <p>Route2Bee bietet alle technischen Funktionen für ein GoBD-konformes elektronisches Fahrtenbuch: Audit-Log, Finalisierung (unveränderbare Einträge), 10-Jahres-Aufbewahrung und Prüfsummen auf PDF-Exporten.</p>
+        <p>Route2Bee bietet ein Änderungsprotokoll, die Finalisierung geprüfter Fahrten und PDF-Exporte mit Prüfsumme. Diese Funktionen unterstützen eine nachvollziehbare Dokumentation; sie garantieren keine steuerliche Anerkennung. Bewahre benötigte Exporte selbst auf, insbesondere vor einer Kontolöschung.</p>
         <p>Die steuerliche Anerkennung durch dein Finanzamt hängt aber auch von deiner Nutzung ab – insbesondere von der <strong>zeitgerechten und vollständigen Erfassung aller Fahrten</strong> und der korrekten Zuordnung des Fahrtzwecks. Wir empfehlen, die Nutzung mit deinem Steuerberater abzustimmen.</p>
     </div>
 
     <div class="faq-item">
         <h3>Wo liegen meine Daten?</h3>
-        <p>Deine Fahrten werden primär <strong>lokal</strong> auf deinem iPhone in einer SQLite-Datenbank gespeichert. Die Cloud-Synchronisierung (optional) läuft über Supabase-Server in <strong>Frankfurt, Deutschland</strong>. Einzelne GPS-Koordinaten verlassen dein Gerät nie – nur aggregierte Fahrtdaten (Start-, Endadresse, Strecke, Dauer).</p>
+        <p>Deine Fahrten werden lokal auf deinem Smartphone gespeichert. Sobald das Gerät online ist, werden Fahrtdaten und GPS-Wegpunkte mit deinem Konto auf Supabase-Servern in <strong>Frankfurt, Deutschland</strong> synchronisiert. So stehen auch die Streckenverläufe auf deinen Geräten zur Verfügung.</p>
         <p>Details: <a href="/route2bee/privacy">Datenschutzerklärung</a></p>
     </div>
 
@@ -181,7 +183,7 @@
         <h3>Wie exportiere ich meine Daten?</h3>
         <p>Zwei Wege:</p>
         <ul>
-            <li><strong>Fahrtenbericht</strong> (Reports-Tab): PDF, CSV, DATEV (SKR03/SKR04), Lexoffice</li>
+            <li><strong>Fahrtenbericht</strong> (Reports-Tab): PDF, CSV, DATEV-Buchungsstapel (SKR03/SKR04) und Eigenbeleg-PDF zum Hochladen in Lexware Office</li>
             <li><strong>Kompletter JSON-Export</strong> (Mehr → Meine Daten → „Daten exportieren"): alle Fahrten inkl. Metadaten für DSGVO-Datenportabilität (Art. 20)</li>
         </ul>
     </div>
@@ -189,7 +191,7 @@
     <div class="faq-item">
         <h3>Wie lösche ich mein Konto?</h3>
         <p>In der App: Mehr-Tab → Meine Daten (DSGVO) → <strong>„Konto & Daten löschen"</strong>. Die Löschung ist unwiderruflich.</p>
-        <p><strong>Wichtig:</strong> Mit dem Konto wird <em>alles</em> gelöscht — auch geprüfte Fahrten, Wegpunkte und das Änderungsprotokoll. Wir behalten keine Kopie. Die 10-jährige Aufbewahrungspflicht für dein Fahrtenbuch (§ 147 AO) liegt bei dir: Exportiere deine Fahrten vorher (PDF, CSV, DATEV oder JSON) und bewahre den Export selbst auf.</p>
+        <p><strong>Wichtig:</strong> Mit dem Konto wird <em>alles</em> gelöscht — auch geprüfte Fahrten, Wegpunkte und das Änderungsprotokoll. Wir behalten keine Kopie. Wenn für deine Unterlagen eine steuerliche Aufbewahrungspflicht gilt, musst du sie selbst erfüllen: Exportiere deine Fahrten vorher (PDF, CSV, DATEV oder JSON) und bewahre den Export selbst auf.</p>
     </div>
 
     <div class="faq-item">
@@ -199,7 +201,7 @@
             <li>Was du gemacht hast (Schritte)</li>
             <li>Was passiert ist</li>
             <li>Was du erwartet hast</li>
-            <li>iPhone-Modell und iOS-Version</li>
+            <li>Gerätemodell und iOS- bzw. Android-Version</li>
             <li>App-Version (Mehr-Tab → ganz unten)</li>
         </ul>
         <p>Wir antworten normalerweise innerhalb eines Werktags.</p>
@@ -220,7 +222,7 @@
                 <ul>
                     <li><a href="/route2bee">Übersicht</a></li>
                     <li><a href="/route2bee/support">Support &amp; FAQ</a></li>
-                    <li><a href="https://apps.apple.com/app/route2bee">App Store</a></li>
+                    <li><a href="https://apps.apple.com/de/app/fahrtenbuch-route2bee/id6761436614">App Store</a></li>
                 </ul>
             </div>
             <div class="footer-col">
