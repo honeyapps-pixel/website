@@ -69,6 +69,20 @@
         }
         .legal-body th { color: var(--text-primary); font-weight: 600; background: #F5F8FC; }
         .legal-body td { color: var(--text-secondary); }
+        .format-label { display: none; }
+        @media (max-width: 600px) {
+            .table-wrap { overflow: visible; }
+            .legal-body table, .legal-body tbody, .legal-body tr, .legal-body td { display: block; }
+            .legal-body thead {
+                position: absolute; width: 1px; height: 1px; padding: 0;
+                overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+            }
+            .legal-body tbody tr { margin-bottom: 20px; border: 1px solid #E8F0FA; border-radius: 10px; overflow: hidden; }
+            .legal-body td { padding: 12px 16px; overflow-wrap: anywhere; }
+            .legal-body td:first-child { background: #F5F8FC; font-size: 18px; }
+            .legal-body td:last-child { border-bottom: 0; }
+            .format-label { display: block; color: var(--text-primary); font-weight: 600; margin-bottom: 4px; }
+        }
         .back-link {
             display: inline-flex; align-items: center; gap: 6px; margin-top: 44px;
             color: #3B73B9; font-weight: 600; text-decoration: none;
@@ -120,10 +134,10 @@
 <p>Öffne in Route2Bee den Bereich <strong>Berichte</strong>. Wähle die Monats- oder Jahresansicht und den benötigten Zeitraum. Kontrolliere die angezeigte Fahrtenzahl und die Zusammenfassung nach Firma. Für einen Zeitraum ohne Fahrten ist kein Fahrtenexport verfügbar.</p>
 <h2>3. Das passende Format wählen</h2>
 <div class="table-wrap"><table><thead><tr><th>Format</th><th>Wofür du es verwendest</th><th>Was du vorher klärst</th></tr></thead><tbody>
-<tr><td><strong>PDF</strong></td><td>Fahrtenbericht lesen, ablegen und weitergeben</td><td>Zeitraum, Angaben und Vollständigkeit prüfen</td></tr>
-<tr><td><strong>CSV</strong></td><td>Fahrtdaten in einer Tabelle weiterverarbeiten</td><td>Welche Spalten deine Auswertung braucht</td></tr>
-<tr><td><strong>DATEV</strong></td><td>Buchungsstapel für die Steuerkanzlei</td><td>Kontenrahmen, Konten, Berater- und Mandantennummer abstimmen</td></tr>
-<tr><td><strong>Lexware Office</strong></td><td>Eigenbeleg-PDF zum Hochladen in die Buchhaltung</td><td>Beleg prüfen und anschließend selbst hochladen</td></tr>
+<tr><td><strong>PDF</strong></td><td><span class="format-label" aria-hidden="true">Wofür du es verwendest</span>Fahrtenbericht lesen, ablegen und weitergeben</td><td><span class="format-label" aria-hidden="true">Was du vorher klärst</span>Zeitraum, Angaben und Vollständigkeit prüfen</td></tr>
+<tr><td><strong>CSV</strong></td><td><span class="format-label" aria-hidden="true">Wofür du es verwendest</span>Fahrtdaten in einer Tabelle weiterverarbeiten</td><td><span class="format-label" aria-hidden="true">Was du vorher klärst</span>Welche Spalten deine Auswertung braucht</td></tr>
+<tr><td><strong>DATEV</strong></td><td><span class="format-label" aria-hidden="true">Wofür du es verwendest</span>Buchungsstapel für die Steuerkanzlei</td><td><span class="format-label" aria-hidden="true">Was du vorher klärst</span>Kontenrahmen, Konten, Berater- und Mandantennummer abstimmen</td></tr>
+<tr><td><strong>Lexware Office</strong></td><td><span class="format-label" aria-hidden="true">Wofür du es verwendest</span>Eigenbeleg-PDF zum Hochladen in die Buchhaltung</td><td><span class="format-label" aria-hidden="true">Was du vorher klärst</span>Beleg prüfen und anschließend selbst hochladen</td></tr>
 </tbody></table></div>
 <p>DATEV und der Eigenbeleg für Lexware Office sind Premium-Funktionen. Diese beiden Formate werden für die Einstellungen <strong>Euro und Kilometer</strong> angeboten. Wenn der Button fehlt, kontrolliere zuerst Währung und Einheit.</p>
 <h2>DATEV: Einstellungen mit deiner Kanzlei abstimmen</h2>
