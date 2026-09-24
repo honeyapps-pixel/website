@@ -117,7 +117,7 @@
 <section class="privacy-hero">
     <img src="../app-icon-512.png" alt="ReciBee">
     <h1>Datenschutz für ReciBee</h1>
-    <p class="updated">Stand: 17. April 2026</p>
+    <p class="updated">Stand: 24. September 2026</p>
 </section>
 
 <div class="legal-page">
@@ -151,8 +151,10 @@
             <li><a href="#analytics">3a. Firebase Analytics &amp; Crashlytics</a></li>
             <li><a href="#brevo">3b. E-Mail-Versand (Brevo)</a></li>
             <li><a href="#admob">3c. Werbung (Google AdMob)</a></li>
+            <li><a href="#push">3d. Push-Benachrichtigungen</a></li>
             <li><a href="#ki">4. Künstliche Intelligenz (KI-Funktionen)</a></li>
             <li><a href="#import">5. Rezept-Import aus Drittquellen</a></li>
+            <li><a href="#oeffentlich">5a. Öffentlich geteilte Rezepte</a></li>
             <li><a href="#usa">6. Datenübertragung in die USA</a></li>
             <li><a href="#speicherdauer">7. Speicherdauer</a></li>
             <li><a href="#rechte">8. Deine Rechte</a></li>
@@ -201,6 +203,7 @@
         <li><strong>Mikrofon</strong> – für die Spracheingabe von Rezepten</li>
         <li><strong>Fotogalerie</strong> – zum Auswählen von Bildern für Rezepte</li>
         <li><strong>Spracherkennung</strong> – zur automatischen Transkription gesprochener Rezepte</li>
+        <li><strong>Mitteilungen</strong> – für Push-Benachrichtigungen, z. B. über das Ergebnis eines Rezept-Imports (siehe Abschnitt 3d)</li>
         <li><strong>Tracking-Transparenz (nur iOS)</strong> – für personalisierte Werbung über Google AdMob und anonymisierte Nutzungsstatistiken (wird nur mit deiner ausdrücklichen Zustimmung aktiviert)</li>
     </ul>
 
@@ -212,6 +215,7 @@
         <li>Firebase Cloud Storage – für die Speicherung von Bildern</li>
         <li>Firebase Cloud Functions – für serverseitige Verarbeitung (Rezept-Import, KI-Funktionen, Social-Media-Import)</li>
         <li>Firebase App Check – zur Absicherung gegen missbräuchliche Zugriffe (Geräte-Attestierung über Apple DeviceCheck bzw. Google Play Integrity)</li>
+        <li>Firebase Cloud Messaging – für Push-Benachrichtigungen (siehe Abschnitt 3d)</li>
     </ul>
     <p>Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland) ist Auftragsverarbeiter im Sinne von Art. 28 DSGVO. Ein Auftragsverarbeitungsvertrag (AVV) liegt vor.</p>
     <p>Weitere Informationen: <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">https://firebase.google.com/support/privacy</a></p>
@@ -257,6 +261,15 @@
     <p>Weitere Informationen: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">https://policies.google.com/technologies/ads</a><br>
     Datenschutz bei Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a></p>
 
+    <h2 id="push">3d. Push-Benachrichtigungen</h2>
+    <p>Wenn du Mitteilungen erlaubst, sendet dir die App Push-Benachrichtigungen über Firebase Cloud Messaging (Google Ireland Limited, siehe Abschnitt 3):</p>
+    <ul>
+        <li>Ergebnis eines Rezept-Imports über die Teilen-Funktion („Rezept importiert" bzw. „Import fehlgeschlagen")</li>
+        <li>Wöchentliche Erinnerung, deinen Wochenplan zu erstellen</li>
+    </ul>
+    <p>Dafür wird ein gerätebezogenes Push-Token zusammen mit deiner Nutzer-ID, der Plattform (iOS/Android) und dem Zeitpunkt der letzten Aktualisierung gespeichert. Zugestellt werden die Benachrichtigungen über den Apple Push Notification Service (Apple Inc.) bzw. Google.</p>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO sowie § 25 Abs. 1 TDDDG (Einwilligung über die Mitteilungs-Abfrage deines Geräts). Du kannst Mitteilungen jederzeit in den Systemeinstellungen deines Geräts deaktivieren. Beim Abmelden und bei der Löschung deines Accounts wird das Push-Token gelöscht.</p>
+
     <h2 id="ki">4. Künstliche Intelligenz (KI-Funktionen)</h2>
     <p>Die App nutzt KI-gestützte Funktionen auf Basis von Google Gemini (ein generatives KI-Modell von Google LLC). Die Verarbeitung erfolgt über unsere eigenen Firebase Cloud Functions, die als Vermittler zur Gemini API dienen. Daten werden dabei ausschließlich auf deine aktive Anfrage hin übermittelt.</p>
     <p><strong>a) Bild-zu-Rezept-Erkennung</strong><br>
@@ -284,17 +297,28 @@
         <li><strong>Webseiten-Import (URL):</strong> Die angegebene URL wird von unserer Cloud Function serverseitig aufgerufen. Seiteninhalt und strukturierte Rezeptdaten (JSON-LD, Microdata) werden extrahiert.</li>
         <li><strong>Social-Media-Import (Instagram, TikTok, Pinterest):</strong> Öffentlich zugängliche Beiträge werden über öffentliche Schnittstellen oder öffentlich einsehbare Inhalte abgerufen. Gespeichert werden nur die extrahierten Rezeptdaten.</li>
         <li><strong>Chefkoch:</strong> Die App nutzt die öffentliche Rezept-API von chefkoch.de zum Abruf von Rezeptdaten.</li>
-        <li><strong>iOS Share Extension:</strong> Wenn du über das iOS-Teilen-Menü Inhalte (z. B. URLs oder Texte) an ReciBee weitergibst, werden diese direkt an unsere Cloud Function übertragen und dort wie ein regulärer Import verarbeitet (inkl. KI-gestützter Strukturierung über Google Gemini, siehe Abschnitt 4). Gespeichert werden ausschließlich die extrahierten Rezeptdaten.</li>
+        <li><strong>Teilen-Funktion (iOS und Android):</strong> Wenn du über das Teilen-Menü deines Geräts einen Link an ReciBee weitergibst, wird dieser an unsere Cloud Function übertragen. Der Import läuft anschließend im Hintergrund auf unseren Servern und wird wie ein regulärer Import verarbeitet (inkl. KI-gestützter Strukturierung über Google Gemini, siehe Abschnitt 4). Über das Ergebnis informieren wir dich per Push-Benachrichtigung (siehe Abschnitt 3d) bzw. beim nächsten Öffnen der App. Dafür speichern wir einen Import-Auftrag (geteilter Link, Status, Titel des importierten Rezepts, Sprache und Zeitpunkte) für 7 Tage; danach wird er automatisch gelöscht. Dauerhaft gespeichert werden nur die extrahierten Rezeptdaten.</li>
     </ul>
     <p>Du bist dafür verantwortlich, dass du zur Nutzung der importierten Inhalte berechtigt bist und keine Urheberrechte Dritter verletzt.</p>
+
+    <h2 id="oeffentlich">5a. Öffentlich geteilte Rezepte</h2>
+    <p>Wenn du ein eigenes Rezept als „öffentlich" teilst, wird es</p>
+    <ul>
+        <li>anderen ReciBee-Nutzern im Bereich „Entdecken" angezeigt – zusammen mit deinem Anzeigenamen sowie „Gefällt mir"-Angaben, Bewertungen und Kommentaren,</li>
+        <li>als öffentlich zugängliche Webseite unter rezept-af153.web.app bereitgestellt (Titel, Beschreibung, Foto, Zutaten und Zubereitung – ohne deinen Namen), damit das Rezept per Link geteilt werden kann,</li>
+        <li>in einer Sitemap aufgeführt, sodass Suchmaschinen (z. B. Google) die Seite finden und in ihren Suchergebnissen anzeigen können.</li>
+    </ul>
+    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung – die Veröffentlichung erfolgt ausschließlich auf deine ausdrückliche Anweisung).</p>
+    <p>Du kannst die Veröffentlichung jederzeit zurücknehmen oder das Rezept löschen. Die Webseite ist dann nicht mehr abrufbar; zwischengespeicherte Kopien können noch bis zu 24 Stunden ausgeliefert werden. Auf die Suchergebnisse von Suchmaschinen haben wir keinen direkten Einfluss; Einträge werden dort in der Regel bei der nächsten Aktualisierung durch die Suchmaschine entfernt.</p>
 
     <h2 id="usa">6. Datenübertragung in die USA</h2>
     <p>Einige der von uns genutzten Dienste verarbeiten Daten auf Servern in den USA:</p>
     <ul>
         <li>Firebase-Dienste (teilweise in Region us-central1)</li>
         <li>Google Gemini API (KI-Verarbeitung durch Google LLC)</li>
+        <li>Apple Push Notification Service (Zustellung von Push-Benachrichtigungen auf iOS-Geräten durch Apple Inc.)</li>
     </ul>
-    <p>Die Übertragung erfolgt auf Grundlage des EU-U.S. Data Privacy Framework (DPF), unter dem Google LLC zertifiziert ist, sowie auf Basis von EU-Standardvertragsklauseln (Art. 46 DSGVO).</p>
+    <p>Die Übertragung erfolgt auf Grundlage des EU-U.S. Data Privacy Framework (DPF), unter dem Google LLC und Apple Inc. zertifiziert sind, sowie auf Basis von EU-Standardvertragsklauseln (Art. 46 DSGVO).</p>
     <p>Weitere Informationen zum Data Privacy Framework: <a href="https://www.dataprivacyframework.gov" target="_blank" rel="noopener">https://www.dataprivacyframework.gov</a></p>
 
     <h2 id="speicherdauer">7. Speicherdauer</h2>
@@ -309,6 +333,8 @@
         <li>Firebase Analytics: max. 14 Monate (Google-Standard)</li>
         <li>Firebase Crashlytics Absturzberichte: 90 Tage</li>
         <li>Server-Logs (Cloud Functions): 30 Tage</li>
+        <li>Import-Aufträge aus der Teilen-Funktion: 7 Tage</li>
+        <li>Push-Token: bis zum Abmelden, zur Account-Löschung oder bis das Token ungültig wird</li>
         <li>Google AdMob Werbedaten: gemäß Google Ads-Richtlinien (ca. 13–24 Monate)</li>
     </ul>
     <p><strong>KI-Verarbeitung:</strong></p>
