@@ -90,7 +90,7 @@
 
 <section class="legal-hero">
     <h1>Datenschutzerklärung</h1>
-    <p class="updated">Route2Bee · Stand: September 2026</p>
+    <p class="updated">Route2Bee · Stand: Oktober 2026</p>
     <p class="updated lang-switch"><a href="/route2bee/en/privacy">Read in English &rarr;</a></p>
 </section>
 
@@ -108,7 +108,7 @@
       <li>Fahrtdaten: Start- und Endadresse, Entfernung, Dauer, Startzeit, Endzeit</li>
       <li>Kategorien (Tags) und Kostensätze, die du selbst anlegst</li>
       <li>Bekannte Adressen, Fahrt-Vorlagen für wiederkehrende Strecken und deine App-Einstellungen, die du in der App speicherst</li>
-      <li>Fahrt-Zweck (geschäftlich, privat, Arbeitsweg, Sonderfahrt inkl. Anlass) und Kilometerstand pro Fahrt</li>
+      <li>Fahrt-Zweck (geschäftlich, privat, Arbeitsweg, Sonderfahrt inkl. Anlass), Anlass bzw. aufgesuchter Geschäftspartner, soweit du ihn einträgst, und Kilometerstand pro Fahrt</li>
       <li>Notizen und Kennzeichen/Fahrzeuginfo, die du freiwillig eingibst</li>
       <li>Technische Gerätedaten für die Fehleranalyse: Betriebssystem, App-Version, Gerätemodell sowie Laufzeitkontext eines Fehlers (z. B. Sprache, Zeitzone, Speicher- und Akkustand, erteilte Berechtigungen) (siehe Sentry, Ziffer 7)</li>
       <li>Technisches Diagnoseprotokoll der Fahrterkennung: Zustandswechsel (z. B. „Fahrt erkannt", „GPS-Signal veraltet"), Fehlercodes, Zeitstempel und Geräteeinstellungen wie der Status der Akku-Optimierung — ohne Koordinaten (siehe Ziffer 3)</li>
@@ -117,7 +117,8 @@
       <li>E-Mail-Versandprotokoll: welche Service- oder Hinweis-E-Mail wir dir wann geschickt haben, sowie ein von dir erklärter Widerspruch gegen Hinweis-E-Mails (siehe Ziffer 8)</li>
       <li>Abonnementstatus (aktiv/inaktiv, Kaufzeitpunkt, Ablaufdatum) — Zahlungsdaten erhalten wir nie</li>
       <li>Nachweis deiner Zustimmung zu den AGB: Fassung, Zeitpunkt, Plattform, App-Version und Sprache</li>
-      <li>Änderungsprotokoll (Audit-Log): Zeitstempel, Art der Änderung, alte und neue Werte bei Bearbeitung oder Löschung von Fahrtdaten (siehe Ziffer 5)</li>
+      <li>Änderungsprotokoll (Audit-Log): Zeitstempel, Art der Änderung, alte und neue Werte beim Anlegen, Bearbeiten, Abschließen oder Löschen von Fahrten sowie bei Korrekturen des Tachostands eines Fahrzeugs — auf deinem Gerät und serverseitig (siehe Ziffer 5)</li>
+      <li>Export-Protokoll: Zeitpunkt, Art des Exports, Zeitraum, Anzahl der Fahrten, Fahrzeug-ID, App-Version und SHA-256-Prüfsumme jedes Exports (siehe Ziffer 5)</li>
     </ul>
     <p>Wir kaufen keine Daten von Dritten zu und setzen in der App keine Werbe-Tracker oder Analyse-SDKs von Drittanbietern ein.</p>
 
@@ -156,15 +157,17 @@
     </ul>
     <p>Wir nutzen deine Daten nicht für Werbung Dritter, nicht für Profilbildung und nicht für automatisierte Entscheidungen.</p>
 
-    <h2>5. GoBD-orientierte Fahrtenbuchführung: Audit-Log und Finalisierung</h2>
-    <p>Damit dein Fahrtenbuch den Grundsätzen zur ordnungsmäßigen Führung und Aufbewahrung von Büchern in elektronischer Form (GoBD) genügen kann, verarbeitet die App zusätzliche Daten:</p>
-    <p><strong>Audit-Log (Änderungsprotokoll):</strong> Bei jeder Erstellung, Bearbeitung oder Löschung einer Fahrt wird ein Audit-Log-Eintrag gespeichert. Dieser enthält: Zeitstempel der Änderung, Art der Aktion (Erstellen, Bearbeiten, Korrektur, Löschen, Finalisierung), betroffene Felder mit alten und neuen Werten sowie deine Nutzer-ID. Das Audit-Log wird lokal auf deinem Gerät gespeichert und in die Cloud synchronisiert.</p>
+    <h2>5. Fahrtenbuchfunktionen: Änderungsprotokoll, Abschließen und Export-Protokoll</h2>
+    <p>Damit Änderungen an deinem Fahrtenbuch nachvollziehbar bleiben, verarbeitet die App zusätzliche Daten. Ob dein Fahrtenbuch steuerlichen Anforderungen genügt, hängt vor allem von deinen Angaben ab (AGB Ziffer 9).</p>
+    <p><strong>Audit-Log (Änderungsprotokoll):</strong> Bei jeder Erstellung, Bearbeitung oder Löschung einer Fahrt wird ein Audit-Log-Eintrag gespeichert. Dieser enthält: Zeitstempel der Änderung, Art der Aktion (Erstellen, Bearbeiten, Korrektur, Löschen, Finalisierung), betroffene Felder mit alten und neuen Werten sowie deine Nutzer-ID. Das Audit-Log wird lokal auf deinem Gerät gespeichert und in die Cloud synchronisiert. Zusätzlich protokolliert unser Server selbst jede Anlage und Änderung einer Fahrt, die bei ihm ankommt (geänderte Felder mit alten und neuen Werten), sowie Korrekturen des Anfangs-Tachostands deiner Fahrzeuge. Das Protokoll kann im PDF-Export ausgegeben werden.</p>
     <p><strong>Finalisierung:</strong> Wenn du eine Fahrt als „geprüft" markierst, wird sie finalisiert (mit Zeitstempel versehen). Finalisierte Fahrten können bearbeitet werden, wobei die Änderung als Korrektur im Audit-Log protokolliert wird. Innerhalb deines Kontos können finalisierte Fahrten nicht einzeln endgültig gelöscht werden — sie werden nur als gelöscht markiert (Soft-Delete), damit dein Fahrtenbuch nachvollziehbar bleibt.</p>
-    <p><strong>Rechtsgrundlage:</strong> Audit-Log und Soft-Delete sind Bestandteil des vertraglich geschuldeten Fahrtenbuchs (Art. 6 Abs. 1 lit. b DSGVO). Die steuerliche Aufbewahrungspflicht nach § 147 AO (in der Regel 10 Jahre) trifft dich als Steuerpflichtigen — nicht uns. Wir bewahren deine Daten daher nur so lange auf, wie dein Konto besteht.</p>
-    <p><strong>Kontolöschung:</strong> Mit der Löschung deines Kontos werden auch finalisierte Fahrten, Wegpunkte und das Audit-Log vollständig und unwiderruflich gelöscht; wir bewahren nichts davon auf. Benötigst du dein Fahrtenbuch für steuerliche Zwecke, exportiere es vor der Löschung (PDF, CSV, DATEV oder JSON).</p>
+    <p><strong>Export-Protokoll:</strong> Bei jedem Export (PDF, CSV, DATEV, Eigenbeleg) speichern wir Zeitpunkt, Art des Exports, Zeitraum, Anzahl der Fahrten, gegebenenfalls die Fahrzeug-ID, die App-Version und eine SHA-256-Prüfsumme der Exportdatei. Zweck: Du kannst später nachvollziehen, welcher Export wann erstellt wurde, und prüfen, ob eine Exportdatei seither verändert wurde. Das Export-Protokoll ist nur für dein Konto sichtbar.</p>
+    <p><strong>Anlass und Geschäftspartner:</strong> Trägst du bei einer Fahrt einen Anlass oder den Namen eines aufgesuchten Geschäftspartners ein, speichern und synchronisieren wir diese Angabe wie die übrigen Fahrtdaten und geben sie in deinen Exporten aus. Enthält sie Daten Dritter, achte darauf, nur das für dein Fahrtenbuch Nötige einzutragen.</p>
+    <p><strong>Rechtsgrundlage:</strong> Audit-Log, Soft-Delete und Export-Protokoll sind Bestandteil des vertraglich geschuldeten Fahrtenbuchs (Art. 6 Abs. 1 lit. b DSGVO). Die steuerliche Aufbewahrungspflicht nach § 147 AO (in der Regel 10 Jahre) trifft dich als Steuerpflichtigen — nicht uns. Wir bewahren deine Daten daher nur so lange auf, wie dein Konto besteht.</p>
+    <p><strong>Kontolöschung:</strong> Mit der Löschung deines Kontos werden auch finalisierte Fahrten, Wegpunkte, das Audit-Log und das Export-Protokoll vollständig und unwiderruflich gelöscht; wir bewahren nichts davon auf. Benötigst du dein Fahrtenbuch für steuerliche Zwecke, exportiere es vor der Löschung (PDF, CSV, DATEV oder JSON).</p>
 
     <h2>6. Speicherort und Datensicherheit</h2>
-    <p>Deine Fahrten werden primär lokal in einer SQLite-Datenbank auf deinem Gerät gespeichert. Auf iOS werden diese Daten zusätzlich durch die Data Protection API des Betriebssystems geschützt. Die Cloud-Synchronisierung — sie umfasst deine Fahrten, die zugehörigen GPS-Wegpunkte, Firmen, Fahrzeuge, bekannte Orte, Fahrt-Vorlagen, Einstellungen und das Audit-Log — erfolgt über <strong>Supabase</strong>, dessen Server in der Region EU-Zentraleuropa (Frankfurt, Deutschland) betrieben werden. Alle Datenübertragungen sind TLS-verschlüsselt; per Row Level Security ist jeder Datensatz auf das Konto beschränkt, das ihn angelegt hat.</p>
+    <p>Deine Fahrten werden primär lokal in einer SQLite-Datenbank auf deinem Gerät gespeichert. Auf iOS werden diese Daten zusätzlich durch die Data Protection API des Betriebssystems geschützt. Die Cloud-Synchronisierung — sie umfasst deine Fahrten, die zugehörigen GPS-Wegpunkte, Firmen, Fahrzeuge, bekannte Orte, Fahrt-Vorlagen, Einstellungen, das Audit-Log und das Export-Protokoll — erfolgt über <strong>Supabase</strong>, dessen Server in der Region EU-Zentraleuropa (Frankfurt, Deutschland) betrieben werden. Alle Datenübertragungen sind TLS-verschlüsselt; per Row Level Security ist jeder Datensatz auf das Konto beschränkt, das ihn angelegt hat.</p>
     <p>Dein Konto ist durch Supabase Auth gesichert (E-Mail/Passwort, Sign in with Apple oder Google Sign-In). Wir haben keinen Zugang zu deinem Passwort. Kein Übertragungs- oder Speicherverfahren ist vollkommen sicher; absolute Sicherheit können wir nicht garantieren.</p>
 
     <h2>7. Drittanbieter-Dienste</h2>
@@ -199,7 +202,7 @@
     <h2>10. Speicherdauer</h2>
     <ul>
       <li>Kontodaten (E-Mail-Adresse, Anzeigename, Fahrzeuge, Firmen, Einstellungen): bis zur Löschung deines Kontos</li>
-      <li>Fahrtdaten, GPS-Wegpunkte und Audit-Log in der Cloud: bis zur Löschung deines Kontos. Finalisierte Fahrten können innerhalb des Kontos nur als gelöscht markiert werden (Ziffer 5); mit dem Konto werden sie vollständig gelöscht.</li>
+      <li>Fahrtdaten, GPS-Wegpunkte, Audit-Log und Export-Protokoll in der Cloud: bis zur Löschung deines Kontos. Finalisierte Fahrten können innerhalb des Kontos nur als gelöscht markiert werden (Ziffer 5); mit dem Konto werden sie vollständig gelöscht.</li>
       <li>Fahrtdaten und GPS-Wegpunkte lokal auf dem Gerät: bis zur Deinstallation der App oder Abmeldung</li>
       <li>Diagnoseprotokoll der Fahrterkennung, E-Mail-Versandprotokoll, Herkunft der Installation, Daten des Empfehlungsprogramms und Nachweis der AGB-Zustimmung: bis zur Löschung deines Kontos</li>
       <li>Widerspruch gegen Hinweis-E-Mails: solange dein Konto besteht, damit er beachtet wird</li>
@@ -223,7 +226,7 @@
 
     <h2>12. Konto löschen</h2>
     <p>Du kannst dein Konto direkt in der App unter Einstellungen → „Konto &amp; Daten löschen" löschen. Alternativ kannst du dich an <a href="mailto:info@honeyapps.de">info@honeyapps.de</a> wenden.</p>
-    <p><strong>Was gelöscht wird:</strong> alles — Kontodaten, Fahrten (auch finalisierte), GPS-Wegpunkte, Audit-Log, Fahrzeuge, Firmen, bekannte Orte, Vorlagen, Einstellungen, Diagnose- und Versandprotokolle, Herkunftsangaben, Empfehlungsdaten und Zustimmungsnachweise. Ebenso gelöscht wird dein Kundendatensatz bei RevenueCat. Die Löschung ist sofort wirksam und unwiderruflich; wir halten keine Kopie vor. Ausgenommen sind nur Daten, die nicht bei uns liegen oder technisch nachlaufen: bereits erstellte Fehlerberichte bei Sentry (bis zu 90 Tage, Ziffer 10), das Versandprotokoll von Brevo und die Kaufbelege bei Apple bzw. Google.</p>
+    <p><strong>Was gelöscht wird:</strong> alles — Kontodaten, Fahrten (auch finalisierte), GPS-Wegpunkte, Audit-Log, Export-Protokoll, Fahrzeuge, Firmen, bekannte Orte, Vorlagen, Einstellungen, Diagnose- und Versandprotokolle, Herkunftsangaben, Empfehlungsdaten und Zustimmungsnachweise. Ebenso gelöscht wird dein Kundendatensatz bei RevenueCat. Die Löschung ist sofort wirksam und unwiderruflich; wir halten keine Kopie vor. Ausgenommen sind nur Daten, die nicht bei uns liegen oder technisch nachlaufen: bereits erstellte Fehlerberichte bei Sentry (bis zu 90 Tage, Ziffer 10), das Versandprotokoll von Brevo und die Kaufbelege bei Apple bzw. Google.</p>
     <p><strong>Vorher exportieren:</strong> Ein Fahrtenbuch unterliegt bei dir als Steuerpflichtigem in der Regel einer Aufbewahrungspflicht von 10 Jahren (§ 147 AO). Exportiere deine Fahrten vor der Löschung (PDF, CSV, DATEV oder JSON). Nach der Löschung können wir nichts wiederherstellen.</p>
     <p><strong>Abonnement:</strong> Die Kontolöschung beendet ein laufendes Abonnement nicht automatisch. Kündige es zusätzlich in den Abo-Einstellungen deines App Stores bzw. bei Google Play.</p>
 

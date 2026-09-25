@@ -90,7 +90,7 @@
 
 <section class="legal-hero">
     <h1>Terms of Service</h1>
-    <p class="updated">Route2Bee &middot; Last updated: September 2026</p>
+    <p class="updated">Route2Bee &middot; Last updated: October 2026</p>
     <p class="updated lang-switch"><a href="/route2bee/agb">Auf Deutsch lesen &rarr;</a></p>
 </section>
 
@@ -112,7 +112,7 @@
       <li>Categorization and management of trips</li>
       <li>Mileage reports with PDF and CSV export</li>
       <li>Cloud synchronization across your devices</li>
-      <li>Recordkeeping features including an audit log, trip finalization and export checksums</li>
+      <li>Recordkeeping aids including a change log, trip finalization, a reason and business partner field per trip, and a checksum per export (see Section 10)</li>
     </ul>
     <p>We may extend, modify or restrict the functionality of the App at any time. For a paid subscription period already begun, the core functions (automatic trip detection, export, cloud synchronization) remain available.</p>
 
@@ -190,18 +190,19 @@
     <p><strong>9.7 Visibility.</strong> The referrer sees the referred user’s first name and reward status in their invitation list (see Section 10 of the Privacy Policy).</p>
 
     <h2>10. Mileage Records and Tax Matters</h2>
-    <p>Route2Bee provides features intended to support contemporaneous mileage recordkeeping, including:</p>
+    <p>Route2Bee is a tool that helps you keep your own mileage log. The following features describe what the App does technically; they are not a promise that your records meet any particular tax requirement:</p>
     <ul>
-      <li><strong>Audit log:</strong> every creation, edit, correction, finalization and deletion of a trip is recorded with a timestamp and the prior and new values.</li>
+      <li><strong>Change log:</strong> creations, edits, corrections, finalizations and deletions of a trip are recorded with a timestamp and the prior and new values, including on our servers. The log can be included in the PDF export.</li>
       <li><strong>Finalization:</strong> reviewed trips are marked as finalized; later edits are recorded as corrections, and finalized trips are not permanently deleted individually but flagged as deleted.</li>
       <li><strong>Timeliness prompts:</strong> the App flags manual entries made more than 7 days after the trip date.</li>
-      <li><strong>Export checksum:</strong> PDF exports include a SHA-256 checksum supporting data integrity.</li>
+      <li><strong>Export checksum:</strong> exports may include a SHA-256 checksum. It is stored together with the time, period and number of trips of the export and can help you check whether an export file has been changed since it was created.</li>
     </ul>
+    <p><strong>Your mileage log is your responsibility.</strong> You alone are responsible for your log and for anything you submit from it, in particular: (a) its accuracy and completeness — automatic detection can miss trips, end them too early or too late, merge, split or misclassify them, so review your trips regularly and add or correct them; (b) recording and reviewing trips in a timely manner; (c) the purpose, destination, reason and business partner of each trip; (d) odometer readings — the App measures distances by GPS and calculates odometer readings from them, and both can differ from the distance actually driven and from your vehicle’s odometer, so compare them with your odometer regularly and correct them; (e) whether and to what extent trips are deductible or reimbursable; and (f) checking every export before you submit it to a tax authority, accountant, employer or accounting software.</p>
     <p><strong>Recordkeeping is your responsibility.</strong> Any obligation to retain your mileage records (for example under IRS rules or your state’s rules) rests with you. We keep your data only while your account exists; when you delete your account, everything is deleted (Section 15). Export your records regularly and keep the exports yourself.</p>
     <p><strong>NO TAX ADVICE.</strong> We are not a tax advisor, accountant, attorney or enrolled agent, and nothing in the App or in these Terms constitutes tax, accounting or legal advice. The App does not determine whether a trip is deductible, which mileage rate applies to you, or whether your records satisfy the substantiation requirements of the Internal Revenue Service (including IRS Publication 463) or of any state or local tax authority.</p>
     <p><strong>No guarantee of acceptance.</strong> We do not warrant that records generated with the App will be accepted by the IRS, any state or local tax authority, any employer, or any other third party. Acceptance depends on factors within your control, in particular the complete, accurate and timely recording of all trips, the correct classification of each trip’s purpose, and your regular review and finalization of trips.</p>
-    <p><strong>Default mileage rate.</strong> Any default cost rate suggested by the App is a convenience value only, may not reflect the current IRS standard mileage rate or your employer’s reimbursement policy, and must be verified by you. You are solely responsible for the rates you enter and the amounts you claim.</p>
-    <p>You should consult a qualified tax professional regarding your recordkeeping and deductions.</p>
+    <p><strong>Default rates.</strong> Any default rate preset in the App — for example USD 0.70 per mile in the U.S. configuration, or EUR 0.30 per km for business trips and EUR 0.38 per km of commuting distance in the German configuration — and any suggested accounting categories are convenience values only, provided without warranty for your individual situation. They may not reflect the current IRS standard mileage rate, any other applicable rate or your employer’s reimbursement policy. You can change them in the App and must verify them before use. You are solely responsible for the rates you use and the amounts you claim.</p>
+    <p>Whether a tax authority accepts your records is decided by that authority in each individual case. Information in the App, on our website or from our support is general information only. You should consult a qualified tax professional regarding your recordkeeping and deductions.</p>
 
     <h2>11. Disclaimer of Warranties</h2>
     <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE APP AND ALL RELATED SERVICES ARE PROVIDED “AS IS” AND “AS AVAILABLE”, WITH ALL FAULTS AND WITHOUT WARRANTY OF ANY KIND.</p>
@@ -213,7 +214,7 @@
     <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, OUR TOTAL AGGREGATE LIABILITY FOR ALL CLAIMS RELATING TO THE APP WILL NOT EXCEED THE GREATER OF (A) THE AMOUNT YOU ACTUALLY PAID US OR THROUGH AN APP STORE FOR THE APP IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM, OR (B) FIFTY US DOLLARS (USD 50).</p>
     <p>In particular, we accept no liability for:</p>
     <ul>
-      <li>Inaccurate, incomplete or missing trip records caused by GPS inaccuracy or by operating-system power management</li>
+      <li>Inaccurate, incomplete or missing trip records caused by GPS inaccuracy or by operating-system power management, and differences between GPS distances, calculated odometer readings and your vehicle’s odometer</li>
       <li>Data loss caused by device failure, uninstallation, sign-out, account deletion or technical problems</li>
       <li>Tax, financial, employment or legal consequences arising from your use of the App</li>
       <li>Damages arising from operating the App while driving</li>
@@ -237,8 +238,8 @@
     <p><strong>Effect of termination:</strong> When your account ends, it is deleted completely and irreversibly together with all data — including finalized trips, waypoints and the audit log (see Section 14 of the Privacy Policy). We retain nothing. Export your records before deletion if you need them for tax purposes (Section 10).</p>
 
     <h2>16. Changes to These Terms</h2>
-    <p>We may modify these Terms. We will notify you of material changes at least 30 days in advance by email or in-app notification. Changes take effect on the date stated in the notice.</p>
-    <p>If you do not agree to the changes, you must stop using the App and may delete your account and cancel your subscription before the changes take effect. Continued use after the effective date constitutes acceptance of the modified Terms. Changes to Section 17 (Dispute Resolution) will not apply to any dispute of which we had actual notice before the effective date of the change.</p>
+    <p>We may modify these Terms. We will notify you of material changes at least 30 days in advance by email or in-app notification.</p>
+    <p>Material changes apply to you only once you accept them in the App. If you do not accept them, the previous Terms continue to apply to you, and we may terminate the free use of the App as described in Section 15. Changes to Section 17 (Dispute Resolution) will not apply to any dispute of which we had actual notice before the effective date of the change.</p>
 
     <h2>17. Dispute Resolution — Arbitration and Class Action Waiver</h2>
     <p><strong>This Section applies to you if you are a resident of the United States. Please read it carefully; it affects your legal rights.</strong></p>

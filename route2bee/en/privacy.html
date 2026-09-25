@@ -90,7 +90,7 @@
 
 <section class="legal-hero">
     <h1>Privacy Policy</h1>
-    <p class="updated">Route2Bee &middot; Last updated: September 2026</p>
+    <p class="updated">Route2Bee &middot; Last updated: October 2026</p>
     <p class="updated lang-switch"><a href="/route2bee/privacy">Auf Deutsch lesen &rarr;</a></p>
 </section>
 
@@ -109,7 +109,7 @@
       <li>Trip data: start and end address, distance, duration, start time, end time</li>
       <li>Categories (tags) and cost rates you create</li>
       <li>Known locations, route templates for recurring trips, and app settings you save in the App</li>
-      <li>Trip purpose (business, personal, commute, special trip incl. reason) and odometer reading per trip</li>
+      <li>Trip purpose (business, personal, commute, special trip incl. reason), the reason for the trip or the business partner visited if you enter it, and odometer reading per trip</li>
       <li>Notes and vehicle information (license plate, make) that you choose to enter</li>
       <li>Technical device data for error analysis: operating system, app version, device model and the runtime context of an error (e.g. language, time zone, memory and battery level, granted permissions) (see Sentry, Section 8)</li>
       <li>Trip-detection diagnostics: state changes of the automatic detection (e.g. “trip detected”, “GPS signal stale”), error codes, timestamps and device settings such as battery-optimization status — without coordinates (see Section 3)</li>
@@ -118,7 +118,8 @@
       <li>Email log: which service or product email we sent you and when, and any opt-out from product emails you declared (see Section 9)</li>
       <li>Subscription status (active/inactive, purchase date, expiry) — we never receive your payment card details</li>
       <li>Record of your acceptance of the Terms of Service: version, time, platform, app version and language</li>
-      <li>Audit log: timestamp, type of change, and prior and new values when trip data is edited or deleted (see Section 7)</li>
+      <li>Audit log: timestamp, type of change, and prior and new values when a trip is created, edited, finalized or deleted and when a vehicle’s odometer reading is corrected — on your device and on our servers (see Section 7)</li>
+      <li>Export log: time, type of export, period, number of trips, vehicle ID, app version and SHA-256 checksum of each export (see Section 7)</li>
     </ul>
     <p>We collect this information directly from you and automatically from your device when you use the App. We do not buy personal information from data brokers, and we do not use advertising trackers or third-party analytics SDKs in the App.</p>
 
@@ -165,13 +166,15 @@
     <p>We disclose personal information to service providers only for the business purposes described in Section 8, under contracts that prohibit them from retaining, using or disclosing it for any other purpose.</p>
 
     <h2>7. Recordkeeping, Audit Log and Retention</h2>
-    <p>To support the integrity of your mileage records, the App keeps additional data:</p>
-    <p><strong>Audit log:</strong> each creation, edit, correction, deletion or finalization of a trip is logged with a timestamp, the type of action, the affected fields with prior and new values, and your user ID. The audit log is stored on your device and synchronized to the cloud.</p>
+    <p>So that changes to your mileage log remain traceable, the App keeps additional data. Whether your log meets any tax requirement depends mainly on the information you enter (Terms, Section 10).</p>
+    <p><strong>Audit log:</strong> each creation, edit, correction, deletion or finalization of a trip is logged with a timestamp, the type of action, the affected fields with prior and new values, and your user ID. The audit log is stored on your device and synchronized to the cloud. In addition, our server itself logs every creation and change of a trip it receives (changed fields with prior and new values) and corrections of your vehicles’ initial odometer reading. The log can be included in the PDF export.</p>
+    <p><strong>Export log:</strong> for each export (PDF, CSV, DATEV, self-issued receipt) we store the time, type of export, period, number of trips, the vehicle ID where applicable, the app version and a SHA-256 checksum of the export file. Purpose: so that you can later trace which export was created when, and check whether an export file has been changed since. The export log is visible only to your account.</p>
+    <p><strong>Reason and business partner:</strong> if you enter a reason or the name of a business partner you visited for a trip, we store and synchronize it like other trip data and include it in your exports. If it contains information about other people, enter only what your log needs.</p>
     <p><strong>Finalization:</strong> when you mark a trip as reviewed, it is finalized with a timestamp. Finalized trips can still be edited, but the change is recorded as a correction in the audit log; within your account, finalized trips are not permanently deleted individually, only flagged as deleted, so that your log remains traceable.</p>
     <p><strong>Retention periods:</strong></p>
     <ul>
       <li>Account data (email, display name, vehicles, companies, settings): until you delete your account</li>
-      <li>Trip data, GPS waypoints and audit log in the cloud: until you delete your account — finalized trips can only be flagged as deleted while the account exists, and are permanently deleted together with the account</li>
+      <li>Trip data, GPS waypoints, audit log and export log in the cloud: until you delete your account — finalized trips can only be flagged as deleted while the account exists, and are permanently deleted together with the account</li>
       <li>Trip data and GPS waypoints on your device: until you uninstall the App or sign out</li>
       <li>Trip-detection diagnostics, email log, install source, referral data and Terms-acceptance record: until you delete your account</li>
       <li>Email opt-out: for as long as your account exists, so that it is honored</li>
@@ -211,7 +214,7 @@
     <p>If you delete your account, your referral data is deleted. A reward another person has already earned through your redemption remains with them, without any reference to you.</p>
 
     <h2>11. Where Your Data Is Stored and How It Is Secured</h2>
-    <p>Your trips are stored primarily in a local SQLite database on your device. On iOS this data is additionally protected by the operating system’s Data Protection API. Cloud synchronization — covering your trips, the GPS waypoints that make up their routes, your companies, vehicles, known locations, route templates, settings and the audit log — runs through <strong>Supabase</strong>, whose servers for this project are operated in the EU Central region (Frankfurt, Germany). All data transfers are TLS-encrypted, and row-level security restricts every record to the account that created it.</p>
+    <p>Your trips are stored primarily in a local SQLite database on your device. On iOS this data is additionally protected by the operating system’s Data Protection API. Cloud synchronization — covering your trips, the GPS waypoints that make up their routes, your companies, vehicles, known locations, route templates, settings, the audit log and the export log — runs through <strong>Supabase</strong>, whose servers for this project are operated in the EU Central region (Frankfurt, Germany). All data transfers are TLS-encrypted, and row-level security restricts every record to the account that created it.</p>
     <p>Your account is secured by Supabase Auth (email/password, Sign in with Apple or Google Sign-In). We never have access to your password. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
 
     <h2>12. Your California Privacy Rights (CCPA/CPRA)</h2>
@@ -236,7 +239,7 @@
 
     <h2>14. Deleting Your Account</h2>
     <p>You can delete your account in the App under Settings → “Delete account &amp; data”, or by emailing <a href="mailto:info@honeyapps.de">info@honeyapps.de</a>.</p>
-    <p><strong>What is deleted:</strong> everything — account data, trips (including finalized ones), GPS waypoints, audit log, vehicles, companies, known locations, templates, settings, diagnostics and email logs, install source, referral data and Terms-acceptance records. Your customer record at RevenueCat is deleted as well. Deletion takes effect immediately and is irreversible; we keep no copy. The only exceptions are data we do not hold or that expires on its own schedule: error reports already sent to Sentry (up to 90 days), Brevo’s delivery log, and purchase records held by Apple or Google.</p>
+    <p><strong>What is deleted:</strong> everything — account data, trips (including finalized ones), GPS waypoints, audit log, export log, vehicles, companies, known locations, templates, settings, diagnostics and email logs, install source, referral data and Terms-acceptance records. Your customer record at RevenueCat is deleted as well. Deletion takes effect immediately and is irreversible; we keep no copy. The only exceptions are data we do not hold or that expires on its own schedule: error reports already sent to Sentry (up to 90 days), Brevo’s delivery log, and purchase records held by Apple or Google.</p>
     <p><strong>Export first:</strong> a mileage log is typically subject to recordkeeping obligations that rest with you as the taxpayer (for example under IRS rules, generally at least three years, or longer under your state’s rules). Export your trips before deleting your account (PDF, CSV or JSON). After deletion we cannot restore anything.</p>
     <p><strong>Subscription:</strong> deleting your account does not cancel an active subscription — cancel that in your App Store or Google Play account settings.</p>
 
